@@ -7,9 +7,28 @@ public class TransactionsDto {
 
     private Double amount;
 
-    private Long otherPersonAccountNumber;
+    private String  otherAccountName;
 
     private TransactionStatus transactionStatus;
+
+    private String type;
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getOtherAccountName() {
+        return otherAccountName;
+    }
+
+    public void setOtherAccountName(String otherAccountName) {
+        this.otherAccountName = otherAccountName;
+    }
 
     public Long getTransactionId() {
         return transactionId;
@@ -27,13 +46,6 @@ public class TransactionsDto {
         this.amount = amount;
     }
 
-    public Long getOtherPersonAccountNumber() {
-        return otherPersonAccountNumber;
-    }
-
-    public void setOtherPersonAccountNumber(Long otherPersonAccountNumber) {
-        this.otherPersonAccountNumber = otherPersonAccountNumber;
-    }
 
     public TransactionStatus getTransactionStatus() {
         return transactionStatus;

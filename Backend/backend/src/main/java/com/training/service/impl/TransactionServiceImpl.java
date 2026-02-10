@@ -1,5 +1,7 @@
 package com.training.service.impl;
 
+import com.training.enums.TransactionStatus;
+import com.training.enums.TransactionType;
 import com.training.exceptions.AccountNotFoundException;
 import com.training.exceptions.IncorrectPinException;
 import com.training.exceptions.InsufficientBalanceException;
@@ -13,6 +15,7 @@ import com.training.service.TransactionService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -48,10 +51,7 @@ public class TransactionServiceImpl implements TransactionService {
             System.out.println("Insufficient Balance Exception");
             throw new InsufficientBalanceException();
         }
-//        if(!Objects.equals(senderAccount.getPin(), transferRequestDto.getSenderAccountPin())) {
-//            System.out.println("Incorrect pin exception");
-//            throw new IncorrectPinException();
-//        }
+
 
         // debit amount
         Double amount = transferRequestDto.getAmount();
@@ -61,6 +61,12 @@ public class TransactionServiceImpl implements TransactionService {
         // commit
         accountRepo.save(senderAccount);
         accountRepo.save(receiverAccount);
+        // add to transaction table
+        Transaction transaction = new Transaction
+                (null,senderAccount.getAccountId(), receiverAccount.getAccountId()
+                        ,amount, TransactionStatus.SUCCESS,""
+                        ,transferRequestDto.getIdempotencyKey(), LocalDateTime.now());
+        transactionRepo.save(transaction);
         return true;
     }
 
@@ -71,15 +77,21 @@ public class TransactionServiceImpl implements TransactionService {
         List<TransactionsDto> transactions = new ArrayList<>();
         for (Transaction txn: txns
              ) {
-//            TransactionsDto tdto = TransactionsDto.builder()
-//                    .transactionId(txn.getTransactionId())
-//                    .transactionStatus(txn.getTransactionStatus())
-//                    .amount(txn.getAmount())
-//                    .build();
+            // add name of person and type of transaction
 
             TransactionsDto tdto = new TransactionsDto();
-            Long otherNumber = !Objects.equals(txn.getFromAccount(), accountNumber) ? txn.getFromAccount():txn.getToAccount();
-            tdto.setOtherPersonAccountNumber(otherNumber);
+
+            Long otherNumber=txn.getToAccount();
+            String type = TransactionType.CREDIT.toString();
+            if(Objects.equals(txn.getFromAccount(), accountNumber)){
+                otherNumber = txn.getFromAccount();
+                type = TransactionType.DEBIT.toString();
+            }
+            tdto.setOtherAccountName(accountRepo.findById(otherNumber).get().getAccountHolderName());
+            tdto.setTransactionId(txn.getTransactionId());
+            tdto.setTransactionStatus(txn.getTransactionStatus());
+            tdto.setAmount(txn.getAmount());
+            tdto.setType(type);
             transactions.add(tdto);
         }
         return transactions;

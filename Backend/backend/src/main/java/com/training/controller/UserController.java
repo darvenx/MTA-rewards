@@ -22,10 +22,11 @@ public class UserController {
     @PostMapping("/user")
     public ResponseEntity<UserSuccessLoginOrSignUpDto> signUpNewUser(
             @RequestBody UserSignUpDto userSignUpDto)
-            throws UserAlreadyExistsException
-    {
+            throws UserAlreadyExistsException {
         return new ResponseEntity<>(userService.singUp(userSignUpDto), HttpStatus.OK);
     }
+
+
 
     @GetMapping("/user")
     public ResponseEntity<UserSuccessLoginOrSignUpDto> loginUser(

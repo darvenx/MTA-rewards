@@ -1,6 +1,6 @@
-package com.training.dto.user;
+package com.training.dto;
 
-public class UserSuccessLoginOrSignUpDto {
+public class JwtResponseDto {
     private String token;
 
     public String getToken() {
@@ -10,5 +10,4 @@ public class UserSuccessLoginOrSignUpDto {
     public void setToken(String token) {
         this.token = token;
     }
-
 }

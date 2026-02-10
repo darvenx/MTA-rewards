@@ -9,7 +9,10 @@ import com.training.entities.User;
 import com.training.exceptions.UserAlreadyExistsException;
 import com.training.exceptions.UserNotFoundException;
 import com.training.repo.UserRepo;
+import com.training.service.Jwt;
+import com.training.service.JwtService;
 import com.training.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.constructor.DuplicateKeyException;
 
@@ -19,11 +22,12 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserRepo userRepo;
+    @Autowired
+    private UserRepo userRepo;
 
-    public UserServiceImpl(UserRepo userRepo) {
-        this.userRepo = userRepo;
-    }
+    @Autowired
+    private JwtService jwtService;
+
 
     @Override
     public UserSuccessLoginOrSignUpDto login(UserLoginDto userLoginDto)
@@ -42,11 +46,9 @@ public class UserServiceImpl implements UserService {
             accountIds.add(account.getAccountId());
             balances.add(account.getAccountBalance());
         });
+        Jwt token = jwtService.generateAccessToken(user.getUserId(), user.getUsername(),accountIds,balances,user.getRole());
         UserSuccessLoginOrSignUpDto resDto = new UserSuccessLoginOrSignUpDto();
-        resDto.setUserId(user.getUserId());
-        resDto.setAccountNumbers(accountIds);
-        resDto.setAccountBalance(balances);
-        resDto.setToken("Random");
+        resDto.setToken(token.toString());
         return resDto;
     }
 
@@ -103,12 +105,12 @@ public class UserServiceImpl implements UserService {
         if(userObj.isPresent()){
             user = userObj.get();
         }
+        Jwt token = jwtService.generateAccessToken(user.getUserId(), user.getUsername(),new ArrayList<>(),new ArrayList<>(),user.getRole());
         UserSuccessLoginOrSignUpDto resDto = new UserSuccessLoginOrSignUpDto();
-        resDto.setUserId(user.getUserId());
-        resDto.setAccountNumbers(new ArrayList<>());
-        resDto.setAccountBalance(new ArrayList<>());
+        resDto.setToken(token.toString());
         return resDto;
     }
+
 
     @Override
     public Boolean resetPassword(UserUpdatePasswordDto userRequest)

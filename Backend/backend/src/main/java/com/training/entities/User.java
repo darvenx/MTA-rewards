@@ -1,6 +1,7 @@
 package com.training.entities;
 
 
+import com.training.enums.UserRole;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -26,6 +27,18 @@ public class User {
     @Column
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Account> accounts;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 
     public String getEmail() {
         return email;
