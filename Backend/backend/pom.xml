@@ -161,6 +161,11 @@
 						<artifactId>spring-restdocs-asciidoctor</artifactId>
 						<version>${spring-restdocs.version}</version>
 					</dependency>
+					<dependency>
+						<groupId>org.jacoco</groupId>
+						<artifactId>org.jacoco.ant</artifactId>
+						<version>0.7.0.201403182114</version>
+					</dependency>
 				</dependencies>
 			</plugin>
 
@@ -175,6 +180,44 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<excludes>
+								<exclude>**/dto/**</exclude>
+								<exclude>**/entities/**</exclude>
+								<exclude>**/exceptions/**</exclude>
+								<exclude>**/enums/**</exclude>
+								<exclude>**/com/training/SpringBootTestConfig*</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.5.4</version>
+				<configuration>
+					<argLine>${argLine}</argLine>
 				</configuration>
 			</plugin>
 		</plugins>
