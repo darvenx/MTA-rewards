@@ -105,7 +105,7 @@ public class User {
         this.accounts = accounts;
     }
 
-    public User(Long userId, String phoneNumber, String email, String username, String password, String firstName, String lastName, List<Account> accounts) {
+    public User(Long userId, String phoneNumber, String email, String username, String password, String firstName, String lastName, List<Account> accounts, UserRole role) {
         this.userId = userId;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -114,6 +114,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.accounts = accounts;
+        this.role = role;
     }
 
     public User(){}

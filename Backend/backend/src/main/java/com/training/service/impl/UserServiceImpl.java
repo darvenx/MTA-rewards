@@ -6,6 +6,7 @@ import com.training.dto.user.UserSuccessLoginOrSignUpDto;
 import com.training.dto.user.UserUpdatePasswordDto;
 import com.training.entities.Account;
 import com.training.entities.User;
+import com.training.enums.UserRole;
 import com.training.exceptions.UserAlreadyExistsException;
 import com.training.exceptions.UserNotFoundException;
 import com.training.repo.UserRepo;
@@ -18,6 +19,7 @@ import org.yaml.snakeyaml.constructor.DuplicateKeyException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -96,7 +98,8 @@ public class UserServiceImpl implements UserService {
                 ,userRequest.getPassword()
                 ,userRequest.getFirstName()
                 ,userRequest.getLastName()
-                ,new ArrayList<>());
+                ,new ArrayList<>()
+                , Objects.equals(userRequest.getRole(), UserRole.ADMIN.name()) ?UserRole.ADMIN:UserRole.USER);
 
         userRepo.saveAndFlush(user);
 

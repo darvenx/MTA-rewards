@@ -42,13 +42,11 @@ public class TransactionServiceImpl implements TransactionService {
         Optional<Account> reciever = accountRepo.findById(transferRequestDto.getReceiverAccountNumber());
         // check Exceptions
         if(sender.isEmpty() || reciever.isEmpty()){
-            System.out.println("Accounts not found");
             throw new AccountNotFoundException();
         }
         Account senderAccount = sender.get();
         Account receiverAccount = reciever.get();
         if(senderAccount.getAccountBalance() < transferRequestDto.getAmount()){
-            System.out.println("Insufficient Balance Exception");
             throw new InsufficientBalanceException();
         }
 
@@ -81,11 +79,15 @@ public class TransactionServiceImpl implements TransactionService {
 
             TransactionsDto tdto = new TransactionsDto();
 
-            Long otherNumber=txn.getToAccount();
-            String type = TransactionType.CREDIT.toString();
+            Long otherNumber;
+            String type;
             if(Objects.equals(txn.getFromAccount(), accountNumber)){
-                otherNumber = txn.getFromAccount();
+                otherNumber = txn.getToAccount();
                 type = TransactionType.DEBIT.toString();
+            }
+            else{
+                otherNumber = txn.getFromAccount();
+                type = TransactionType.CREDIT.toString();
             }
             tdto.setOtherAccountName(accountRepo.findById(otherNumber).get().getAccountHolderName());
             tdto.setTransactionId(txn.getTransactionId());
