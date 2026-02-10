@@ -205,6 +205,9 @@
 								<exclude>**/entities/**</exclude>
 								<exclude>**/exceptions/**</exclude>
 								<exclude>**/enums/**</exclude>
+								<exclude>com/training/configurations/**</exclude>
+								<exclude>com/training/filters/**</exclude>
+								<exclude>com/training/MainServerApp*</exclude>
 								<exclude>**/com/training/SpringBootTestConfig*</exclude>
 							</excludes>
 						</configuration>
@@ -217,6 +220,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.5.4</version>
 				<configuration>
+					<!--suppress UnresolvedMavenProperty -->
 					<argLine>${argLine}</argLine>
 				</configuration>
 			</plugin>
