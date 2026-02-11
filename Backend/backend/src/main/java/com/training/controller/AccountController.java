@@ -1,5 +1,6 @@
 package com.training.controller;
 
+import com.training.dto.AccountDataDto;
 import com.training.dto.account.AccountCreateDto;
 import com.training.dto.account.AccountSuccessCreation;
 import com.training.service.impl.AccountServiceImpl;
@@ -8,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/account")
 public class AccountController {
 
     private final AccountServiceImpl accountService;
@@ -17,10 +18,15 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping("/account")
+    @PostMapping("/")
     public ResponseEntity<AccountSuccessCreation> createNewAccount(
             @RequestBody AccountCreateDto accountCreateDto){
         return  new ResponseEntity<>(accountService.createAccount(accountCreateDto),HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountDataDto> fetchAllAccountsData(@PathVariable Long id){
+        return new ResponseEntity<>(accountService.getAllAccountsData(id),HttpStatus.OK);
     }
 
 }

@@ -6,6 +6,24 @@ import java.util.List;
 public class AccountDataDto {
     List<Double> balances;
     List<Long> accountIds;
+    List<String> accountTypes;
+    List<String> accountStatus;
+
+    public List<String> getAccountType() {
+        return accountTypes;
+    }
+
+    public void setAccountType(List<String> accountType) {
+        this.accountTypes = accountType;
+    }
+
+    public List<String> getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(List<String> accountStatus) {
+        this.accountStatus = accountStatus;
+    }
 
     public List<Double> getBalances() {
         return balances;
@@ -31,6 +49,8 @@ public class AccountDataDto {
     public AccountDataDto() {
         this.accountIds = new ArrayList<>();
         this.balances = new ArrayList<>();
+        this.accountTypes  = new ArrayList<>();
+        this.accountStatus = new ArrayList<>();
     }
     public void addBalance(Double amount){
         balances.add(amount);
@@ -38,4 +58,6 @@ public class AccountDataDto {
     public void addAccount(Long id){
         accountIds.add(id);
     }
+    public void addStatus(String status){accountStatus.add(status);}
+    public void addType(String type){accountTypes.add(type);}
 }

@@ -1,4 +1,4 @@
-package com.training.service;
+package com.training.jwt;
 
 import com.training.configurations.JwtConfig;
 import com.training.enums.UserRole;
