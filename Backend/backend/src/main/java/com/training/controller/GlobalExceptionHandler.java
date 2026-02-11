@@ -1,5 +1,6 @@
 package com.training.controller;
 
+import com.training.exceptions.SelfTransferException;
 import com.training.exceptions.UserAlreadyExistsException;
 import com.training.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -62,6 +63,11 @@ public class GlobalExceptionHandler {
             fieldErrors.add(errorMap);
         });
         return new ResponseEntity<>(Collections.singletonMap("fieldErrors", fieldErrors), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(SelfTransferException.class)
+    public ResponseEntity<Object> handleSelfTransferException(){
+        return new ResponseEntity<>("Cant Transfer to self",HttpStatus.BAD_REQUEST);
     }
 
 }

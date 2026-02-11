@@ -9,6 +9,7 @@ import com.training.dto.transaction.TransactionsDto;
 import com.training.dto.transaction.TransferRequestDto;
 import com.training.entities.Account;
 import com.training.entities.Transaction;
+import com.training.exceptions.SelfTransferException;
 import com.training.repo.AccountRepo;
 import com.training.repo.TransactionRepo;
 import com.training.service.TransactionService;
@@ -36,8 +37,11 @@ public class TransactionServiceImpl implements TransactionService {
     @Transactional
     public Boolean transferMoney(TransferRequestDto transferRequestDto)
             throws AccountNotFoundException,IncorrectPinException,
-            InsufficientBalanceException
+            InsufficientBalanceException, SelfTransferException
     {
+        if(Objects.equals(transferRequestDto.getSenderAccountNumber(), transferRequestDto.getReceiverAccountNumber())){
+            throw new SelfTransferException("Cant send to same account");
+        }
         Optional<Account> sender = accountRepo.findById(transferRequestDto.getSenderAccountNumber());
         Optional<Account> reciever = accountRepo.findById(transferRequestDto.getReceiverAccountNumber());
         // check Exceptions

@@ -1,5 +1,6 @@
 package com.training.service.impl;
 
+import com.training.dto.UserDetailsResponseDto;
 import com.training.dto.user.UserLoginDto;
 import com.training.dto.user.UserSignUpDto;
 import com.training.dto.user.UserSuccessLoginOrSignUpDto;
@@ -85,7 +86,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserSuccessLoginOrSignUpDto signUp(UserSignUpDto userRequest)
-        throws UserAlreadyExistsException
+            throws UserAlreadyExistsException
     {
         Optional<User> userObj = userRepo.findByUsernameOrEmailOrPhoneNumber(
                 userRequest.getUsername(),userRequest.getEmail()
@@ -123,7 +124,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean resetPassword(UserUpdatePasswordDto userRequest)
-        throws UserNotFoundException
+            throws UserNotFoundException
     {
         Optional<User> userObj = userRepo.findByUsernameAndPassword(
                 userRequest.getUsername(),userRequest.getOldPassword());
@@ -134,5 +135,15 @@ public class UserServiceImpl implements UserService {
         user.setPassword(userRequest.getNewPassword());
         userRepo.saveAndFlush(user);
         return true;
+    }
+
+    public UserDetailsResponseDto getUserDetails(Long id) throws UserNotFoundException{
+        Optional<User> userObj = userRepo.findById(id);
+        if(userObj.isEmpty()){
+            throw new UserNotFoundException();
+        }
+        User user = userObj.get();
+        String fullName = user.getFirstName() + user.getLastName();
+        return new UserDetailsResponseDto(fullName,user.getEmail(),user.getPhoneNumber(),user.getUsername());
     }
 }
