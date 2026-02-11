@@ -74,7 +74,8 @@ export class SignupComponent implements OnDestroy {
             // Handle successful signup - normalise to SessionUser and persist
             const session = mapLoginSuccessToSessionUser(res, signupData.username);
             this.authService.setSession(session);
-
+            localStorage.setItem("id",String(res.id));
+            console.log(localStorage.getItem("id"));
             this.snackBar.open('Account created successfully! Logging in...', 'Close', {
               duration: 3000,
               panelClass: ['success-snackbar']

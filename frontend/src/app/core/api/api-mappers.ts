@@ -67,14 +67,14 @@ export function mapApiTransactionsDtoToTransaction(
       : TransactionStatus.FAILED;
 
   return {
-    id: String(dto.transactionId),
-    accountId: currentAccountId,
+    transactionId: String(dto.transactionId),
+    // accountId: currentAccountId,
     type,
     amount: dto.amount,
     date: new Date().toISOString(),
-    status,
+    transactionStatus:status,
     description: dto.otherAccountName,
-    otherPartyName: dto.otherAccountName
+    otherAccountName: dto.otherAccountName
   };
 }
 

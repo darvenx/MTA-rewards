@@ -43,6 +43,7 @@ export class LoginComponent {
           console.log(res);
           this.isLoading = false;
           sessionStorage.setItem("id",String(res.id));
+          localStorage.setItem("id",String(res.id));
           console.log(sessionStorage);
           // Defensive check for response structure
           if (!res || !res.token) {

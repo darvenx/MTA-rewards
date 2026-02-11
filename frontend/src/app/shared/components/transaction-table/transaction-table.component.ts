@@ -51,8 +51,8 @@ import { Transaction, TransactionType } from '../../../core/models/transaction.m
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
         <td mat-cell *matCellDef="let transaction">
-          <span class="status-badge" [class.success]="transaction.status === 'SUCCESS'" [class.failed]="transaction.status === 'FAILED'">
-            {{transaction.status}}
+          <span class="status-badge" [class.success]="transaction.transactionStatus === 'SUCCESS'" [class.failed]="transaction.status === 'FAILED'">
+            {{transaction.transactionStatus}}
           </span>
         </td>
       </ng-container>

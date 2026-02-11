@@ -10,6 +10,7 @@ import {
     mapLegacyAccountDtoToAccount,
     mapApiTransactionsDtoToTransaction
 } from '../core/api/api-mappers';
+import { User } from '../core/models/user-data.model';
 
 @Injectable({
     providedIn: 'root'
@@ -17,10 +18,8 @@ import {
 export class AccountService {
     constructor(private http: HttpClient) { }
 
-    getAccount(id: string): Observable<Account> {
-        return this.http.get<LegacyAccountDto>(ApiEndpoints.account.get(id)).pipe(
-            map(mapLegacyAccountDtoToAccount)
-        );
+    getAccount(id: string): Observable<User> {
+        return this.http.get<User>(ApiEndpoints.account.get(id));
     }
 
     getBalance(id: string): Observable<number> {
@@ -28,22 +27,10 @@ export class AccountService {
     }
 
     getTransactions(id: string): Observable<Transaction[]> {
-        return this.http.get<ApiTransactionsDto[]>(ApiEndpoints.transaction.listByAccount(id)).pipe(
-            map((txns) => txns.map((txn) => mapApiTransactionsDtoToTransaction(txn, id))),
-            // For each transaction, fetch the other party's account to read the holder name.
-            switchMap((transactions: Transaction[]) => {
-                if (!transactions || transactions.length === 0) return of([] as Transaction[]);
-
-                const requests = transactions.map(t => {
-                    if (!t.otherAccountNumber) return of(t);
-                    return this.getAccount(t.otherAccountNumber).pipe(
-                        map(acc => ({ ...t, otherPartyName: acc.holderName })),
-                        catchError(() => of({ ...t, otherPartyName: 'Unknown' }))
-                    );
-                });
-
-                return forkJoin(requests);
-            })
+        console.log("get api");
+        return this.http.get<ApiTransactionsDto[]>(ApiEndpoints.transaction.listByAccount(id))
+        .pipe(
+            map((txns) => txns.map((txn) => mapApiTransactionsDtoToTransaction(txn, id)))
         );
     }
 }

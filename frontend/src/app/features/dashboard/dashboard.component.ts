@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { Account } from '../../core/models/account.model';
 import { Observable } from 'rxjs';
 import { Transaction, TransactionType, TransactionStatus } from '../../core/models/transaction.model';
+import { User } from '../../core/models/user-data.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,18 +48,19 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     const accountId = this.authService.getAccountId();
+    let user:User;
     if (accountId) {
-      this.account$ = this.accountService.getAccount(accountId);
+      // user = this.accountService.getAccount(accountId);
       // Fetch balance once and animate the UI value
-      this.accountService.getBalance(accountId).subscribe({
-        next: (value) => {
-          this.animateValue((v) => (this.animatedBalance = v), 0, value);
-          this.isBalanceLoaded = true;
-        },
-        error: () => {
-          this.isBalanceLoaded = true;
-        }
-      });
+      // this.accountService.getBalance(accountId).subscribe({
+      //   next: (value) => {
+      //     this.animateValue((v) => (this.animatedBalance = v), 0, value);
+      //     this.isBalanceLoaded = true;
+      //   },
+      //   error: () => {
+      //     this.isBalanceLoaded = true;
+      //   }
+      // });
 
       // Fetch transactions and compute totals for the quick-stats
       this.accountService.getTransactions(accountId).subscribe({
@@ -90,7 +92,7 @@ export class DashboardComponent implements OnInit {
 
     transactions.forEach(t => {
       // Only count successful transactions
-      if (t.status !== TransactionStatus.SUCCESS) return;
+      if (t.transactionStatus !== TransactionStatus.SUCCESS) return;
 
       if (t.type === TransactionType.DEBIT) {
         sent += t.amount;

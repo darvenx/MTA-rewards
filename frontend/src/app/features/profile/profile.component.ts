@@ -17,6 +17,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
 import { Account } from '../../core/models/account.model';
+import { User } from '../../core/models/user-data.model';
+
 
 @Component({
   selector: 'app-profile',
@@ -38,7 +40,7 @@ import { Account } from '../../core/models/account.model';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  account$!: Observable<Account>;
+  account$!: Observable<User>;
   balance$!: Observable<number>;
 
   profileForm!: FormGroup;
@@ -58,20 +60,21 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const accountId = this.auth.getAccountId();
+    const accountId = localStorage.getItem("id");
     this.initForms();
+    console.log("accountId" + accountId);
 
     if (accountId) {
       this.loadingProfile = true;
       this.account$ = this.accountService.getAccount(accountId);
-      this.balance$ = this.accountService.getBalance(accountId);
+      // this.balance$ = this.accountService.getBalance(accountId);
 
       // populate when available
       this.account$.pipe(take(1)).subscribe(acc => {
         this.profileForm.patchValue({
-          fullName: acc.holderName,
+          fullName: acc.fullName,
           email: (acc as any).email || '',
-          phone: (acc as any).phone || '',
+          phone: (acc as any).phoneNumber || '',
           address: (acc as any).address || ''
         });
         this.loadingProfile = false;
@@ -147,7 +150,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm.reset();
     // repopulate from account
     this.account$.pipe(take(1)).subscribe(acc => {
-      this.profileForm.patchValue({ fullName: acc.holderName, email: (acc as any).email || '', phone: (acc as any).phone || '', address: (acc as any).address || '' });
+      this.profileForm.patchValue({ fullName: acc.fullName, email: (acc as any).email || '', phone: (acc as any).phone || '', address: (acc as any).address || '' });
     });
   }
 
