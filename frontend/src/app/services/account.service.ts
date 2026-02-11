@@ -11,6 +11,7 @@ import {
     mapApiTransactionsDtoToTransaction
 } from '../core/api/api-mappers';
 import { User } from '../core/models/user-data.model';
+import { accountsData } from '../core/models/accounts-data.model';
 
 @Injectable({
     providedIn: 'root'
@@ -22,8 +23,8 @@ export class AccountService {
         return this.http.get<User>(ApiEndpoints.account.get(id));
     }
 
-    getBalance(id: string): Observable<number> {
-        return this.http.get<number>(ApiEndpoints.account.balance(id));
+    getBalance(id: string): Observable<accountsData> {
+        return this.http.get<accountsData>(ApiEndpoints.account.balance(id));
     }
 
     getTransactions(id: string): Observable<Transaction[]> {

@@ -50,7 +50,7 @@ export const ApiEndpoints = {
      * implement matching endpoints or refactor the UI in one place.
      */
     get: (id: string | number) => `${BASE}/user/${id}`,
-    balance: (id: string | number) => `${BASE}/account/${id}/balance`
+    balance: (id: string | number) => `${BASE}/account/${id}`
   },
   transfer: {
     /**
