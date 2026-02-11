@@ -19,21 +19,20 @@ public class JwtService {
         this.jwtConfig = jwtConfig;
     }
 
-    public Jwt generateAccessToken(Long id, String userName, List<Long> ids, List<Double> amounts , UserRole role){
-        return generateToken(id,userName,ids,amounts,jwtConfig.getAccessTokenExpiration(),role);
+    public Jwt generateAccessToken(Long id, String userName, List<Long> ids, UserRole role){
+        return generateToken(id,userName,ids,jwtConfig.getAccessTokenExpiration(),role);
     }
 
-    public Jwt generateRefreshToken(Long id, String userName, List<Long> ids, List<Double> amounts ,UserRole role){
-        return generateToken(id,userName,ids,amounts,jwtConfig.getAccessTokenExpiration(),role);
+    public Jwt generateRefreshToken(Long id, String userName, List<Long> ids ,UserRole role){
+        return generateToken(id,userName,ids,jwtConfig.getAccessTokenExpiration(),role);
     }
 
     private Jwt generateToken(Long id, String username,List<Long> accounts,
-                              List<Double>amounts,int expiration, UserRole role){
+                              int expiration, UserRole role){
         Claims claims = Jwts.claims()
                 .subject(id.toString())
                 .add("username",username)
                 .add("accounts",accounts)
-                .add("amounts",amounts)
                 .add("role",role)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + (1000L * expiration)))

@@ -15,6 +15,10 @@ public class UserSignUpDto {
     private String lastName;
     private String role;
 
+    public UserSignUpDto() {
+
+    }
+
     public String getRole() {
         return role;
     }

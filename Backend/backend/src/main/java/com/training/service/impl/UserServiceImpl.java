@@ -48,9 +48,12 @@ public class UserServiceImpl implements UserService {
             accountIds.add(account.getAccountId());
             balances.add(account.getAccountBalance());
         });
-        Jwt token = jwtService.generateAccessToken(user.getUserId(), user.getUsername(),accountIds,balances,user.getRole());
+        Jwt token = jwtService.generateAccessToken(user.getUserId(), user.getUsername(),accountIds,user.getRole());
         UserSuccessLoginOrSignUpDto resDto = new UserSuccessLoginOrSignUpDto();
         resDto.setToken(token.toString());
+        resDto.setAccounts(accountIds);
+        resDto.setBalances(balances);
+        resDto.setId(user.getUserId());
         return resDto;
     }
 
@@ -81,7 +84,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserSuccessLoginOrSignUpDto singUp(UserSignUpDto userRequest)
+    public UserSuccessLoginOrSignUpDto signUp(UserSignUpDto userRequest)
         throws UserAlreadyExistsException
     {
         Optional<User> userObj = userRepo.findByUsernameOrEmailOrPhoneNumber(
@@ -108,9 +111,12 @@ public class UserServiceImpl implements UserService {
         if(userObj.isPresent()){
             user = userObj.get();
         }
-        Jwt token = jwtService.generateAccessToken(user.getUserId(), user.getUsername(),new ArrayList<>(),new ArrayList<>(),user.getRole());
+        Jwt token = jwtService.generateAccessToken(user.getUserId(), user.getUsername(),new ArrayList<>(),user.getRole());
         UserSuccessLoginOrSignUpDto resDto = new UserSuccessLoginOrSignUpDto();
         resDto.setToken(token.toString());
+        resDto.setAccounts(new ArrayList<>());
+        resDto.setBalances(new ArrayList<>());
+        resDto.setId(user.getUserId());
         return resDto;
     }
 

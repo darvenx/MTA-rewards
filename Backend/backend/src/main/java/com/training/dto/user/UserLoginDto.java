@@ -11,6 +11,10 @@ public class UserLoginDto {
     private String username;
     private String password;
 
+    public UserLoginDto() {
+
+    }
+
     public String getUsername() {
         return username;
     }

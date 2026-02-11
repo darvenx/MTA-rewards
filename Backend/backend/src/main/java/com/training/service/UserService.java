@@ -15,7 +15,7 @@ public interface UserService {
     UserSuccessLoginOrSignUpDto login(UserLoginDto userLoginDto)
         throws UserNotFoundException;
 
-    UserSuccessLoginOrSignUpDto singUp(UserSignUpDto userRequest)
+    UserSuccessLoginOrSignUpDto signUp(UserSignUpDto userRequest)
             throws UserAlreadyExistsException;
 
     Boolean updateData(UserSignUpDto userRequest)

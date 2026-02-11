@@ -67,8 +67,6 @@ public class SecurityConfig {
                         .hasRole(UserRole.ADMIN.name())
                         .anyRequest()
                         .hasAnyRole(UserRole.ADMIN.name(),UserRole.USER.name()))
-//                        .permitAll())
-
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(c -> {
                     c.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));

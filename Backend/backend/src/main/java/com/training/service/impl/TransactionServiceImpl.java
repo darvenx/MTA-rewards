@@ -49,6 +49,9 @@ public class TransactionServiceImpl implements TransactionService {
         if(senderAccount.getAccountBalance() < transferRequestDto.getAmount()){
             throw new InsufficientBalanceException();
         }
+        if(!Objects.equals(senderAccount.getUser().getPassword(), transferRequestDto.getSenderAccountPin())){
+            throw new IncorrectPinException();
+        }
 
 
         // debit amount
