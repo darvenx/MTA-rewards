@@ -1,0 +1,134 @@
+<!-- Page header -->
+<mat-toolbar color="transparent" class="transfer-header">
+  <button mat-icon-button (click)="goBack()" aria-label="Back to dashboard">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="header-left">
+    <h1 class="page-title">Transfer Funds</h1>
+    <div class="page-subtitle">
+      Dashboard › <span>Transfer Funds</span>
+    </div>
+  </div>
+</mat-toolbar>
+
+<div class="container transfer-page">
+  <!-- Left: info / tips -->
+  <section class="transfer-side-tip" aria-label="Transfer safety tips">
+    <mat-card class="tip-card">
+      <mat-card-title>
+        <mat-icon class="tip-icon">verified_user</mat-icon>
+        Stay secure
+      </mat-card-title>
+      <mat-card-content>
+        <p>Tip: Double‑check the recipient’s account number before confirming transfers.</p>
+        <p>We recommend sending a small test amount the first time you pay a new beneficiary.</p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- Right: main transfer form -->
+  <section class="transfer-content">
+    <mat-card class="transfer-card">
+      <mat-card-header>
+        <mat-card-title>Quick Transfer</mat-card-title>
+        <mat-card-subtitle>Send money securely in a few steps.</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="transferForm" (ngSubmit)="initiateTransfer()" class="transfer-form">
+
+          <!-- From account group -->
+          <div class="form-section from-account-group">
+            <div class="section-label">From account</div>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>From Account</mat-label>
+              <mat-icon matPrefix color="primary">account_balance</mat-icon>
+              <input matInput formControlName="senderAccountNumber" readonly />
+              <mat-hint>Your primary account</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <!-- Recipient details -->
+          <div class="form-section">
+            <div class="section-label">Recipient details</div>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>To Account Number</mat-label>
+              <mat-icon matPrefix>account_balance</mat-icon>
+              <input
+                matInput
+                formControlName="receiverAccountNumber"
+                placeholder="Enter recipient account number"
+              />
+              <mat-error *ngIf="transferForm.get('receiverAccountNumber')?.hasError('required')">
+                Recipient account is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Amount (emphasised) -->
+          <div class="form-section">
+            <div class="section-label">Amount</div>
+
+            <mat-form-field appearance="outline" class="full-width amount-field">
+              <mat-label>Amount</mat-label>
+              <mat-icon matPrefix color="primary">currency_rupee</mat-icon>
+              <input
+                matInput
+                type="number"
+                formControlName="amount"
+                placeholder="0.00"
+              />
+              <span matSuffix class="amount-suffix">INR</span>
+              <mat-error *ngIf="transferForm.get('amount')?.hasError('required')">
+                Amount is required
+              </mat-error>
+              <mat-error *ngIf="transferForm.get('amount')?.hasError('min')">
+                Amount must be greater than 0
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Remarks -->
+          <div class="form-section">
+            <div class="section-label">Remarks (optional)</div>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Remarks</mat-label>
+              <mat-icon matPrefix>notes</mat-icon>
+              <textarea
+                matInput
+                formControlName="remarks"
+                rows="2"
+                placeholder="Add a note for this transfer"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <!-- Actions -->
+          <div class="actions">
+            <button mat-button type="button" (click)="goBack()">Cancel</button>
+
+            <button
+              mat-raised-button
+              color="primary"
+              class="primary-cta"
+              type="submit"
+              [disabled]="transferForm.invalid || isLoading"
+            >
+              <mat-icon>send</mat-icon>
+              <span>
+                {{
+                  transferForm.valid && transferForm.value.amount
+                    ? ('Transfer \u20B9' + (transferForm.value.amount | number:'1.2-2'))
+                    : 'Transfer Now'
+                }}
+              </span>
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</div>
+

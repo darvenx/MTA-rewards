@@ -58,10 +58,11 @@ public class SecurityConfig {
         http
                 .sessionManagement(c -> c
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .cors(cors->{})
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(c -> c
-                        .requestMatchers(HttpMethod.POST,"/api/v1/user").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/api/v1/user").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/v1/user/signup").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/v1/user/login").permitAll()
                         .requestMatchers( "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/**")
                         .hasRole(UserRole.ADMIN.name())

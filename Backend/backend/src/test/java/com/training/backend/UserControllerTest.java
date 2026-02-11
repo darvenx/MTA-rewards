@@ -1,5 +1,6 @@
-package com.training.controller;
+package com.training.backend;
 
+import com.training.controller.UserController;
 import com.training.dto.user.UserLoginDto;
 import com.training.dto.user.UserSignUpDto;
 import com.training.dto.user.UserSuccessLoginOrSignUpDto;

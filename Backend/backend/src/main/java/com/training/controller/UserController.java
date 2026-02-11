@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.yaml.snakeyaml.constructor.DuplicateKeyException;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/user")
 public class UserController {
     private final UserServiceImpl userService;
     private final AccountServiceImpl accountService;
@@ -23,16 +23,14 @@ public class UserController {
         this.accountService = accountService;
     }
 
-    @PostMapping("/user")
+    @PostMapping("/signup")
     public ResponseEntity<UserSuccessLoginOrSignUpDto> signUpNewUser(
             @RequestBody UserSignUpDto userSignUpDto)
             throws UserAlreadyExistsException {
         return new ResponseEntity<>(userService.signUp(userSignUpDto), HttpStatus.OK);
     }
 
-
-
-    @GetMapping("/user")
+    @PostMapping("/login")
     public ResponseEntity<UserSuccessLoginOrSignUpDto> loginUser(
             @RequestBody UserLoginDto userLoginDto)
             throws UserNotFoundException
@@ -40,14 +38,16 @@ public class UserController {
         return new ResponseEntity<>(userService.login(userLoginDto),HttpStatus.OK);
     }
 
-    @PutMapping("/user")
+
+
+    @PutMapping("/update")
     public ResponseEntity<Boolean> updateDetails(
             @RequestBody UserSignUpDto userSignUpDto)
             throws DuplicateKeyException,UserNotFoundException {
         return new ResponseEntity<>(userService.updateData(userSignUpDto),HttpStatus.OK);
     }
 
-    @GetMapping("/user/account/{id}")
+    @GetMapping("/account/{id}")
     public ResponseEntity<AccountDataDto> getAccounts(@PathVariable Long id)
     throws UserNotFoundException
     {

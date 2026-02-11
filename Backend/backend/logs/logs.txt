@@ -1,0 +1,791 @@
+2026-02-10 18:00:22 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 636 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-10 18:00:22 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-10 18:00:24 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-10 18:00:25 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-10 18:00:26 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 222 ms. Found 3 JPA repository interfaces.
+2026-02-10 18:00:29 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-10 18:00:29 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-10 18:00:29 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-10 18:00:29 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-10 18:00:29 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 6954 ms
+2026-02-10 18:00:30 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-10 18:00:32 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-10 18:00:36 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-10 18:00:36 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-10 18:00:39 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@74844216
+2026-02-10 18:00:39 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-10 18:00:39 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-10 18:00:39 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-10 18:00:45 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-10 18:00:46 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-10 18:00:46 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-10 18:00:48 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-10 18:00:53 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-10 18:00:54 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-10 18:00:54 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-10 18:00:56 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-10 18:00:56 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-10 18:00:57 INFO  [main] com.training.MainServerApp - Started MainServerApp in 36.764 seconds (process running for 38.499)
+2026-02-10 18:05:44 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-10 18:05:44 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-10 18:05:44 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2026-02-10 18:06:02 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-10 18:06:02 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-10 18:06:02 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-10 18:06:02 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-10 18:06:02 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-10 18:06:27 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 1328 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-10 18:06:27 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-10 18:06:28 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-10 18:06:30 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-10 18:06:30 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 181 ms. Found 3 JPA repository interfaces.
+2026-02-10 18:06:32 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-10 18:06:32 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-10 18:06:32 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-10 18:06:32 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-10 18:06:32 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 5103 ms
+2026-02-10 18:06:33 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-10 18:06:33 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-10 18:06:35 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-10 18:06:35 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-10 18:06:36 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@b548f51
+2026-02-10 18:06:36 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-10 18:06:36 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-10 18:06:36 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-10 18:06:38 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-10 18:06:38 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-10 18:06:39 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-10 18:06:39 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-10 18:06:41 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-10 18:06:41 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-10 18:06:41 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-10 18:06:43 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-10 18:06:44 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-10 18:06:44 INFO  [main] com.training.MainServerApp - Started MainServerApp in 17.824 seconds (process running for 18.963)
+2026-02-10 18:07:32 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-10 18:07:32 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-10 18:07:32 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms
+2026-02-10 18:07:32 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4IiwidXNlcm5hbWUiOiJnYXVyYW5nMjIyMjMiLCJhY2NvdW50cyI6W10sImFtb3VudHMiOltdLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzA3MjQzNzgsImV4cCI6MTc3MDcyNzk3OH0.0EmsjCfDGrFO7TuLfEcZoM_8r7q3jV-9_q1FiuZkUxZ5gR2H6RRzb88RCbCry8HBOZVBJn0oOL4kEPZ-RpN2ew]
+2026-02-10 18:07:32 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: null
+2026-02-10 18:07:41 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [UserLoginDto(username=first, password=first)]
+2026-02-10 18:07:41 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [UserLoginDto(username=first, password=first)]
+2026-02-10 18:07:42 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: JwtService.generateAccessToken(..) with args: [1, first, [1], [9000.0], ADMIN]
+2026-02-10 18:07:42 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.generateAccessToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sImFtb3VudHMiOls5MDAwLjBdLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzA3NDY4NjIsImV4cCI6MTc3MDc1MDQ2Mn0.iEGfvyOlEOMfmWeXzOGOjOyso6yGVSDIEYuBKYz6DcJQLD4dI0MiMnwL2Qq86EvRosp0-kxBNmvFQEV4w2FI_A
+2026-02-10 18:07:43 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@169498f2
+2026-02-10 18:07:43 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@169498f2,[]>
+2026-02-10 18:08:16 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sImFtb3VudHMiOls5MDAwLjBdLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzA3NDY4NjIsImV4cCI6MTc3MDc1MDQ2Mn0.iEGfvyOlEOMfmWeXzOGOjOyso6yGVSDIEYuBKYz6DcJQLD4dI0MiMnwL2Qq86EvRosp0-kxBNmvFQEV4w2FI_A]
+2026-02-10 18:08:16 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sImFtb3VudHMiOls5MDAwLjBdLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzA3NDY4NjIsImV4cCI6MTc3MDc1MDQ2Mn0.iEGfvyOlEOMfmWeXzOGOjOyso6yGVSDIEYuBKYz6DcJQLD4dI0MiMnwL2Qq86EvRosp0-kxBNmvFQEV4w2FI_A
+2026-02-10 18:08:16 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [2]
+2026-02-10 18:08:16 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [2]
+2026-02-10 18:08:16 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@291cfc9]
+2026-02-10 18:08:16 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@291cfc9],[]>
+2026-02-10 18:08:42 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-10 18:08:43 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-10 18:08:43 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-10 18:08:43 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-10 18:08:43 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-11 05:21:41 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 3908 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-11 05:21:41 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-11 05:21:45 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-11 05:21:48 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-11 05:21:48 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 317 ms. Found 3 JPA repository interfaces.
+2026-02-11 05:21:55 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-11 05:21:55 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:21:55 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-11 05:21:55 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-11 05:21:55 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 13153 ms
+2026-02-11 05:21:56 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-11 05:21:57 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-11 05:21:59 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-11 05:21:59 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-11 05:22:00 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@78aa1753
+2026-02-11 05:22:00 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-11 05:22:01 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-11 05:22:01 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-11 05:22:08 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-11 05:22:08 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 05:22:09 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-11 05:22:10 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-11 05:22:13 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-11 05:22:15 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-11 05:22:15 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-11 05:22:20 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:22:20 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-11 05:22:20 INFO  [main] com.training.MainServerApp - Started MainServerApp in 41.693 seconds (process running for 47.251)
+2026-02-11 05:22:28 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-11 05:22:28 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-11 05:22:28 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 11 ms
+2026-02-11 05:22:28 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Entering: UserController.signUpNewUser(..) with args: [com.training.dto.user.UserSignUpDto@4971c4d7]
+2026-02-11 05:22:28 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.signUp(..) with args: [com.training.dto.user.UserSignUpDto@4971c4d7]
+2026-02-11 05:22:31 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: JwtService.generateAccessToken(..) with args: [3, third, [], ADMIN]
+2026-02-11 05:22:31 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.generateAccessToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ
+2026-02-11 05:22:32 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.signUp(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@663ec15d
+2026-02-11 05:22:32 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.signUpNewUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@663ec15d,[]>
+2026-02-11 05:24:01 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-11 05:24:01 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-11 05:24:01 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 05:24:01 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-11 05:24:01 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-11 05:24:20 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 6184 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-11 05:24:20 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-11 05:24:24 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-11 05:24:27 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-11 05:24:27 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 238 ms. Found 3 JPA repository interfaces.
+2026-02-11 05:24:31 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-11 05:24:31 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:24:31 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-11 05:24:31 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-11 05:24:31 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 10867 ms
+2026-02-11 05:24:33 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-11 05:24:33 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-11 05:24:35 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-11 05:24:35 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-11 05:24:36 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@615e7fe7
+2026-02-11 05:24:36 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-11 05:24:36 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-11 05:24:36 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-11 05:24:41 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-11 05:24:41 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 05:24:42 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-11 05:24:42 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-11 05:24:45 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-11 05:24:45 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-11 05:24:45 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-11 05:24:49 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:24:49 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-11 05:24:49 INFO  [main] com.training.MainServerApp - Started MainServerApp in 31.638 seconds (process running for 33.373)
+2026-02-11 05:24:54 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-11 05:24:54 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-11 05:24:54 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2026-02-11 05:24:55 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [com.training.dto.user.UserLoginDto@1f54e22f]
+2026-02-11 05:24:55 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [com.training.dto.user.UserLoginDto@1f54e22f]
+2026-02-11 05:24:57 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: JwtService.generateAccessToken(..) with args: [3, third, [], ADMIN]
+2026-02-11 05:24:57 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.generateAccessToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA
+2026-02-11 05:24:57 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@e453cac
+2026-02-11 05:24:57 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@e453cac,[]>
+2026-02-11 05:26:04 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbXSwiYW1vdW50cyI6W10sInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3MDcyNDkyOSwiZXhwIjoxNzcwNzI4NTI5fQ.LcnBGHy2SMsTelokUxPJ8NUwTm8YvQRC8oZUxTP3jyP1-RhG42V2eN057JBxgywSbNXoP_E8Ug8EEujiuumkUg]
+2026-02-11 05:26:04 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: null
+2026-02-11 05:26:26 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA]
+2026-02-11 05:26:26 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA
+2026-02-11 05:26:26 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.createNewAccount(..) with args: [com.training.dto.account.AccountCreateDto@3b3e91a]
+2026-02-11 05:26:26 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.createAccount(..) with args: [com.training.dto.account.AccountCreateDto@3b3e91a]
+2026-02-11 05:26:26 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.createAccount(..) with result: com.training.dto.account.AccountSuccessCreation@13887aa
+2026-02-11 05:26:26 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.createNewAccount(..) with result: <200 OK OK,com.training.dto.account.AccountSuccessCreation@13887aa,[]>
+2026-02-11 05:27:12 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA]
+2026-02-11 05:27:12 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA
+2026-02-11 05:27:12 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [2]
+2026-02-11 05:27:12 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [2]
+2026-02-11 05:27:13 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@1848034e]
+2026-02-11 05:27:13 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@1848034e],[]>
+2026-02-11 05:42:04 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-11 05:42:04 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-11 05:42:04 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 05:42:04 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-11 05:42:04 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-11 05:42:22 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 2600 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-11 05:42:22 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-11 05:42:25 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-11 05:42:27 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-11 05:42:28 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 255 ms. Found 3 JPA repository interfaces.
+2026-02-11 05:42:32 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-11 05:42:32 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:42:32 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-11 05:42:32 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-11 05:42:32 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 9220 ms
+2026-02-11 05:42:33 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-11 05:42:34 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-11 05:42:35 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-11 05:42:35 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-11 05:42:36 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@16890f00
+2026-02-11 05:42:36 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-11 05:42:37 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-11 05:42:37 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-11 05:42:41 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-11 05:42:41 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 05:42:42 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-11 05:42:43 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-11 05:42:45 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-11 05:42:46 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-11 05:42:46 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-11 05:42:49 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:42:49 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-11 05:42:49 INFO  [main] com.training.MainServerApp - Started MainServerApp in 29.183 seconds (process running for 30.778)
+2026-02-11 05:44:07 INFO  [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-11 05:44:07 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-11 05:44:07 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms
+2026-02-11 05:44:07 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ]
+2026-02-11 05:44:07 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ
+2026-02-11 05:44:08 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getAccounts(..) with args: [1]
+2026-02-11 05:44:08 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAccountDetails(..) with args: [1]
+2026-02-11 05:44:53 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-11 05:44:53 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-11 05:44:53 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 05:44:53 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-11 05:44:53 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-11 05:45:13 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 4064 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-11 05:45:13 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-11 05:45:16 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-11 05:45:19 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-11 05:45:19 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 372 ms. Found 3 JPA repository interfaces.
+2026-02-11 05:45:23 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-11 05:45:23 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:45:23 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-11 05:45:23 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-11 05:45:23 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 9717 ms
+2026-02-11 05:45:24 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-11 05:45:25 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-11 05:45:26 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-11 05:45:26 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-11 05:45:27 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@19677add
+2026-02-11 05:45:27 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-11 05:45:28 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-11 05:45:28 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-11 05:45:32 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-11 05:45:33 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 05:45:33 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-11 05:45:34 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-11 05:45:37 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-11 05:45:38 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-11 05:45:38 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-11 05:45:47 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:45:48 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-11 05:45:48 INFO  [main] com.training.MainServerApp - Started MainServerApp in 37.193 seconds (process running for 38.77)
+2026-02-11 05:45:52 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-11 05:45:52 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-11 05:45:52 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2026-02-11 05:45:52 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ]
+2026-02-11 05:45:53 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ
+2026-02-11 05:45:53 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getAccounts(..) with args: [1]
+2026-02-11 05:45:53 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAccountDetails(..) with args: [1]
+2026-02-11 05:45:55 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAccountDetails(..) with result: com.training.dto.AccountDataDto@c9bbbb6
+2026-02-11 05:45:55 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getAccounts(..) with result: <200 OK OK,com.training.dto.AccountDataDto@c9bbbb6,[]>
+2026-02-11 05:46:03 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ]
+2026-02-11 05:46:03 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ
+2026-02-11 05:46:03 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getAccounts(..) with args: [2]
+2026-02-11 05:46:03 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAccountDetails(..) with args: [2]
+2026-02-11 05:46:03 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAccountDetails(..) with result: com.training.dto.AccountDataDto@6407ce95
+2026-02-11 05:46:03 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getAccounts(..) with result: <200 OK OK,com.training.dto.AccountDataDto@6407ce95,[]>
+2026-02-11 05:46:07 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ]
+2026-02-11 05:46:07 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ
+2026-02-11 05:46:07 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getAccounts(..) with args: [3]
+2026-02-11 05:46:07 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAccountDetails(..) with args: [3]
+2026-02-11 05:46:07 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAccountDetails(..) with result: com.training.dto.AccountDataDto@542931ed
+2026-02-11 05:46:07 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getAccounts(..) with result: <200 OK OK,com.training.dto.AccountDataDto@542931ed,[]>
+2026-02-11 05:46:12 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ]
+2026-02-11 05:46:12 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ
+2026-02-11 05:46:12 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getAccounts(..) with args: [4]
+2026-02-11 05:46:12 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAccountDetails(..) with args: [4]
+2026-02-11 05:46:12 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAccountDetails(..) with result: com.training.dto.AccountDataDto@75d18e60
+2026-02-11 05:46:12 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getAccounts(..) with result: <200 OK OK,com.training.dto.AccountDataDto@75d18e60,[]>
+2026-02-11 05:47:23 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-11 05:47:24 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-11 05:47:24 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 05:47:24 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-11 05:47:24 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-11 05:47:38 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 920 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-11 05:47:38 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-11 05:47:40 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-11 05:47:43 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-11 05:47:43 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 253 ms. Found 3 JPA repository interfaces.
+2026-02-11 05:47:47 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-11 05:47:47 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:47:47 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-11 05:47:47 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-11 05:47:48 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 9514 ms
+2026-02-11 05:47:49 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-11 05:47:49 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-11 05:47:51 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-11 05:47:51 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-11 05:47:52 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@19677add
+2026-02-11 05:47:52 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-11 05:47:52 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-11 05:47:52 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-11 05:47:58 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-11 05:47:58 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 05:47:58 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-11 05:48:00 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-11 05:48:02 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-11 05:48:03 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-11 05:48:03 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-11 05:48:07 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:48:07 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-11 05:48:07 INFO  [main] com.training.MainServerApp - Started MainServerApp in 31.256 seconds (process running for 33.193)
+2026-02-11 05:48:19 INFO  [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-11 05:48:19 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-11 05:48:19 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 11 ms
+2026-02-11 05:48:19 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ]
+2026-02-11 05:48:19 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ
+2026-02-11 05:48:20 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getAccounts(..) with args: [4]
+2026-02-11 05:48:20 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAccountDetails(..) with args: [4]
+2026-02-11 05:48:22 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Entering: GlobalExceptionHandler.handleUserNotFoundException() with args: []
+2026-02-11 05:48:22 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Exiting: GlobalExceptionHandler.handleUserNotFoundException() with result: <400 BAD_REQUEST Bad Request,{message=User not found},[]>
+2026-02-11 05:48:27 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ]
+2026-02-11 05:48:27 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ
+2026-02-11 05:48:27 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getAccounts(..) with args: [2]
+2026-02-11 05:48:27 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAccountDetails(..) with args: [2]
+2026-02-11 05:48:27 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAccountDetails(..) with result: com.training.dto.AccountDataDto@4585be7f
+2026-02-11 05:48:27 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getAccounts(..) with result: <200 OK OK,com.training.dto.AccountDataDto@4585be7f,[]>
+2026-02-11 05:48:31 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ]
+2026-02-11 05:48:31 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ
+2026-02-11 05:49:12 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Entering: UserController.signUpNewUser(..) with args: [com.training.dto.user.UserSignUpDto@173e7a2]
+2026-02-11 05:49:12 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.signUp(..) with args: [com.training.dto.user.UserSignUpDto@173e7a2]
+2026-02-11 05:49:13 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: JwtService.generateAccessToken(..) with args: [4, fourth, [], USER]
+2026-02-11 05:49:13 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.generateAccessToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q
+2026-02-11 05:49:13 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.signUp(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@1697715b
+2026-02-11 05:49:13 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.signUpNewUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@1697715b,[]>
+2026-02-11 05:49:28 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [com.training.dto.user.UserLoginDto@5a485524]
+2026-02-11 05:49:28 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [com.training.dto.user.UserLoginDto@5a485524]
+2026-02-11 05:49:28 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: JwtService.generateAccessToken(..) with args: [4, fourth, [], USER]
+2026-02-11 05:49:28 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.generateAccessToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTY4LCJleHAiOjE3NzA3OTI1Njh9.mXKICjMO3WXl5AY2h_7Ez_8DgqBxNXEMTxg5L-YR9i7W_7Y1whPig-4hN68iS7EpVRIiI8szJdqWN5kEmf2tPA
+2026-02-11 05:49:28 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@347a125f
+2026-02-11 05:49:28 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@347a125f,[]>
+2026-02-11 05:49:44 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA]
+2026-02-11 05:49:44 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA
+2026-02-11 05:49:44 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.createNewAccount(..) with args: [com.training.dto.account.AccountCreateDto@742b8099]
+2026-02-11 05:49:44 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.createAccount(..) with args: [com.training.dto.account.AccountCreateDto@742b8099]
+2026-02-11 05:49:45 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.createAccount(..) with result: com.training.dto.account.AccountSuccessCreation@557d3ee7
+2026-02-11 05:49:45 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.createNewAccount(..) with result: <200 OK OK,com.training.dto.account.AccountSuccessCreation@557d3ee7,[]>
+2026-02-11 05:49:51 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA]
+2026-02-11 05:49:51 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA
+2026-02-11 05:49:51 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.createNewAccount(..) with args: [com.training.dto.account.AccountCreateDto@7e865fc3]
+2026-02-11 05:49:51 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.createAccount(..) with args: [com.training.dto.account.AccountCreateDto@7e865fc3]
+2026-02-11 05:49:52 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.createAccount(..) with result: com.training.dto.account.AccountSuccessCreation@6d0a680f
+2026-02-11 05:49:52 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.createNewAccount(..) with result: <200 OK OK,com.training.dto.account.AccountSuccessCreation@6d0a680f,[]>
+2026-02-11 05:50:16 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ]
+2026-02-11 05:50:16 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3MzUxLCJleHAiOjE3NzA3OTA5NTF9.cd9-0uJlduu1Btwd4399e48CkOtDoXLNIFE8R_6sFb6zsUj1yucKnLDvk_XUO5zUIxlB0DGH4GxVzXie69xiWQ
+2026-02-11 05:50:16 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getAccounts(..) with args: [4]
+2026-02-11 05:50:16 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAccountDetails(..) with args: [4]
+2026-02-11 05:50:17 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAccountDetails(..) with result: com.training.dto.AccountDataDto@ef8412a
+2026-02-11 05:50:17 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getAccounts(..) with result: <200 OK OK,com.training.dto.AccountDataDto@ef8412a,[]>
+2026-02-11 05:51:01 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA]
+2026-02-11 05:51:01 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA
+2026-02-11 05:51:31 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sImFtb3VudHMiOlsxMDAwMC4wXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzI1MDQ1LCJleHAiOjE3NzA3Mjg2NDV9.eR3EAeyYXdYbkIsbzZCixBI_LM22Vaxvlq1Ks60_31UvQzWRneYMZC3RPcd2sATFG_f5h8s52zaSNYxSvZ9d7A]
+2026-02-11 05:51:31 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: null
+2026-02-11 05:51:48 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q]
+2026-02-11 05:51:48 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q
+2026-02-11 05:51:48 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.transferMoney(..) with args: [com.training.dto.transaction.TransferRequestDto@3b4e5618]
+2026-02-11 05:51:48 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.transferMoney(..) with args: [com.training.dto.transaction.TransferRequestDto@3b4e5618]
+2026-02-11 05:51:48 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.transferMoney(..) with result: true
+2026-02-11 05:51:48 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.transferMoney(..) with result: <200 OK OK,true,[]>
+2026-02-11 05:52:34 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q]
+2026-02-11 05:52:34 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q
+2026-02-11 05:52:34 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.transferMoney(..) with args: [com.training.dto.transaction.TransferRequestDto@2405ad20]
+2026-02-11 05:52:34 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.transferMoney(..) with args: [com.training.dto.transaction.TransferRequestDto@2405ad20]
+2026-02-11 05:52:34 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.transferMoney(..) with result: true
+2026-02-11 05:52:34 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.transferMoney(..) with result: <200 OK OK,true,[]>
+2026-02-11 05:52:38 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA]
+2026-02-11 05:52:38 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ0aGlyZCIsImFjY291bnRzIjpbXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzg3NDk3LCJleHAiOjE3NzA3OTEwOTd9.THkz-DTvxrL7IYps69pftyo_hoVf7yDn9ZvrnTy-byiQnqScWO0vrZCdT-6xMkbx9FGlx24fCeCmqONCMhClbA
+2026-02-11 05:53:08 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q]
+2026-02-11 05:53:08 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q
+2026-02-11 05:53:21 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q]
+2026-02-11 05:53:21 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q
+2026-02-11 05:53:21 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [2]
+2026-02-11 05:53:21 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [2]
+2026-02-11 05:53:21 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@15e5d691, com.training.dto.transaction.TransactionsDto@22366a8, com.training.dto.transaction.TransactionsDto@67e1f7c2]
+2026-02-11 05:53:21 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@15e5d691, com.training.dto.transaction.TransactionsDto@22366a8, com.training.dto.transaction.TransactionsDto@67e1f7c2],[]>
+2026-02-11 05:56:22 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-11 05:56:22 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-11 05:56:22 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 05:56:22 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-11 05:56:22 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-11 05:56:34 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 5720 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-11 05:56:34 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-11 05:56:36 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-11 05:56:39 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-11 05:56:39 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 234 ms. Found 3 JPA repository interfaces.
+2026-02-11 05:56:43 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-11 05:56:44 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:56:44 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-11 05:56:44 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-11 05:56:44 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 9694 ms
+2026-02-11 05:56:45 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-11 05:56:45 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-11 05:56:48 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-11 05:56:48 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-11 05:56:50 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1c5d376c
+2026-02-11 05:56:50 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-11 05:56:50 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-11 05:56:50 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-11 05:56:54 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-11 05:56:55 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 05:56:55 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-11 05:56:56 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-11 05:56:58 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-11 05:56:59 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-11 05:56:59 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-11 05:57:03 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-11 05:57:03 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-11 05:57:03 INFO  [main] com.training.MainServerApp - Started MainServerApp in 31.892 seconds (process running for 33.584)
+2026-02-11 05:57:13 INFO  [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-11 05:57:13 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-11 05:57:13 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 12 ms
+2026-02-11 05:57:13 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q]
+2026-02-11 05:57:13 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q
+2026-02-11 05:57:14 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.transferMoney(..) with args: [com.training.dto.transaction.TransferRequestDto@40a2e769]
+2026-02-11 05:57:14 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.transferMoney(..) with args: [com.training.dto.transaction.TransferRequestDto@40a2e769]
+2026-02-11 05:57:22 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q]
+2026-02-11 05:57:22 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q
+2026-02-11 05:57:22 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.transferMoney(..) with args: [com.training.dto.transaction.TransferRequestDto@4f9941f5]
+2026-02-11 05:57:22 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.transferMoney(..) with args: [com.training.dto.transaction.TransferRequestDto@4f9941f5]
+2026-02-11 05:57:22 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.transferMoney(..) with result: true
+2026-02-11 05:57:22 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.transferMoney(..) with result: <200 OK OK,true,[]>
+2026-02-11 06:29:46 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sImFtb3VudHMiOlsxMDAwMC4wXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzI1MDQ1LCJleHAiOjE3NzA3Mjg2NDV9.eR3EAeyYXdYbkIsbzZCixBI_LM22Vaxvlq1Ks60_31UvQzWRneYMZC3RPcd2sATFG_f5h8s52zaSNYxSvZ9d7A]
+2026-02-11 06:29:46 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: null
+2026-02-11 06:29:54 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sImFtb3VudHMiOlsxMDAwMC4wXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzI1MDQ1LCJleHAiOjE3NzA3Mjg2NDV9.eR3EAeyYXdYbkIsbzZCixBI_LM22Vaxvlq1Ks60_31UvQzWRneYMZC3RPcd2sATFG_f5h8s52zaSNYxSvZ9d7A]
+2026-02-11 06:29:54 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: null
+2026-02-11 06:30:02 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sImFtb3VudHMiOlsxMDAwMC4wXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzI1MDQ1LCJleHAiOjE3NzA3Mjg2NDV9.eR3EAeyYXdYbkIsbzZCixBI_LM22Vaxvlq1Ks60_31UvQzWRneYMZC3RPcd2sATFG_f5h8s52zaSNYxSvZ9d7A]
+2026-02-11 06:30:02 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: null
+2026-02-11 06:30:10 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sImFtb3VudHMiOlsxMDAwMC4wXSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcwNzI1MDQ1LCJleHAiOjE3NzA3Mjg2NDV9.eR3EAeyYXdYbkIsbzZCixBI_LM22Vaxvlq1Ks60_31UvQzWRneYMZC3RPcd2sATFG_f5h8s52zaSNYxSvZ9d7A]
+2026-02-11 06:30:10 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: null
+2026-02-11 06:30:35 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q]
+2026-02-11 06:30:35 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q
+2026-02-11 06:30:35 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [2]
+2026-02-11 06:30:35 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [2]
+2026-02-11 06:30:37 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@144a469f, com.training.dto.transaction.TransactionsDto@44b3fb5b, com.training.dto.transaction.TransactionsDto@38379ba3, com.training.dto.transaction.TransactionsDto@5ff70ad3]
+2026-02-11 06:30:37 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@144a469f, com.training.dto.transaction.TransactionsDto@44b3fb5b, com.training.dto.transaction.TransactionsDto@38379ba3, com.training.dto.transaction.TransactionsDto@5ff70ad3],[]>
+2026-02-11 06:31:09 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q]
+2026-02-11 06:31:09 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwidXNlcm5hbWUiOiJmb3VydGgiLCJhY2NvdW50cyI6W10sInJvbGUiOiJVU0VSIiwiaWF0IjoxNzcwNzg4OTUzLCJleHAiOjE3NzA3OTI1NTN9.vFgsgJs2aVGZZp6M7w7Ojyf2_jJ5iN-3j1vsXDEl-jAxk-Y-ofDR3BeKVp8DLmnFh9s8weKQ8YzYi_zgedU96Q
+2026-02-11 06:31:09 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [2]
+2026-02-11 06:31:09 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [2]
+2026-02-11 06:31:09 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@35b57bf5, com.training.dto.transaction.TransactionsDto@3cfbd901, com.training.dto.transaction.TransactionsDto@3bb321d7, com.training.dto.transaction.TransactionsDto@64b9b159]
+2026-02-11 06:31:09 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@35b57bf5, com.training.dto.transaction.TransactionsDto@3cfbd901, com.training.dto.transaction.TransactionsDto@3bb321d7, com.training.dto.transaction.TransactionsDto@64b9b159],[]>
+2026-02-11 06:36:26 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-11 06:36:26 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-11 06:36:26 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 06:36:26 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-11 06:36:26 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-11 08:30:59 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 3132 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-11 08:30:59 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-11 08:31:02 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-11 08:31:03 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-11 08:31:03 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 173 ms. Found 3 JPA repository interfaces.
+2026-02-11 08:31:06 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-11 08:31:06 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-11 08:31:06 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-11 08:31:06 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-11 08:31:06 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 6610 ms
+2026-02-11 08:31:07 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-11 08:31:08 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-11 08:31:09 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-11 08:31:09 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-11 08:31:11 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@16890f00
+2026-02-11 08:31:11 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-11 08:31:11 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-11 08:31:11 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-11 08:31:15 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-11 08:31:16 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 08:31:16 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-11 08:31:17 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-11 08:31:20 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-11 08:31:20 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-11 08:31:20 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-11 08:31:25 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-11 08:31:25 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-11 08:31:25 INFO  [main] com.training.MainServerApp - Started MainServerApp in 27.661 seconds (process running for 29.224)
+2026-02-11 08:31:51 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-11 08:31:51 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-11 08:31:51 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2026-02-11 08:33:14 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-11 08:33:14 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-11 08:33:14 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 08:33:14 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-11 08:33:14 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-11 08:33:22 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 4128 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-11 08:33:22 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-11 08:33:23 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-11 08:33:24 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-11 08:33:24 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 131 ms. Found 3 JPA repository interfaces.
+2026-02-11 08:33:28 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-11 08:33:28 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-11 08:33:28 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-11 08:33:28 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-11 08:33:28 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 6340 ms
+2026-02-11 08:33:33 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-11 08:33:33 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-11 08:33:35 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-11 08:33:35 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-11 08:33:36 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@74844216
+2026-02-11 08:33:36 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-11 08:33:36 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-11 08:33:36 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-11 08:33:39 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-11 08:33:40 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 08:33:40 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-11 08:33:42 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-11 08:33:48 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-11 08:33:49 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-11 08:33:49 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-11 08:33:53 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-11 08:33:53 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-11 08:33:53 INFO  [main] com.training.MainServerApp - Started MainServerApp in 32.475 seconds (process running for 33.594)
+2026-02-11 08:33:56 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-11 08:33:56 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-11 08:33:57 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 08:33:57 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-11 08:33:57 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-11 08:34:06 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 812 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-11 08:34:06 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-11 08:34:07 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-11 08:34:08 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-11 08:34:08 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 147 ms. Found 3 JPA repository interfaces.
+2026-02-11 08:34:10 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-11 08:34:10 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-11 08:34:10 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-11 08:34:10 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-11 08:34:10 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 4728 ms
+2026-02-11 08:34:11 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-11 08:34:11 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-11 08:34:12 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-11 08:34:12 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-11 08:34:13 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@fd0e118
+2026-02-11 08:34:13 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-11 08:34:13 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-11 08:34:13 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-11 08:34:16 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-11 08:34:16 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 08:34:16 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-11 08:34:17 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-11 08:34:18 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-11 08:34:19 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-11 08:34:19 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-11 08:34:21 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-11 08:34:21 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-11 08:34:21 INFO  [main] com.training.MainServerApp - Started MainServerApp in 16.609 seconds (process running for 17.558)
+2026-02-11 08:35:31 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-11 08:35:31 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-11 08:35:31 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-02-11 08:35:31 WARN  [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/api/v1/user/login' (previous null). Performing CorsConfiguration lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-02-11 08:39:01 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-11 08:39:01 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-11 08:39:01 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 08:39:01 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-11 08:39:01 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-11 08:39:09 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 3980 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-11 08:39:10 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-11 08:39:11 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-11 08:39:12 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-11 08:39:13 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 156 ms. Found 3 JPA repository interfaces.
+2026-02-11 08:39:15 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-11 08:39:15 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-11 08:39:15 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-11 08:39:15 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-11 08:39:15 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 5372 ms
+2026-02-11 08:39:16 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-11 08:39:16 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-11 08:39:17 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-11 08:39:17 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-11 08:39:18 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@62f6185a
+2026-02-11 08:39:18 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-11 08:39:18 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-11 08:39:18 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-11 08:39:21 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-11 08:39:21 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 08:39:22 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-11 08:39:23 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-11 08:39:27 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-11 08:39:27 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-11 08:39:27 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-11 08:39:29 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-11 08:39:29 INFO  [main] com.training.MainServerApp - Started MainServerApp in 21.382 seconds (process running for 22.468)
+2026-02-11 08:39:29 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-11 08:39:30 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-11 08:39:30 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 08:39:30 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-11 08:39:30 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-11 08:39:38 INFO  [main] com.training.MainServerApp - Starting MainServerApp using Java 17.0.8 with PID 5720 (C:\MoneyTransferSystem\Backend\backend\target\classes started by labuser in C:\MoneyTransferSystem\Backend)
+2026-02-11 08:39:38 INFO  [main] com.training.MainServerApp - No active profile set, falling back to 1 default profile: "default"
+2026-02-11 08:39:39 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-02-11 08:39:40 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-11 08:39:40 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 143 ms. Found 3 JPA repository interfaces.
+2026-02-11 08:39:43 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-11 08:39:43 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-11 08:39:43 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-11 08:39:43 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-11 08:39:43 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 5199 ms
+2026-02-11 08:39:45 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-11 08:39:46 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-11 08:39:47 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-11 08:39:47 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-11 08:39:48 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@fd0e118
+2026-02-11 08:39:48 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-11 08:39:48 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-11 08:39:48 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/moneyTransferDB]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.1
+	Default catalog/schema: moneyTransferDB/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-11 08:39:50 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-11 08:39:50 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-11 08:39:50 INFO  [main] com.training.MainServerApp - Application started successfully!
+2026-02-11 08:39:51 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-11 08:39:52 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-11 08:39:52 INFO  [main] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-02-11 08:39:52 WARN  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-02-11 08:39:55 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-11 08:39:55 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-11 08:39:55 INFO  [main] com.training.MainServerApp - Started MainServerApp in 18.336 seconds (process running for 19.332)
+2026-02-11 08:40:02 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-11 08:40:02 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-11 08:40:02 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+2026-02-11 08:40:02 WARN  [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/api/v1/user/signup' (previous null). Performing CorsConfiguration lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-02-11 08:40:03 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Entering: UserController.signUpNewUser(..) with args: [com.training.dto.user.UserSignUpDto@75155861]
+2026-02-11 08:40:03 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.signUp(..) with args: [com.training.dto.user.UserSignUpDto@75155861]
+2026-02-11 08:40:05 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: JwtService.generateAccessToken(..) with args: [5, damn, [], USER]
+2026-02-11 08:40:05 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.generateAccessToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwidXNlcm5hbWUiOiJkYW1uIiwiYWNjb3VudHMiOltdLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc3MDc5OTIwNSwiZXhwIjoxNzcwODAyODA1fQ.r1jO73tZmCLCwuUb19Lo1dU3sWV6w9n__TisHY0UtpxolXIBErL7KRIZYft1mhUmPq9SLc5ZD910ENOb5jo1-g
+2026-02-11 08:40:05 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.signUp(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@159feff9
+2026-02-11 08:40:05 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.signUpNewUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@159feff9,[]>
+2026-02-11 08:41:18 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [com.training.dto.user.UserLoginDto@7ca413aa]
+2026-02-11 08:41:18 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [com.training.dto.user.UserLoginDto@7ca413aa]
+2026-02-11 08:41:18 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: JwtService.generateAccessToken(..) with args: [1, first, [1], ADMIN]
+2026-02-11 08:41:18 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.generateAccessToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3MDc5OTI3OCwiZXhwIjoxNzcwODAyODc4fQ.0cdxBxzkk3gZFiMi8fu7iB3tqGpjR7sBkEyvkYW_pRi4Eh-rw7_tDs0ajswVZ-9slL3chDeiJ4votxz6NQdDpw
+2026-02-11 08:41:18 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@2516bb7
+2026-02-11 08:41:18 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@2516bb7,[]>
+2026-02-11 08:41:43 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: JwtService.parseToken(..) with args: [eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3MDc5OTI3OCwiZXhwIjoxNzcwODAyODc4fQ.0cdxBxzkk3gZFiMi8fu7iB3tqGpjR7sBkEyvkYW_pRi4Eh-rw7_tDs0ajswVZ-9slL3chDeiJ4votxz6NQdDpw]
+2026-02-11 08:41:43 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.parseToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3MDc5OTI3OCwiZXhwIjoxNzcwODAyODc4fQ.0cdxBxzkk3gZFiMi8fu7iB3tqGpjR7sBkEyvkYW_pRi4Eh-rw7_tDs0ajswVZ-9slL3chDeiJ4votxz6NQdDpw
+2026-02-11 08:41:43 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.transferMoney(..) with args: [com.training.dto.transaction.TransferRequestDto@29258d41]
+2026-02-11 08:41:43 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.transferMoney(..) with args: [com.training.dto.transaction.TransferRequestDto@29258d41]
+2026-02-11 08:45:34 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [com.training.dto.user.UserLoginDto@7e96d6ae]
+2026-02-11 08:45:34 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [com.training.dto.user.UserLoginDto@7e96d6ae]
+2026-02-11 08:45:34 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: JwtService.generateAccessToken(..) with args: [1, first, [1], ADMIN]
+2026-02-11 08:45:34 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: JwtService.generateAccessToken(..) with result: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJmaXJzdCIsImFjY291bnRzIjpbMV0sInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3MDc5OTUzNCwiZXhwIjoxNzcwODAzMTM0fQ.NgBMAknZvPOYNT29Qg5xszvCb_1a-FFWXwENA46YlnQEs4NwoxgfnVL53L7FfPLR3rXfzaay4ehXJJBTwbr_YA
+2026-02-11 08:45:34 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@300ff6a2
+2026-02-11 08:45:34 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@300ff6a2,[]>

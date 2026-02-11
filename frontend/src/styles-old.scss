@@ -1,0 +1,159 @@
+// Import prebuilt theme
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+// Basic structure
+html,
+body {
+  height: 100%;
+  background-color: #f5f5f5 !important;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f5f5 !important;
+}
+
+* {
+  color-scheme: light !important;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+// Global utility classes
+.spacer {
+  flex: 1 1 auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.success-text {
+  color: #2e7d32;
+}
+
+.error-text {
+  color: #c62828;
+}
+
+/* Custom modifications */
+.mat-mdc-card-title {
+  font-weight: 500;
+}
+
+/* Force Light Theme Globally */
+.mat-mdc-card,
+mat-card {
+  background-color: white !important;
+  color: #1a1a1a !important;
+}
+
+.mat-mdc-form-field,
+mat-form-field {
+  color: #1a1a1a !important;
+}
+
+.mdc-text-field,
+.mat-mdc-text-field-wrapper {
+  background-color: white !important;
+}
+
+.mdc-text-field__input,
+input.mat-mdc-input-element {
+  color: #1a1a1a !important;
+  caret-color: #1976d2 !important;
+}
+
+.mdc-text-field__input::placeholder {
+  color: #999 !important;
+  opacity: 1 !important;
+}
+
+.mat-mdc-form-field-label,
+.mdc-floating-label {
+  color: #666 !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: rgba(25, 118, 210, 0.04) !important;
+}
+
+.mat-mdc-menu-panel {
+  background-color: white !important;
+}
+
+.mat-mdc-menu-item {
+  color: #1a1a1a !important;
+}
+
+/* Login Page Light Theme Override */
+app-login {
+  display: block;
+}
+
+app-login mat-card,
+app-login .mat-mdc-card {
+  background-color: white !important;
+  color: #1a1a1a !important;
+}
+
+app-login mat-form-field,
+app-login .mat-mdc-form-field {
+  color: #1a1a1a !important;
+}
+
+app-login .mdc-text-field {
+  background-color: white !important;
+}
+
+app-login input,
+app-login .mat-mdc-form-field input,
+app-login .mdc-text-field__input {
+  color: #1a1a1a !important;
+}
+
+app-login .mat-mdc-form-field-label,
+app-login .mdc-floating-label {
+  color: #666 !important;
+}
+
+app-login .mat-mdc-form-field-focus-overlay {
+  background-color: rgba(25, 118, 210, 0.04) !important;
+}
+
+app-login h2 {
+  color: #1a1a1a !important;
+}
+
+app-login a {
+  color: #1976d2 !important;
+}
+
+app-login .mat-mdc-button,
+app-login button {
+  color: white !important;
+}
+
+/* Override Material dark styles */
+.mdc-notched-outline__leading,
+.mdc-notched-outline__notch,
+.mdc-notched-outline__trailing {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--focused .mdc-notched-outline__notch,
+.mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: #1976d2 !important;
+}
