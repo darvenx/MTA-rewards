@@ -1,7 +1,7 @@
 export interface TransferRequest {
     senderAccountNumber: number;
     receiverAccountNumber: number;
-    senderAccountPin?: string;
+    senderAccountPin: string;
     amount: number;
     idempotencyKey: string;
 }

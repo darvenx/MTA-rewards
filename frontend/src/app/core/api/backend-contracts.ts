@@ -35,7 +35,7 @@ export interface ApiUserSignUpRequest {
 // The current Java class may be trimmed down, but the integration
 // team should treat this as the target contract.
 export interface ApiUserSuccessLoginOrSignUpDto {
-  userId: number;
+  id: number;
   token: string;
   accountBalance: number[];
   accountNumbers: number[];

@@ -47,7 +47,7 @@ export class AuthService {
 
         if (ApiHttpConfig.user.loginMethod === 'GET') {
             // Legacy fallback if GET-with-body login is required.
-            return this.http.get<ApiUserSuccessLoginOrSignUpDto>(url, {
+            return this.http.post<ApiUserSuccessLoginOrSignUpDto>(url, {
                 params: payload as any
             });
         }

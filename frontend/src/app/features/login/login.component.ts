@@ -37,11 +37,13 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.isLoading = true;
       const { username, password } = this.loginForm.value;
-
+      console.log(username,password);
       this.authService.login(username, password).subscribe({
         next: (res) => {
+          console.log(res);
           this.isLoading = false;
-
+          sessionStorage.setItem("id",String(res.id));
+          console.log(sessionStorage);
           // Defensive check for response structure
           if (!res || !res.token) {
             console.error('Invalid login response:', res);

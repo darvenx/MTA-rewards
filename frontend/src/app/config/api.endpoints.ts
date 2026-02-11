@@ -34,12 +34,6 @@ export const ApiEndpoints = {
     signup: () => `${BASE}/user/signup`, // POST UserSignUpDto -> UserSuccessLoginOrSignUpDto
     login: () => `${BASE}/user/login`,  // POST UserLoginDto -> UserSuccessLoginOrSignUpDto
     update: () => `${BASE}/user/update`, // PUT UserSignUpDto -> boolean
-
-    /**
-     * Placeholder only – the current backend does **not** expose a
-     * forgot-password endpoint. This is intentionally isolated here
-     * so it can be wired up or removed centrally later.
-     */
     forgotPassword: () => `${BASE}/user/forgot-password`
   },
   account: {

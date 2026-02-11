@@ -66,11 +66,13 @@ export class TransferComponent implements OnInit {
         const idempotencyKey = self.crypto.randomUUID();
 
         const request: TransferRequest = {
-            senderAccountNumber: Number(formValue.senderAccountNumber),
+            senderAccountNumber: Number(sessionStorage.getItem("id")),
             receiverAccountNumber: Number(formValue.receiverAccountNumber),
             amount: formValue.amount,
-            idempotencyKey: idempotencyKey
+            idempotencyKey: idempotencyKey,
+            senderAccountPin:String(formValue.remarks)
         };
+        // console.log(request);
 
         this.transferService.transfer(request).subscribe({
             next: (ok) => {
