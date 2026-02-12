@@ -48,6 +48,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleExpiredJwtException() {
         return createErrorResponse("JWT token has expired", HttpStatus.UNAUTHORIZED);
     }
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<Object> handleInvalidCredentialsException() {
+        return createErrorResponse("Wrong credentials", HttpStatus.UNAUTHORIZED);
+    }
+    @ExceptionHandler(DuplicateTransferException.class)
+    public ResponseEntity<Object> handleDuplicateTransferException() {
+        return createErrorResponse("Duplicate Transaction", HttpStatus.UNAUTHORIZED);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -67,13 +75,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleSelfTransferException(){
         return new ResponseEntity<>("Cant Transfer to self",HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(InsufficientBalanceException.class)
-    public ResponseEntity<Object> handleInsufficientBalanceException(){
-        return new ResponseEntity<>("Not enough balance",HttpStatus.BAD_REQUEST);
-    }
+
     @ExceptionHandler(IncorrectPinException.class)
     public ResponseEntity<Object> handleIncorrectPinException(){
-        return new ResponseEntity<>("Wrong pin",HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Invalid Pin",HttpStatus.BAD_REQUEST);
     }
-
+    @ExceptionHandler(InsufficientBalanceException.class)
+    public ResponseEntity<Object> handleInsufficientBalance(){
+        return new ResponseEntity<>("Not enough balance",HttpStatus.BAD_REQUEST);
+    }
 }
