@@ -49,15 +49,31 @@ public class AccountDataDto {
     public AccountDataDto() {
         this.accountIds = new ArrayList<>();
         this.balances = new ArrayList<>();
-        this.accountTypes  = new ArrayList<>();
+        this.accountTypes = new ArrayList<>();
         this.accountStatus = new ArrayList<>();
     }
-    public void addBalance(Double amount){
+
+    public void addBalance(Double amount) {
         balances.add(amount);
     }
-    public void addAccount(Long id){
+
+    public void addAccount(Long id) {
         accountIds.add(id);
     }
-    public void addStatus(String status){accountStatus.add(status);}
-    public void addType(String type){accountTypes.add(type);}
+
+    public void addStatus(String status) {
+        accountStatus.add(status);
+    }
+
+    public void addType(String type) {
+        accountTypes.add(type);
+    }
+
+    public List<String> getTypes() {
+        return accountTypes;
+    }
+
+    public List<String> getStatuses() {
+        return accountStatus;
+    }
 }
