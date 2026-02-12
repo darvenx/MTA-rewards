@@ -52,6 +52,7 @@ class TransactionServiceImplTest {
 
         User user1 = new User();
         user1.setUserId(1L);
+        user1.setPassword("1234");
 
         senderAccount = new Account();
         senderAccount.setAccountId(1L);

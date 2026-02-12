@@ -8,6 +8,8 @@ import com.training.enums.AccountStatus;
 import com.training.enums.AccountType;
 import com.training.repo.AccountRepo;
 import com.training.repo.UserRepo;
+import com.training.dto.AccountDataDto;
+import com.training.exceptions.UserNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -274,5 +276,29 @@ class AccountServiceImplTest {
         assertNotNull(testAccount.getLastUpdated());
         assertTrue(testAccount.getLastUpdated().isAfter(beforeCall.minusSeconds(1)));
         assertTrue(testAccount.getLastUpdated().isBefore(afterCall.plusSeconds(1)));
+    }
+
+    @Test
+    @DisplayName("Should return account details successfully")
+    void testGetAccountDetails_Success() throws Exception {
+        when(accountRepo.findAllByUser_UserId(1L)).thenReturn(Arrays.asList(testAccount));
+
+        AccountDataDto result = accountService.getAccountDetails(1L);
+
+        assertNotNull(result);
+        assertTrue(result.getAccountIds().contains(1L));
+        assertTrue(result.getBalances().contains(10000.0));
+
+        verify(accountRepo, times(1)).findAllByUser_UserId(1L);
+    }
+
+    @Test
+    @DisplayName("Should throw UserNotFoundException when no accounts found")
+    void testGetAccountDetails_UserNotFound() {
+        when(accountRepo.findAllByUser_UserId(1L)).thenReturn(new ArrayList<>());
+
+        assertThrows(UserNotFoundException.class, () -> accountService.getAccountDetails(1L));
+
+        verify(accountRepo, times(1)).findAllByUser_UserId(1L);
     }
 }

@@ -59,6 +59,50 @@ public class JwtTest {
         assertTrue(jwt.isExpired());
     }
 
+    @Test
+    void testIsExpired_NotExpired() {
+        Date future = new Date(System.currentTimeMillis() + 10000);
+
+        Claims claims = Jwts.claims()
+                .subject("123")
+                .expiration(future)
+                .build();
+
+        Jwt jwt = new Jwt(claims, secretKey);
+
+        assertFalse(jwt.isExpired());
+    }
+
+    @Test
+    void testIsExpired_ThrowsTokenExpired() {
+        Claims mockClaims = org.mockito.Mockito.mock(Claims.class);
+        Date future = new Date(System.currentTimeMillis() + 10000);
+
+        // Use doThrow/doReturn syntax
+        org.mockito.Mockito.doThrow(new JwtException("Mock Exception"))
+                .doReturn(future)
+                .when(mockClaims).getExpiration();
+
+        Jwt jwt = new Jwt(mockClaims, secretKey);
+
+        assertThrows(BadCredentialsException.class, () -> jwt.isExpired(), "Token expired");
+    }
+
+    @Test
+    void testIsExpired_ThrowsInvalidCredentials() {
+        Claims mockClaims = org.mockito.Mockito.mock(Claims.class);
+        Date past = new Date(System.currentTimeMillis() - 10000);
+
+        org.mockito.Mockito.doThrow(new JwtException("Mock Exception"))
+                .doReturn(past)
+                .when(mockClaims).getExpiration();
+
+        Jwt jwt = new Jwt(mockClaims, secretKey);
+
+        BadCredentialsException exception = assertThrows(BadCredentialsException.class, () -> jwt.isExpired());
+        assertEquals("Invalid Credentials", exception.getMessage());
+    }
+
     // Testing the specific exception handling in Jwt.isExpired()
     // The code catches JwtException. If expiration is after now, throws "Token
     // expired" (BadCredentialsException)

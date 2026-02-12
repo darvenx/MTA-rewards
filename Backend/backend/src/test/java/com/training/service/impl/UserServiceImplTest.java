@@ -32,66 +32,66 @@ import static org.mockito.Mockito.*;
 @DisplayName("UserServiceImpl Tests")
 class UserServiceImplTest {
 
-    @Mock
-    private UserRepo userRepo;
+        @Mock
+        private UserRepo userRepo;
 
-    @Mock
-    private JwtService jwtService;
+        @Mock
+        private JwtService jwtService;
 
-    @InjectMocks
-    private UserServiceImpl userService;
+        @InjectMocks
+        private UserServiceImpl userService;
 
-    private User testUser;
-    private UserSignUpDto signUpDto;
-    private UserLoginDto loginDto;
-    private UserUpdatePasswordDto updatePasswordDto;
+        private User testUser;
+        private UserSignUpDto signUpDto;
+        private UserLoginDto loginDto;
+        private UserUpdatePasswordDto updatePasswordDto;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
+        @BeforeEach
+        void setUp() {
+                MockitoAnnotations.openMocks(this);
 
-        testUser = new User();
-        testUser.setUserId(1L);
-        testUser.setUsername("testuser");
-        testUser.setPassword("oldPassword123");
-        testUser.setEmail("test@example.com");
-        testUser.setPhoneNumber("1234567890");
-        testUser.setFirstName("Test");
-        testUser.setLastName("User");
+                testUser = new User();
+                testUser.setUserId(1L);
+                testUser.setUsername("testuser");
+                testUser.setPassword("oldPassword123");
+                testUser.setEmail("test@example.com");
+                testUser.setPhoneNumber("1234567890");
+                testUser.setFirstName("Test");
+                testUser.setLastName("User");
 
-        Account account1 = new Account();
-        account1.setAccountId(1L);
-        account1.setAccountBalance(5000.0);
-        account1.setAccountType(AccountType.SAVINGS);
-        account1.setAccountStatus(AccountStatus.ACTIVE);
+                Account account1 = new Account();
+                account1.setAccountId(1L);
+                account1.setAccountBalance(5000.0);
+                account1.setAccountType(AccountType.SAVINGS);
+                account1.setAccountStatus(AccountStatus.ACTIVE);
 
-        Account account2 = new Account();
-        account2.setAccountId(2L);
-        account2.setAccountBalance(3000.0);
-        account2.setAccountType(AccountType.CURRENT);
-        account2.setAccountStatus(AccountStatus.ACTIVE);
+                Account account2 = new Account();
+                account2.setAccountId(2L);
+                account2.setAccountBalance(3000.0);
+                account2.setAccountType(AccountType.CURRENT);
+                account2.setAccountStatus(AccountStatus.ACTIVE);
 
-        testUser.setAccounts(Arrays.asList(account1, account2));
+                testUser.setAccounts(Arrays.asList(account1, account2));
 
-        signUpDto = UserSignUpDto.builder()
-                .username("newuser")
-                .password("password123")
-                .email("newuser@example.com")
-                .phoneNumber("9876543210")
-                .firstName("New")
-                .lastName("User")
-                .build();
+                signUpDto = UserSignUpDto.builder()
+                                .username("newuser")
+                                .password("password123")
+                                .email("newuser@example.com")
+                                .phoneNumber("9876543210")
+                                .firstName("New")
+                                .lastName("User")
+                                .build();
 
-        loginDto = UserLoginDto.builder()
-                .username("testuser")
-                .password("oldPassword123")
-                .build();
+                loginDto = UserLoginDto.builder()
+                                .username("testuser")
+                                .password("oldPassword123")
+                                .build();
 
-        updatePasswordDto = new UserUpdatePasswordDto();
-        updatePasswordDto.setUsername("testuser");
-        updatePasswordDto.setOldPassword("oldPassword123");
-        updatePasswordDto.setNewPassword("newPassword456");
-    }
+                updatePasswordDto = new UserUpdatePasswordDto();
+                updatePasswordDto.setUsername("testuser");
+                updatePasswordDto.setOldPassword("oldPassword123");
+                updatePasswordDto.setNewPassword("newPassword456");
+        }
 
     @Test
     @DisplayName("Should successfully login user with correct credentials")
@@ -101,7 +101,7 @@ class UserServiceImplTest {
 
         Jwt jwt = mock(Jwt.class);
         when(jwt.toString()).thenReturn("token123");
-        when(jwtService.generateAccessToken(anyLong(), anyString(), anyList(), anyList(), any())).thenReturn(jwt);
+        when(jwtService.generateAccessToken(anyLong(), anyString(), anyList(), any())).thenReturn(jwt);
 
         UserSuccessLoginOrSignUpDto result = userService.login(loginDto);
 
@@ -126,27 +126,28 @@ class UserServiceImplTest {
         verify(userRepo, times(1)).findByUsernameAndPassword("invaliduser", "wrongpassword");
     }
 
-    @Test
-    @DisplayName("Should return empty account list for user with no accounts")
-    void testLogin_UserWithNoAccounts() {
-        User userNoAccounts = new User();
-        userNoAccounts.setUserId(2L);
-        userNoAccounts.setUsername("testuser");
-        userNoAccounts.setPassword("oldPassword123");
-        userNoAccounts.setAccounts(new ArrayList<>());
+        @Test
+        @DisplayName("Should return empty account list for user with no accounts")
+        void testLogin_UserWithNoAccounts() {
+                User userNoAccounts = new User();
+                userNoAccounts.setUserId(2L);
+                userNoAccounts.setUsername("testuser");
+                userNoAccounts.setPassword("oldPassword123");
+                userNoAccounts.setAccounts(new ArrayList<>());
 
-        when(userRepo.findByUsernameAndPassword("testuser", "oldPassword123"))
-                .thenReturn(Optional.of(userNoAccounts));
+                when(userRepo.findByUsernameAndPassword("testuser", "oldPassword123"))
+                                .thenReturn(Optional.of(userNoAccounts));
 
-        Jwt jwt = mock(Jwt.class);
-        when(jwt.toString()).thenReturn("token123");
-        when(jwtService.generateAccessToken(anyLong(), anyString(), anyList(), anyList(), any())).thenReturn(jwt);
+                Jwt jwt = mock(Jwt.class);
+                when(jwt.toString()).thenReturn("token123");
+                when(jwtService.generateAccessToken(anyLong(), anyString(), anyList(), any()))
+                                .thenReturn(jwt);
 
-        UserSuccessLoginOrSignUpDto result = userService.login(loginDto);
+                UserSuccessLoginOrSignUpDto result = userService.login(loginDto);
 
-        assertNotNull(result);
-        assertEquals("token123", result.getToken());
-    }
+                assertNotNull(result);
+                assertEquals("token123", result.getToken());
+        }
 
     @Test
     @DisplayName("Should successfully sign up new user")
@@ -167,9 +168,9 @@ class UserServiceImplTest {
 
         Jwt jwt = mock(Jwt.class);
         when(jwt.toString()).thenReturn("token123");
-        when(jwtService.generateAccessToken(anyLong(), anyString(), anyList(), anyList(), any())).thenReturn(jwt);
+        when(jwtService.generateAccessToken(anyLong(), anyString(), anyList(), any())).thenReturn(jwt);
 
-        UserSuccessLoginOrSignUpDto result = userService.singUp(signUpDto);
+        UserSuccessLoginOrSignUpDto result = userService.signUp(signUpDto);
 
         assertNotNull(result);
         assertEquals("token123", result.getToken());
@@ -185,7 +186,7 @@ class UserServiceImplTest {
         when(userRepo.findByUsernameOrEmailOrPhoneNumber("newuser", "newuser@example.com", "9876543210"))
                 .thenReturn(Optional.of(testUser));
 
-        assertThrows(UserAlreadyExistsException.class, () -> userService.singUp(signUpDto));
+        assertThrows(UserAlreadyExistsException.class, () -> userService.signUp(signUpDto));
 
         verify(userRepo, times(1)).findByUsernameOrEmailOrPhoneNumber("newuser", "newuser@example.com", "9876543210");
         verify(userRepo, never()).saveAndFlush(any(User.class));
