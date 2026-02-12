@@ -3,10 +3,7 @@ package com.training.service;
 import com.training.entities.User;
 import com.training.enums.UserRole;
 import com.training.repo.UserRepo;
-<<<<<<< HEAD
 import com.training.service.impl.UserDetailsImpl;
-=======
->>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,11 +24,7 @@ public class UserDetailsTest {
     private UserRepo userRepo;
 
     @InjectMocks
-<<<<<<< HEAD
     private UserDetailsImpl userDetails;
-=======
-    private UserDetails userDetails;
->>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 
     private User testUser;
 
