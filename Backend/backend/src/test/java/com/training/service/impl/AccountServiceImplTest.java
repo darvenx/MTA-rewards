@@ -8,8 +8,11 @@ import com.training.enums.AccountStatus;
 import com.training.enums.AccountType;
 import com.training.repo.AccountRepo;
 import com.training.repo.UserRepo;
+<<<<<<< HEAD
 import com.training.dto.AccountDataDto;
 import com.training.exceptions.UserNotFoundException;
+=======
+>>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -277,6 +280,7 @@ class AccountServiceImplTest {
         assertTrue(testAccount.getLastUpdated().isAfter(beforeCall.minusSeconds(1)));
         assertTrue(testAccount.getLastUpdated().isBefore(afterCall.plusSeconds(1)));
     }
+<<<<<<< HEAD
 
     @Test
     @DisplayName("Should return account details successfully")
@@ -331,4 +335,6 @@ class AccountServiceImplTest {
 
         verify(accountRepo, times(1)).findAllByUser_UserId(1L);
     }
+=======
+>>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 }

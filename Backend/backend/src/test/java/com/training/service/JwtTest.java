@@ -1,7 +1,10 @@
 package com.training.service;
 
 import com.training.enums.UserRole;
+<<<<<<< HEAD
 import com.training.jwt.Jwt;
+=======
+>>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -60,6 +63,7 @@ public class JwtTest {
         assertTrue(jwt.isExpired());
     }
 
+<<<<<<< HEAD
     @Test
     void testIsExpired_NotExpired() {
         Date future = new Date(System.currentTimeMillis() + 10000);
@@ -104,6 +108,8 @@ public class JwtTest {
         assertEquals("Invalid Credentials", exception.getMessage());
     }
 
+=======
+>>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
     // Testing the specific exception handling in Jwt.isExpired()
     // The code catches JwtException. If expiration is after now, throws "Token
     // expired" (BadCredentialsException)

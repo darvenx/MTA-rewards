@@ -186,6 +186,7 @@ class UserControllerTest {
 
         verify(accountService, times(1)).getAccountDetails(1L);
     }
+<<<<<<< HEAD
 
     @Test
     @DisplayName("Should successfully get user details")
@@ -219,4 +220,6 @@ class UserControllerTest {
 
         verify(userService, times(1)).getUserDetails(1L);
     }
+=======
+>>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 }
