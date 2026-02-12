@@ -186,4 +186,37 @@ class UserControllerTest {
 
         verify(accountService, times(1)).getAccountDetails(1L);
     }
+
+    @Test
+    @DisplayName("Should successfully get user details")
+    void testGetUserDetails_Success() throws UserNotFoundException {
+        // Arrange
+        com.training.dto.UserDetailsResponseDto userDetails = new com.training.dto.UserDetailsResponseDto(
+                "Test User", "test@example.com", "1234567890", "testuser");
+
+        when(userService.getUserDetails(1L)).thenReturn(userDetails);
+
+        // Act
+        ResponseEntity<com.training.dto.UserDetailsResponseDto> response = userController.getUserDetails(1L);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Test User", response.getBody().getFullName());
+        assertEquals("test@example.com", response.getBody().getEmail());
+
+        verify(userService, times(1)).getUserDetails(1L);
+    }
+
+    @Test
+    @DisplayName("Should throw UserNotFoundException when getting details for non-existent user")
+    void testGetUserDetails_UserNotFound() throws UserNotFoundException {
+        // Arrange
+        when(userService.getUserDetails(1L)).thenThrow(new UserNotFoundException());
+
+        // Act & Assert
+        assertThrows(UserNotFoundException.class, () -> userController.getUserDetails(1L));
+
+        verify(userService, times(1)).getUserDetails(1L);
+    }
 }

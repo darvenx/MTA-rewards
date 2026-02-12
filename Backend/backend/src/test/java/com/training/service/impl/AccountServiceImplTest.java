@@ -301,4 +301,34 @@ class AccountServiceImplTest {
 
         verify(accountRepo, times(1)).findAllByUser_UserId(1L);
     }
+
+    @Test
+    @DisplayName("Should return all accounts data successfully")
+    void testGetAllAccountsData_Success() {
+        when(accountRepo.findAllByUser_UserId(1L)).thenReturn(Arrays.asList(testAccount));
+
+        AccountDataDto result = accountService.getAllAccountsData(1L);
+
+        assertNotNull(result);
+        assertTrue(result.getAccountIds().contains(1L));
+        assertTrue(result.getBalances().contains(10000.0));
+        assertTrue(result.getTypes().contains(AccountType.SAVINGS.name()));
+        assertTrue(result.getStatuses().contains(AccountStatus.ACTIVE.name()));
+
+        verify(accountRepo, times(1)).findAllByUser_UserId(1L);
+    }
+
+    @Test
+    @DisplayName("Should return empty data when no accounts found")
+    void testGetAllAccountsData_NoAccounts() {
+        when(accountRepo.findAllByUser_UserId(1L)).thenReturn(new ArrayList<>());
+
+        AccountDataDto result = accountService.getAllAccountsData(1L);
+
+        assertNotNull(result);
+        assertTrue(result.getAccountIds().isEmpty());
+        assertTrue(result.getBalances().isEmpty());
+
+        verify(accountRepo, times(1)).findAllByUser_UserId(1L);
+    }
 }

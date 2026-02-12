@@ -11,8 +11,8 @@ import com.training.enums.AccountType;
 import com.training.exceptions.UserAlreadyExistsException;
 import com.training.exceptions.UserNotFoundException;
 import com.training.repo.UserRepo;
-import com.training.service.JwtService;
-import com.training.service.Jwt;
+import com.training.jwt.JwtService;
+import com.training.jwt.Jwt;
 import com.training.enums.UserRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -289,5 +289,31 @@ class UserServiceImplTest {
         assertThrows(UserNotFoundException.class, () -> userService.resetPassword(updatePasswordDto));
         verify(userRepo, times(1)).findByUsernameAndPassword("testuser", "wrongOldPassword");
         verify(userRepo, never()).saveAndFlush(any(User.class));
+    }
+
+    @Test
+    @DisplayName("Should return user details when user exists")
+    void testGetUserDetails_Success() throws UserNotFoundException {
+        when(userRepo.findById(1L)).thenReturn(Optional.of(testUser));
+
+        com.training.dto.UserDetailsResponseDto result = userService.getUserDetails(1L);
+
+        assertNotNull(result);
+        assertEquals("TestUser", result.getFullName());
+        assertEquals("test@example.com", result.getEmail());
+        assertEquals("1234567890", result.getPhoneNumber());
+        assertEquals("testuser", result.getUserName());
+
+        verify(userRepo, times(1)).findById(1L);
+    }
+
+    @Test
+    @DisplayName("Should throw UserNotFoundException when getting details for non-existent user")
+    void testGetUserDetails_UserNotFound() {
+        when(userRepo.findById(999L)).thenReturn(Optional.empty());
+
+        assertThrows(UserNotFoundException.class, () -> userService.getUserDetails(999L));
+
+        verify(userRepo, times(1)).findById(999L);
     }
 }

@@ -2,6 +2,8 @@ package com.training.service;
 
 import com.training.configurations.JwtConfig;
 import com.training.enums.UserRole;
+import com.training.jwt.Jwt;
+import com.training.jwt.JwtService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,7 @@
 package com.training.service;
 
 import com.training.enums.UserRole;
+import com.training.jwt.Jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

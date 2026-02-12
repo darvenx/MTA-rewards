@@ -11,6 +11,7 @@ import com.training.enums.TransactionStatus;
 import com.training.exceptions.AccountNotFoundException;
 import com.training.exceptions.IncorrectPinException;
 import com.training.exceptions.InsufficientBalanceException;
+import com.training.exceptions.SelfTransferException;
 import com.training.repo.AccountRepo;
 import com.training.repo.TransactionRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -393,5 +394,36 @@ class TransactionServiceImplTest {
         when(accountRepo.findById(2L)).thenReturn(Optional.of(receiverAccount));
 
         assertThrows(InsufficientBalanceException.class, () -> transactionService.transferMoney(transferRequestDto));
+    }
+
+    @Test
+    @DisplayName("Should throw SelfTransferException when transferring to same account")
+    void testTransferMoney_SelfTransfer() {
+        transferRequestDto.setReceiverAccountNumber(1L);
+
+        // We expect SelfTransferException, but it might record a failed transaction
+        // first
+        // Need to check if SelfTransferException is thrown
+        // Note: The service might throw SelfTransferException directly
+
+        assertThrows(SelfTransferException.class, () -> transactionService.transferMoney(transferRequestDto));
+
+        verify(transactionRepo, times(1)).saveAndFlush(any(Transaction.class)); // Verifies failure transaction is
+                                                                                // logged
+        verify(accountRepo, never()).save(any(Account.class));
+    }
+
+    @Test
+    @DisplayName("Should throw IncorrectPinException when pin is incorrect")
+    void testTransferMoney_IncorrectPin() {
+        transferRequestDto.setSenderAccountPin("wrongpin");
+        when(accountRepo.findById(1L)).thenReturn(Optional.of(senderAccount));
+        when(accountRepo.findById(2L)).thenReturn(Optional.of(receiverAccount));
+
+        assertThrows(IncorrectPinException.class, () -> transactionService.transferMoney(transferRequestDto));
+
+        verify(transactionRepo, times(1)).saveAndFlush(any(Transaction.class)); // Verifies failure transaction is
+                                                                                // logged
+        verify(accountRepo, never()).save(any(Account.class));
     }
 }
