@@ -1,8 +1,6 @@
 package com.training.controller;
 
-import com.training.exceptions.SelfTransferException;
-import com.training.exceptions.UserAlreadyExistsException;
-import com.training.exceptions.UserNotFoundException;
+import com.training.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -68,6 +66,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SelfTransferException.class)
     public ResponseEntity<Object> handleSelfTransferException(){
         return new ResponseEntity<>("Cant Transfer to self",HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(InsufficientBalanceException.class)
+    public ResponseEntity<Object> handleInsufficientBalanceException(){
+        return new ResponseEntity<>("Not enough balance",HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(IncorrectPinException.class)
+    public ResponseEntity<Object> handleIncorrectPinException(){
+        return new ResponseEntity<>("Wrong pin",HttpStatus.BAD_REQUEST);
     }
 
 }
