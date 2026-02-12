@@ -1,0 +1,94 @@
+<div class="page-bg">
+  <div class="card-wrapper">
+    <mat-card class="split-card">
+      <div class="blue-side">
+        <div class="blue-content">
+          <div class="logo-row">
+            <div class="logo-circle">
+              <mat-icon class="rupee-icon">currency_rupee</mat-icon>
+            </div>
+            <h1 class="brand">Money Transfer</h1>
+          </div>
+
+          <h2 class="headline">Welcome to Secure Banking</h2>
+          <p class="tagline">
+            Manage your money with confidence. Fast transfers, real-time tracking, and complete security - all in one place.
+          </p>
+
+          <div class="features">
+            <div class="feat">
+              <div class="feat-icon"><mat-icon>flash_on</mat-icon></div>
+              <div>
+                <div class="feat-title">Lightning-Fast Transfers</div>
+                <div class="feat-desc">Send money to anyone in seconds, anytime</div>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="feat-icon"><mat-icon>security</mat-icon></div>
+              <div>
+                <div class="feat-title">Fully Encrypted</div>
+                <div class="feat-desc">End-to-end encryption keeps your transactions safe</div>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="feat-icon"><mat-icon>account_balance_wallet</mat-icon></div>
+              <div>
+                <div class="feat-title">Zero Hidden Fees</div>
+                <div class="feat-desc">Transparent pricing with no surprise charges</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-side">
+        <h2 class="form-heading">Welcome Back</h2>
+        <p class="form-sub">Enter your credentials to access your account</p>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="field">
+            <label class="lbl">USERNAME</label>
+            <mat-form-field appearance="outline" class="full-width" color="primary">
+              <input matInput formControlName="username" placeholder="Enter your username" />
+              <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+                Username is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="field">
+            <label class="lbl">PASSWORD</label>
+            <mat-form-field appearance="outline" class="full-width" color="primary">
+              <input
+                matInput
+                [type]="hidePassword ? 'password' : 'text'"
+                formControlName="password"
+                placeholder="Enter your password"
+              />
+              <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+                <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                Password is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <button mat-flat-button color="primary" class="submit-btn" type="submit" [disabled]="loginForm.invalid || isLoading">
+            <mat-spinner diameter="20" *ngIf="isLoading; else loginText" class="white-spinner"></mat-spinner>
+            <ng-template #loginText>Login</ng-template>
+          </button>
+
+          <div class="forgot-link">
+            <a href="" (click)="openForgotPassword($event)">Forgot password?</a>
+          </div>
+
+          <div class="alt-link">
+            <span>Don't have an account? </span>
+            <a routerLink="/signup">Sign Up</a>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>

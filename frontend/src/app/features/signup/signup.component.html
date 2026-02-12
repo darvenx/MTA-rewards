@@ -1,0 +1,146 @@
+<div class="page-bg">
+  <div class="card-wrapper">
+    <mat-card class="split-card">
+      <div class="blue-side">
+        <div class="blue-content">
+          <div class="logo-row">
+            <div class="logo-circle">
+              <mat-icon class="rupee-icon">currency_rupee</mat-icon>
+            </div>
+            <h1 class="brand">Money Transfer</h1>
+          </div>
+
+          <h2 class="headline">Create Your Account</h2>
+          <p class="tagline">Open your account in minutes. Enjoy seamless banking with powerful tools built for you.</p>
+
+          <div class="features">
+            <div class="feat">
+              <div class="feat-icon"><mat-icon>flash_on</mat-icon></div>
+              <div>
+                <div class="feat-title">Quick Setup</div>
+                <div class="feat-desc">Get started with just a few details - no paperwork</div>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="feat-icon"><mat-icon>security</mat-icon></div>
+              <div>
+                <div class="feat-title">Fully Encrypted</div>
+                <div class="feat-desc">Your account details and data stay protected</div>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="feat-icon"><mat-icon>account_balance_wallet</mat-icon></div>
+              <div>
+                <div class="feat-title">Smart Money Tools</div>
+                <div class="feat-desc">Track balances and transfers in one place</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-side">
+        <h2 class="form-heading">Create Account</h2>
+        <p class="form-sub">Fill in your details below</p>
+
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <div class="field half">
+              <label class="lbl">FIRST NAME</label>
+              <mat-form-field appearance="outline" class="full-width" color="primary">
+                <input matInput formControlName="firstName" placeholder="First name" />
+                <mat-error *ngIf="signupForm.get('firstName')?.hasError('required')">Required</mat-error>
+                <mat-error *ngIf="signupForm.get('firstName')?.hasError('serverError')">
+                  {{ signupForm.get('firstName')?.getError('serverError') }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="field half">
+              <label class="lbl">LAST NAME</label>
+              <mat-form-field appearance="outline" class="full-width" color="primary">
+                <input matInput formControlName="lastName" placeholder="Last name" />
+                <mat-error *ngIf="signupForm.get('lastName')?.hasError('required')">Required</mat-error>
+                <mat-error *ngIf="signupForm.get('lastName')?.hasError('serverError')">
+                  {{ signupForm.get('lastName')?.getError('serverError') }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field half">
+              <label class="lbl">USERNAME</label>
+              <mat-form-field appearance="outline" class="full-width" color="primary">
+                <input matInput formControlName="username" placeholder="Username" />
+                <mat-error *ngIf="signupForm.get('username')?.hasError('required')">Required</mat-error>
+                <mat-error *ngIf="signupForm.get('username')?.hasError('serverError')">
+                  {{ signupForm.get('username')?.getError('serverError') }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="field half">
+              <label class="lbl">EMAIL</label>
+              <mat-form-field appearance="outline" class="full-width" color="primary">
+                <input matInput type="email" formControlName="email" placeholder="Email" />
+                <mat-error *ngIf="signupForm.get('email')?.hasError('required')">Required</mat-error>
+                <mat-error *ngIf="signupForm.get('email')?.hasError('email')">Invalid</mat-error>
+                <mat-error *ngIf="signupForm.get('email')?.hasError('serverError')">
+                  {{ signupForm.get('email')?.getError('serverError') }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field half">
+              <label class="lbl">PHONE NUMBER</label>
+              <mat-form-field appearance="outline" class="full-width" color="primary">
+                <input matInput type="tel" formControlName="phoneNumber" placeholder="Phone" />
+                <mat-error *ngIf="signupForm.get('phoneNumber')?.hasError('required')">Required</mat-error>
+                <mat-error *ngIf="signupForm.get('phoneNumber')?.hasError('pattern')">Invalid</mat-error>
+                <mat-error *ngIf="signupForm.get('phoneNumber')?.hasError('serverError')">
+                  {{ signupForm.get('phoneNumber')?.getError('serverError') }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="field half">
+              <label class="lbl">PASSWORD</label>
+              <mat-form-field appearance="outline" class="full-width" color="primary">
+                <input
+                  matInput
+                  [type]="hidePassword ? 'password' : 'text'"
+                  formControlName="password"
+                  placeholder="Password"
+                />
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+                  <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-error *ngIf="signupForm.get('password')?.hasError('required')">Required</mat-error>
+                <mat-error *ngIf="signupForm.get('password')?.hasError('minlength')">Min 6 chars</mat-error>
+                <mat-error *ngIf="signupForm.get('password')?.hasError('serverError')">
+                  {{ signupForm.get('password')?.getError('serverError') }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <button
+            mat-flat-button
+            color="primary"
+            class="submit-btn"
+            type="submit"
+            [disabled]="signupForm.invalid || (isLoading$ | async)"
+          >
+            <mat-spinner diameter="20" *ngIf="isLoading$ | async; else signupText" class="white-spinner"></mat-spinner>
+            <ng-template #signupText>Sign Up Now</ng-template>
+          </button>
+
+          <div class="alt-link">
+            <span>Already have an account? </span>
+            <a routerLink="/login">Login here</a>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+/* Angular Material prebuilt theme */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Reset & base layout */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: #111827;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Layout container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* You can add global styles to this file, and also import other style files */
+:root{
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --primary: #1976d2;
+  --muted: #7a7a7a;
+  --radius: 14px;
+  --gap: 24px;
+  --page-padding: 32px;
+}
+
+* { box-sizing: border-box; }
+
+/* Global container rules */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 var(--page-padding); }
+
+/* Card base */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(16,24,40,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(16,24,40,0.08); }
+
+/* Utility spacing */
+.section { margin-bottom: 32px; }
+.muted { color: var(--muted); }
+
+/* Skeleton */
+.skeleton {
+  background: linear-gradient(90deg, rgba(0,0,0,0.06) 25%, rgba(0,0,0,0.04) 37%, rgba(0,0,0,0.06) 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.2s linear infinite;
+  border-radius: 6px;
+}
+@keyframes shimmer { 0%{background-position:100% 0}100%{background-position:-100% 0} }
+
+/* Action card pointer */
+.clickable { cursor: pointer; }
+
+/* Route fade helper (simple) */
+.fade-enter { opacity: 0; transform: translateY(6px); }
+.fade-enter-active { opacity: 1; transform: translateY(0); transition: all 220ms ease; }
+/* Utility classes */
+.spacer {
+  flex: 1 1 auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.success-text {
+  color: #2e7d32;
+}
+
+.error-text {
+  color: #c62828;
+}
+
+/* Material overrides */
+.mat-mdc-card-title {
+  font-weight: 500;
+}

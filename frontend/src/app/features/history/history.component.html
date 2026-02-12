@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>Transaction History</span>
+</mat-toolbar>
+
+<div class="container history-content">
+  <mat-card>
+    <mat-card-content>
+      <mat-tab-group (selectedTabChange)="onTabChange($event)">
+        <mat-tab label="All Transactions"></mat-tab>
+        <mat-tab label="Sent (Debit)"></mat-tab>
+        <mat-tab label="Received (Credit)"></mat-tab>
+      </mat-tab-group>
+
+      <div class="table-container">
+        <app-transaction-table [transactions]="filteredTransactions"></app-transaction-table>
+
+        <div *ngIf="isLoading" class="loading-spinner">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+
+        <div *ngIf="!isLoading && filteredTransactions.length === 0" class="no-data">
+          <p>No transactions found.</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
