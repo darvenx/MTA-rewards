@@ -36,7 +36,7 @@ export class TransferComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.currentAccountId = this.authService.getAccountId();
+        this.currentAccountId = localStorage.getItem("id");
         if (this.currentAccountId) {
             this.transferForm.patchValue({ senderAccountNumber: this.currentAccountId });
         }

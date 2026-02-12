@@ -20,7 +20,7 @@
           <div class="detail-row">
             <div class="label">Full name</div>
             <div class="value">
-              {{ profileForm.get('fullName')?.value || (account$ | async)?.holderName || '—' }}
+              {{ profileForm.get('fullName')?.value || (account$ | async)?.fullName || '—' }}
             </div>
           </div>
 
@@ -44,7 +44,7 @@
               {{ profileForm.get('phone')?.value || 'Not provided' }}
             </div>
           </div>
-
+<!-- 
           <div class="detail-row">
             <div class="label">Address</div>
             <div class="value">
@@ -57,11 +57,11 @@
             <div class="value">
               {{ lastLogin || '—' }}
             </div>
-          </div>
+          </div> -->
         </section>
 
         <!-- Account snapshot -->
-        <section class="profile-section" *ngIf="account$ | async as account">
+        <!-- <section class="profile-section" *ngIf="account$ | async as account">
           <h3>Account snapshot</h3>
 
           <div class="detail-row">
@@ -84,7 +84,7 @@
               {{ (balance$ | async) | currency:'INR':'symbol':'1.2-2' }}
             </div>
           </div>
-        </section>
+        </section> -->
       </div>
     </mat-card-content>
 

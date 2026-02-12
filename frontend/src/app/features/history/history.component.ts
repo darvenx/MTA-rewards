@@ -23,10 +23,13 @@ export class HistoryComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        const accountId = this.authService.getAccountId();
+        const accountId = localStorage.getItem("id");
+        console.log("on init");
+        console.log(accountId);
         if (accountId) {
             this.accountService.getTransactions(accountId).subscribe({
                 next: (data) => {
+                    console.log(data);
                     // Sort by date newest first
                     this.allTransactions = data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
                     this.filteredTransactions = this.allTransactions;
@@ -37,9 +40,11 @@ export class HistoryComponent implements OnInit {
                 }
             });
         }
+        this.isLoading = false;
     }
 
     onTabChange(event: MatTabChangeEvent): void {
+        console.log(event.index);
         switch (event.index) {
             case 0: // All
                 this.filteredTransactions = this.allTransactions;

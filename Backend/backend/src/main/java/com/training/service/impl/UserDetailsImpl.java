@@ -1,4 +1,4 @@
-package com.training.service;
+package com.training.service.impl;
 
 
 import com.training.repo.UserRepo;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserDetails implements UserDetailsService {
+public class UserDetailsImpl implements UserDetailsService {
     private UserRepo userRepository;
 
-    public UserDetails(UserRepo userRepository) {
+    public UserDetailsImpl(UserRepo userRepository) {
         this.userRepository = userRepository;
     }
 

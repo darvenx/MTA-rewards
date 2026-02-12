@@ -8,6 +8,11 @@ import com.training.enums.AccountStatus;
 import com.training.enums.AccountType;
 import com.training.repo.AccountRepo;
 import com.training.repo.UserRepo;
+<<<<<<< HEAD
+import com.training.dto.AccountDataDto;
+import com.training.exceptions.UserNotFoundException;
+=======
+>>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -275,4 +280,61 @@ class AccountServiceImplTest {
         assertTrue(testAccount.getLastUpdated().isAfter(beforeCall.minusSeconds(1)));
         assertTrue(testAccount.getLastUpdated().isBefore(afterCall.plusSeconds(1)));
     }
+<<<<<<< HEAD
+
+    @Test
+    @DisplayName("Should return account details successfully")
+    void testGetAccountDetails_Success() throws Exception {
+        when(accountRepo.findAllByUser_UserId(1L)).thenReturn(Arrays.asList(testAccount));
+
+        AccountDataDto result = accountService.getAccountDetails(1L);
+
+        assertNotNull(result);
+        assertTrue(result.getAccountIds().contains(1L));
+        assertTrue(result.getBalances().contains(10000.0));
+
+        verify(accountRepo, times(1)).findAllByUser_UserId(1L);
+    }
+
+    @Test
+    @DisplayName("Should throw UserNotFoundException when no accounts found")
+    void testGetAccountDetails_UserNotFound() {
+        when(accountRepo.findAllByUser_UserId(1L)).thenReturn(new ArrayList<>());
+
+        assertThrows(UserNotFoundException.class, () -> accountService.getAccountDetails(1L));
+
+        verify(accountRepo, times(1)).findAllByUser_UserId(1L);
+    }
+
+    @Test
+    @DisplayName("Should return all accounts data successfully")
+    void testGetAllAccountsData_Success() {
+        when(accountRepo.findAllByUser_UserId(1L)).thenReturn(Arrays.asList(testAccount));
+
+        AccountDataDto result = accountService.getAllAccountsData(1L);
+
+        assertNotNull(result);
+        assertTrue(result.getAccountIds().contains(1L));
+        assertTrue(result.getBalances().contains(10000.0));
+        assertTrue(result.getTypes().contains(AccountType.SAVINGS.name()));
+        assertTrue(result.getStatuses().contains(AccountStatus.ACTIVE.name()));
+
+        verify(accountRepo, times(1)).findAllByUser_UserId(1L);
+    }
+
+    @Test
+    @DisplayName("Should return empty data when no accounts found")
+    void testGetAllAccountsData_NoAccounts() {
+        when(accountRepo.findAllByUser_UserId(1L)).thenReturn(new ArrayList<>());
+
+        AccountDataDto result = accountService.getAllAccountsData(1L);
+
+        assertNotNull(result);
+        assertTrue(result.getAccountIds().isEmpty());
+        assertTrue(result.getBalances().isEmpty());
+
+        verify(accountRepo, times(1)).findAllByUser_UserId(1L);
+    }
+=======
+>>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 }

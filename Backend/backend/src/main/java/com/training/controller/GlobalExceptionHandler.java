@@ -1,7 +1,6 @@
 package com.training.controller;
 
-import com.training.exceptions.UserAlreadyExistsException;
-import com.training.exceptions.UserNotFoundException;
+import com.training.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -49,6 +48,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleExpiredJwtException() {
         return createErrorResponse("JWT token has expired", HttpStatus.UNAUTHORIZED);
     }
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<Object> handleInvalidCredentialsException() {
+        return createErrorResponse("Wrong credentials", HttpStatus.UNAUTHORIZED);
+    }
+    @ExceptionHandler(DuplicateTransferException.class)
+    public ResponseEntity<Object> handleDuplicateTransferException() {
+        return createErrorResponse("Duplicate Transaction", HttpStatus.UNAUTHORIZED);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -64,4 +71,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(Collections.singletonMap("fieldErrors", fieldErrors), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(SelfTransferException.class)
+    public ResponseEntity<Object> handleSelfTransferException(){
+        return new ResponseEntity<>("Cant Transfer to self",HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IncorrectPinException.class)
+    public ResponseEntity<Object> handleIncorrectPinException(){
+        return new ResponseEntity<>("Invalid Pin",HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(InsufficientBalanceException.class)
+    public ResponseEntity<Object> handleInsufficientBalance(){
+        return new ResponseEntity<>("Not enough balance",HttpStatus.BAD_REQUEST);
+    }
 }

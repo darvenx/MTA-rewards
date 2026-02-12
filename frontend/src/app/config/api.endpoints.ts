@@ -49,8 +49,8 @@ export const ApiEndpoints = {
      * kept behind this abstraction so the integration team can either
      * implement matching endpoints or refactor the UI in one place.
      */
-    get: (id: string | number) => `${BASE}/account/${id}`,
-    balance: (id: string | number) => `${BASE}/account/${id}/balance`
+    get: (id: string | number) => `${BASE}/user/${id}`,
+    balance: (id: string | number) => `${BASE}/account/${id}`
   },
   transfer: {
     /**

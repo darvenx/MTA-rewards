@@ -75,4 +75,16 @@ public class AccountServiceImpl implements AccountService {
         }
         return response;
     }
+
+    public AccountDataDto getAllAccountsData(Long id) {
+        List<Account> accounts = accountRepo.findAllByUser_UserId(id);
+        AccountDataDto res = new AccountDataDto();
+        for (Account account:accounts) {
+            res.addAccount(account.getAccountId());
+            res.addStatus(account.getAccountStatus().name());
+            res.addType(account.getAccountType().name());
+            res.addBalance(account.getAccountBalance());
+        }
+        return res;
+    }
 }

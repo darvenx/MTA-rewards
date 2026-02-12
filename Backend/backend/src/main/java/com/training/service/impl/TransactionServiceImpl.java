@@ -9,6 +9,7 @@ import com.training.dto.transaction.TransactionsDto;
 import com.training.dto.transaction.TransferRequestDto;
 import com.training.entities.Account;
 import com.training.entities.Transaction;
+import com.training.exceptions.SelfTransferException;
 import com.training.repo.AccountRepo;
 import com.training.repo.TransactionRepo;
 import com.training.service.TransactionService;
@@ -33,23 +34,57 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    @Transactional
     public Boolean transferMoney(TransferRequestDto transferRequestDto)
             throws AccountNotFoundException,IncorrectPinException,
-            InsufficientBalanceException
+            InsufficientBalanceException, SelfTransferException
     {
+        if(Objects.equals(transferRequestDto.getSenderAccountNumber(), transferRequestDto.getReceiverAccountNumber())){
+            transactionRepo.saveAndFlush(
+                    new Transaction(null,
+                            transferRequestDto.getSenderAccountNumber(),
+                            transferRequestDto.getReceiverAccountNumber(),
+                            transferRequestDto.getAmount(),
+                            TransactionStatus.FAILED,
+                            "can not transfer to same account",
+                            null,LocalDateTime.now()));
+            throw new SelfTransferException("Cant send to same account");
+        }
         Optional<Account> sender = accountRepo.findById(transferRequestDto.getSenderAccountNumber());
         Optional<Account> reciever = accountRepo.findById(transferRequestDto.getReceiverAccountNumber());
         // check Exceptions
         if(sender.isEmpty() || reciever.isEmpty()){
+            transactionRepo.saveAndFlush(
+                    new Transaction(null,
+                            transferRequestDto.getSenderAccountNumber(),
+                            transferRequestDto.getReceiverAccountNumber(),
+                            transferRequestDto.getAmount(),
+                            TransactionStatus.FAILED,
+                            "Unidentified sender and reciever",
+                            null,LocalDateTime.now()));
             throw new AccountNotFoundException();
         }
         Account senderAccount = sender.get();
         Account receiverAccount = reciever.get();
         if(senderAccount.getAccountBalance() < transferRequestDto.getAmount()){
+            transactionRepo.saveAndFlush(
+                    new Transaction(null,
+                            transferRequestDto.getSenderAccountNumber(),
+                            transferRequestDto.getReceiverAccountNumber(),
+                            transferRequestDto.getAmount(),
+                            TransactionStatus.FAILED,
+                            "insufficient balance",
+                            null,LocalDateTime.now()));
             throw new InsufficientBalanceException();
         }
         if(!Objects.equals(senderAccount.getUser().getPassword(), transferRequestDto.getSenderAccountPin())){
+            transactionRepo.saveAndFlush(
+                    new Transaction(null,
+                            transferRequestDto.getSenderAccountNumber(),
+                            transferRequestDto.getReceiverAccountNumber(),
+                            transferRequestDto.getAmount(),
+                            TransactionStatus.FAILED,
+                            "incorrect pin",
+                            null,LocalDateTime.now()));
             throw new IncorrectPinException();
         }
 

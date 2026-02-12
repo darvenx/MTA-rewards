@@ -1,7 +1,7 @@
 package com.training.configurations;
 
 import com.training.enums.UserRole;
-import com.training.service.UserDetails;
+import com.training.service.impl.UserDetailsImpl;
 import com.training.filters.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,12 +27,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private final  UserDetails userDetails;
+    private final UserDetailsImpl userDetailsImpl;
 
     private final JwtAuthenticationFilter  jwtAuthenticationFilter;
 
-    public SecurityConfig(UserDetails userDetails, JwtAuthenticationFilter jwtAuthenticationFilter) {
-        this.userDetails = userDetails;
+    public SecurityConfig(UserDetailsImpl userDetailsImpl, JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.userDetailsImpl = userDetailsImpl;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
@@ -43,7 +43,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
-        var provider = new DaoAuthenticationProvider(userDetails);
+        var provider = new DaoAuthenticationProvider(userDetailsImpl);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }

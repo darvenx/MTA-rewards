@@ -1,6 +1,7 @@
 package com.training.controller;
 
 import com.training.dto.AccountDataDto;
+import com.training.dto.UserDetailsResponseDto;
 import com.training.dto.user.UserLoginDto;
 import com.training.dto.user.UserSignUpDto;
 import com.training.dto.user.UserSuccessLoginOrSignUpDto;
@@ -49,9 +50,16 @@ public class UserController {
 
     @GetMapping("/account/{id}")
     public ResponseEntity<AccountDataDto> getAccounts(@PathVariable Long id)
-    throws UserNotFoundException
+            throws UserNotFoundException
     {
         return new ResponseEntity<>(accountService.getAccountDetails(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDetailsResponseDto> getUserDetails(@PathVariable Long id)
+            throws UserNotFoundException
+    {
+        return new ResponseEntity<>(userService.getUserDetails(id),HttpStatus.OK);
     }
 
 }

@@ -9,12 +9,12 @@ export enum TransactionStatus {
 }
 
 export interface Transaction {
-    id: string;
-    accountId: string;
-    type: TransactionType;
+    transactionId: string;
     amount: number;
+    otherAccountName: string;
+    type: TransactionType;
+    transactionStatus: TransactionStatus;
     date: string; // ISO string
-    status: TransactionStatus;
     description?: string;
     // other party information (for debit: receiver; for credit: sender)
     otherPartyName?: string;

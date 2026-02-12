@@ -124,4 +124,29 @@ class AccountControllerTest {
 
         verify(accountService, times(1)).createAccount(any(AccountCreateDto.class));
     }
+<<<<<<< HEAD
+
+    @Test
+    @DisplayName("Should successfully fetch all accounts data")
+    void testFetchAllAccountsData_Success() {
+        // Arrange
+        com.training.dto.AccountDataDto accountDataDto = new com.training.dto.AccountDataDto();
+        accountDataDto.addAccount(1L);
+        accountDataDto.addBalance(1000.0);
+
+        when(accountService.getAllAccountsData(1L)).thenReturn(accountDataDto);
+
+        // Act
+        ResponseEntity<com.training.dto.AccountDataDto> response = accountController.fetchAllAccountsData(1L);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(response.getBody().getAccountIds().contains(1L));
+        assertTrue(response.getBody().getBalances().contains(1000.0));
+
+        verify(accountService, times(1)).getAllAccountsData(1L);
+    }
+=======
+>>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 }

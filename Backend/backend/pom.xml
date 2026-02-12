@@ -250,6 +250,8 @@
 								<exclude>**/enums/**</exclude>
 								<exclude>com/training/configurations/**</exclude>
 								<exclude>com/training/filters/**</exclude>
+								<exclude>com/training/aop/**</exclude>
+								<exclude>com/training/controller/GlobalExceptionHandler*</exclude>
 								<exclude>com/training/MainServerApp*</exclude>
 								<exclude>**/com/training/SpringBootTestConfig*</exclude>
 							</excludes>

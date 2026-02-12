@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { Account } from '../../core/models/account.model';
 import { Observable } from 'rxjs';
 import { Transaction, TransactionType, TransactionStatus } from '../../core/models/transaction.model';
+import { User } from '../../core/models/user-data.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -46,22 +47,37 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const accountId = this.authService.getAccountId();
-    if (accountId) {
-      this.account$ = this.accountService.getAccount(accountId);
-      // Fetch balance once and animate the UI value
-      this.accountService.getBalance(accountId).subscribe({
-        next: (value) => {
-          this.animateValue((v) => (this.animatedBalance = v), 0, value);
-          this.isBalanceLoaded = true;
-        },
-        error: () => {
-          this.isBalanceLoaded = true;
+    const userId = localStorage.getItem("id");
+    // let user:User;
+    console.log(userId);
+    if (userId) {
+      let amt = this.accountService.getBalance(userId);
+      this.accountService.getBalance(userId).subscribe({
+      next: (accountsData) => {
+        console.log("Received accounts data:", accountsData); // Log full response
+        // Ensure accountBalances and the first balance exist
+        if (accountsData && accountsData.balances && accountsData.balances.length > 0) {
+          const firstAccountBalance = accountsData.balances[0];
+          console.log("First Account Balance:", firstAccountBalance); // Log the first account balance
+          
+          // Directly set the balance first, then animate it
+          this.animatedBalance = firstAccountBalance;  // Set the balance directly
+          this.animateValue((v) => (this.animatedBalance = v), 0, firstAccountBalance); // Animate after setting the balance
+        } else {
+          console.error("No account balances found.");
         }
-      });
 
+        this.isBalanceLoaded = true;
+      },
+      error: (err) => {
+        console.error('Error fetching account data:', err);
+        this.isBalanceLoaded = true;
+      }
+    });
+
+    let accountsData = localStorage.getItem("")
       // Fetch transactions and compute totals for the quick-stats
-      this.accountService.getTransactions(accountId).subscribe({
+      this.accountService.getTransactions(userId).subscribe({
         next: (txns) => {
           this.hasTransactions = !!txns && txns.length > 0;
           this.computeTotals(txns);
@@ -90,7 +106,7 @@ export class DashboardComponent implements OnInit {
 
     transactions.forEach(t => {
       // Only count successful transactions
-      if (t.status !== TransactionStatus.SUCCESS) return;
+      if (t.transactionStatus !== TransactionStatus.SUCCESS) return;
 
       if (t.type === TransactionType.DEBIT) {
         sent += t.amount;
