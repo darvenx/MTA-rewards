@@ -36,13 +36,22 @@ export function mapLoginSuccessToSessionUser(
 // -----------------------
 
 export function mapLegacyAccountDtoToAccount(dto: LegacyAccountDto): Account {
+  const holderName = dto.holderName ?? dto.fullName ?? '';
+  const username = dto.username ?? dto.userName;
+  const phone = dto.phone ?? dto.phoneNumber;
+  const id = dto.id ?? dto.accountNumber ?? 0;
+
   return {
-    id: String(dto.id),
-    holderName: dto.holderName,
-    accountNumber: String(dto.accountNumber),
+    id: String(id),
+    holderName,
+    username,
+    accountNumber: dto.accountNumber != null ? String(dto.accountNumber) : undefined,
     balance: dto.balance,
     type: dto.type,
-    status: dto.status
+    status: dto.status,
+    email: dto.email,
+    phone,
+    address: dto.address
   };
 }
 

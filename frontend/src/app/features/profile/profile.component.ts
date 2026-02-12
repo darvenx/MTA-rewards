@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const accountId = localStorage.getItem("id");
+    const accountId = localStorage.getItem("id") || sessionStorage.getItem("id");
     this.initForms();
     console.log("accountId" + accountId);
 
@@ -70,11 +70,12 @@ export class ProfileComponent implements OnInit {
 
       // populate when available
       this.account$.pipe(take(1)).subscribe(acc => {
+        this.username = acc.username || this.username;
         this.profileForm.patchValue({
           fullName: acc.holderName || '',
           email: acc.email || '',
-          phone: acc.phone || (acc as any).phoneNumber || '',
-          address: (acc as any).address || ''
+          phone: acc.phone || '',
+          address: acc.address || ''
         });
         this.loadingProfile = false;
       }, () => this.loadingProfile = false);
@@ -149,11 +150,12 @@ export class ProfileComponent implements OnInit {
     this.profileForm.reset();
     // repopulate from account
     this.account$.pipe(take(1)).subscribe(acc => {
+      this.username = acc.username || this.username;
       this.profileForm.patchValue({
         fullName: acc.holderName || '',
         email: acc.email || '',
-        phone: acc.phone || (acc as any).phoneNumber || '',
-        address: (acc as any).address || ''
+        phone: acc.phone || '',
+        address: acc.address || ''
       });
     });
   }

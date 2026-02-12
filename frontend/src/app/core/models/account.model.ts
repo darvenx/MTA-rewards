@@ -1,6 +1,7 @@
 export interface Account {
     id: string;      // maps to /accounts/{id}
     holderName: string;
+    username?: string;
     accountNumber?: string;
     balance?: number;
     // Optional additional fields used in the UI
