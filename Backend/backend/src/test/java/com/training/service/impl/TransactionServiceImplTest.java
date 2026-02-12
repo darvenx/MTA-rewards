@@ -11,10 +11,7 @@ import com.training.enums.TransactionStatus;
 import com.training.exceptions.AccountNotFoundException;
 import com.training.exceptions.IncorrectPinException;
 import com.training.exceptions.InsufficientBalanceException;
-<<<<<<< HEAD
 import com.training.exceptions.SelfTransferException;
-=======
->>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 import com.training.repo.AccountRepo;
 import com.training.repo.TransactionRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,10 +53,7 @@ class TransactionServiceImplTest {
 
         User user1 = new User();
         user1.setUserId(1L);
-<<<<<<< HEAD
         user1.setPassword("1234");
-=======
->>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 
         senderAccount = new Account();
         senderAccount.setAccountId(1L);
@@ -401,7 +395,6 @@ class TransactionServiceImplTest {
 
         assertThrows(InsufficientBalanceException.class, () -> transactionService.transferMoney(transferRequestDto));
     }
-<<<<<<< HEAD
 
     @Test
     @DisplayName("Should throw SelfTransferException when transferring to same account")
@@ -433,6 +426,4 @@ class TransactionServiceImplTest {
                                                                                 // logged
         verify(accountRepo, never()).save(any(Account.class));
     }
-=======
->>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 }

@@ -124,7 +124,6 @@ class AccountControllerTest {
 
         verify(accountService, times(1)).createAccount(any(AccountCreateDto.class));
     }
-<<<<<<< HEAD
 
     @Test
     @DisplayName("Should successfully fetch all accounts data")
@@ -147,6 +146,4 @@ class AccountControllerTest {
 
         verify(accountService, times(1)).getAllAccountsData(1L);
     }
-=======
->>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 }

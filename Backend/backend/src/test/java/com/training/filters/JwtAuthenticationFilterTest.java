@@ -1,13 +1,8 @@
 package com.training.filters;
 
 import com.training.enums.UserRole;
-<<<<<<< HEAD
 import com.training.jwt.Jwt;
 import com.training.jwt.JwtService;
-=======
-import com.training.service.Jwt;
-import com.training.service.JwtService;
->>>>>>> c2bcfbfa6018b37f88a52eef71d69fefd0f1cf24
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
