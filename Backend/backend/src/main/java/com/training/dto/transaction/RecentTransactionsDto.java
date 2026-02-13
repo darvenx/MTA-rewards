@@ -25,4 +25,44 @@ public class RecentTransactionsDto {
         this.amount = amount;
         this.transactionStatus = transactionStatus;
     }
+
+    public Long getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(Long transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public Long getToAccount() {
+        return toAccount;
+    }
+
+    public void setToAccount(Long toAccount) {
+        this.toAccount = toAccount;
+    }
+
+    public Long getFromAccount() {
+        return fromAccount;
+    }
+
+    public void setFromAccount(Long fromAccount) {
+        this.fromAccount = fromAccount;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public String getTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public void setTransactionStatus(String transactionStatus) {
+        this.transactionStatus = transactionStatus;
+    }
 }

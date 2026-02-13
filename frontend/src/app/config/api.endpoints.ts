@@ -41,7 +41,7 @@ export const ApiEndpoints = {
      * Backend-supported operation: account creation.
      * Backend target: POST `/api/v1/account` (AccountCreateDto).
      */
-    create: () => `${BASE}/account`,
+    create: () => `${BASE}/account/create`,
 
     /**
      * UI-only convenience read endpoints. These do not currently exist

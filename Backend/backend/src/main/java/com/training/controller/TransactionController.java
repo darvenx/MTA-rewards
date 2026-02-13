@@ -31,7 +31,7 @@ public class TransactionController {
         return new ResponseEntity<>(transactionService.transferMoney(transferRequestDto),HttpStatus.OK);
     }
 
-    @GetMapping("/transactions")
+    @GetMapping("/recent-transactions")
     public ResponseEntity<List<RecentTransactionsDto>> getLast10Transactions(){
         return new ResponseEntity<>(transactionService.getRecent10Transactions(),HttpStatus.OK);
     }
