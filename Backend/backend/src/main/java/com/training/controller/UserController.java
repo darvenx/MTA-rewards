@@ -1,6 +1,7 @@
 package com.training.controller;
 
 import com.training.dto.AccountDataDto;
+import com.training.dto.AllUserData;
 import com.training.dto.UserDetailsResponseDto;
 import com.training.dto.user.UserLoginDto;
 import com.training.dto.user.UserSignUpDto;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.yaml.snakeyaml.constructor.DuplicateKeyException;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -62,4 +65,8 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserDetails(id),HttpStatus.OK);
     }
 
+    @GetMapping("/users")
+    public ResponseEntity<List<AllUserData>> getAllUserData(){
+        return new ResponseEntity<>(userService.getAllUserDetails(),HttpStatus.OK);
+    }
 }

@@ -1,5 +1,6 @@
 package com.training.service.impl;
 
+import com.training.dto.AllUserData;
 import com.training.dto.UserDetailsResponseDto;
 import com.training.dto.user.UserLoginDto;
 import com.training.dto.user.UserSignUpDto;
@@ -10,6 +11,8 @@ import com.training.entities.User;
 import com.training.enums.UserRole;
 import com.training.exceptions.UserAlreadyExistsException;
 import com.training.exceptions.UserNotFoundException;
+import com.training.repo.AccountRepo;
+import com.training.repo.TransactionRepo;
 import com.training.repo.UserRepo;
 import com.training.jwt.Jwt;
 import com.training.jwt.JwtService;
@@ -28,6 +31,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private TransactionRepo transactionRepo;
+
+    @Autowired
+    private AccountRepo accountRepo;
     @Autowired
     private JwtService jwtService;
 
@@ -145,5 +153,24 @@ public class UserServiceImpl implements UserService {
         User user = userObj.get();
         String fullName = user.getFirstName() + user.getLastName();
         return new UserDetailsResponseDto(fullName,user.getEmail(),user.getPhoneNumber(),user.getUsername());
+    }
+
+    public List<AllUserData> getAllUserDetails() {
+        List<User> users = userRepo.findAll();
+        List<AllUserData> res = new  ArrayList<>();
+
+        for(User user: users){
+            List <Account> accounts =user.getAccounts();
+            List<Long> accountNumbers = accounts.stream().map(Account::getAccountId).toList();
+            List<Integer> accountTransfers = new ArrayList<>();
+            int i =0;
+            for(Long accountId:accountNumbers){
+                Integer txns = transactionRepo.findAllByFromAccountOrToAccount(accountId, accountId).size();
+                accountTransfers.add(txns);
+
+            }
+            res.add(new AllUserData(user.getUserId(), accountNumbers,accountTransfers,user.getRole().name()));
+        }
+        return res;
     }
 }

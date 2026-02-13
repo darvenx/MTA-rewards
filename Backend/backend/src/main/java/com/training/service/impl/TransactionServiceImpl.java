@@ -1,5 +1,6 @@
 package com.training.service.impl;
 
+import com.training.dto.transaction.RecentTransactionsDto;
 import com.training.enums.TransactionStatus;
 import com.training.enums.TransactionType;
 import com.training.exceptions.AccountNotFoundException;
@@ -17,10 +18,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -136,4 +135,22 @@ public class TransactionServiceImpl implements TransactionService {
         }
         return transactions;
     }
+    public List<RecentTransactionsDto> getRecent10Transactions() {
+        List<Transaction> txns = transactionRepo.findAll();
+
+        // Sort by createdOn in descending order
+        txns.sort((t1, t2) -> t2.getCreatedOn().compareTo(t1.getCreatedOn()));
+        System.out.println(txns);
+        // Limit to 10 and map to DTOs
+        List <RecentTransactionsDto> res = txns.stream()
+                .limit(10)
+                .map(txn ->
+                     new RecentTransactionsDto(txn.getTransactionId(),txn.getFromAccount(),txn.getToAccount(),txn.getAmount(),txn.getTransactionStatus().name())
+                ) // adjust mapping as needed
+                .collect(Collectors.toList());
+        System.out.println("GIVING DATA BELOW");
+        System.out.println(res);
+        return res;
+    }
+
 }

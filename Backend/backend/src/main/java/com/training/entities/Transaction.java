@@ -8,6 +8,19 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="transactions")
 public class Transaction {
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "transactionId=" + transactionId +
+                ", fromAccount=" + fromAccount +
+                ", toAccount=" + toAccount +
+                ", amount=" + amount +
+                ", transactionStatus=" + transactionStatus +
+                ", failureReason='" + failureReason + '\'' +
+                ", idempotencyKey='" + idempotencyKey + '\'' +
+                ", createdOn=" + createdOn +
+                '}';
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
