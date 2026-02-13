@@ -23,10 +23,6 @@ interface TransferConfirmationData {
           <strong>Amount:</strong>
           {{ data.amount | currency:'INR':'symbol':'1.2-2' }}
         </p>
-        <p *ngIf="data.remarks">
-          <strong>Remarks:</strong>
-          {{ data.remarks }}
-        </p>
       </div>
       <p class="helper-text">Please review the details carefully before confirming.</p>
     </mat-dialog-content>

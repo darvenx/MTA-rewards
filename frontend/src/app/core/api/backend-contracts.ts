@@ -106,12 +106,19 @@ export interface ApiTransactionsDto {
 // legacy and new API representations where necessary.
 
 export interface LegacyAccountDto {
-  id: number;
-  holderName: string;
-  accountNumber: number;
-  balance: number;
-  type: string;
-  status: string;
+  id?: number;
+  holderName?: string;
+  fullName?: string;
+  userName?: string;
+  username?: string;
+  email?: string;
+  phone?: string;
+  phoneNumber?: string;
+  accountNumber?: number;
+  balance?: number;
+  type?: string;
+  status?: string;
+  address?: string;
 }
 
 export interface LegacyTransactionDto {
