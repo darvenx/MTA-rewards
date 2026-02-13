@@ -4,10 +4,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AccountService } from '../../services/account.service';
 import { Account } from '../../core/models/account.model';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, forkJoin } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { ApiAccountSuccessCreation } from '../../core/api/backend-contracts';
 import { Transaction, TransactionType, TransactionStatus } from '../../core/models/transaction.model';
+import { accountsData } from '../../core/models/accounts-data.model';
+
+interface DashboardAccountOption {
+  accountId: number;
+  balance: number;
+  accountType: string;
+  accountStatus: string;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -39,7 +47,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   isStatsLoading = true;
   hasTransactions = false;
 
-  unreadCount = 3;
+  availableAccounts: DashboardAccountOption[] = [];
+  accountSelectOptions: DashboardAccountOption[] = [];
+  selectedAccountId: number | null = null;
+  selectedAccountType = 'SAVINGS';
+  selectedAccountStatus = 'ACTIVE';
+
   currentUserId: number | null = null;
   currentHolderName = 'User';
   private destroyed$ = new Subject<void>();
@@ -60,10 +73,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const userId = localStorage.getItem("id");
     if (userId) {
       this.currentUserId = Number(userId);
+      this.selectedAccountId = Number(userId);
+      this.syncAccountSelectOptions();
       this.account$ = this.accountService.getAccount(userId).pipe(
         tap((account) => {
           if (account?.holderName) {
             this.currentHolderName = account.holderName;
+          }
+          const accountNumber = Number(account?.accountNumber);
+          if (Number.isFinite(accountNumber) && accountNumber > 0) {
+            this.selectedAccountId = accountNumber;
+            this.syncAccountSelectOptions();
           }
         })
       );
@@ -75,41 +95,143 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.isStatsLoading = true;
     this.isBalanceLoaded = false;
 
-    const balance$ = this.accountService.getBalance(userId);
+    const accounts$ = this.accountService.getUserAccounts(userId);
     const transactions$ = this.accountService.getTransactions(userId);
 
-    import('rxjs').then(({ forkJoin }) => {
-      forkJoin({
-        balance: balance$,
-        transactions: transactions$
-      })
-        .pipe(takeUntil(this.destroyed$))
-        .subscribe({
-          next: ({ balance, transactions }) => {
-            if (balance && balance.balances && balance.balances.length > 0) {
-              const firstAccountBalance = balance.balances[0];
+    forkJoin({
+      accounts: accounts$,
+      transactions: transactions$
+    })
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe({
+        next: ({ accounts, transactions }) => {
+          this.availableAccounts = this.mapAccountsData(accounts);
+          this.syncAccountSelectOptions();
+          const initialAccount =
+            this.availableAccounts.find((account) => account.accountStatus === 'ACTIVE') ||
+            this.accountSelectOptions[0];
 
-              // animate balance
-              this.animateValue(
-                (v) => (this.animatedBalance = v),
-                0,
-                firstAccountBalance
-              );
-            }
-
+          if (initialAccount) {
+            this.setSelectedAccount(initialAccount.accountId, false);
+          } else {
+            this.selectedAccountId = null;
+            this.animatedBalance = 0;
             this.isBalanceLoaded = true;
-
-            this.hasTransactions = !!transactions && transactions.length > 0;
-            this.computeTotals(transactions);
-            this.isStatsLoading = false;
-          },
-          error: (err) => {
-            console.error('Error fetching dashboard data:', err);
-            this.isBalanceLoaded = true;
-            this.isStatsLoading = false;
           }
-        });
-    });
+
+          this.hasTransactions = !!transactions && transactions.length > 0;
+          this.computeTotals(transactions);
+          setTimeout(() => {
+            this.isStatsLoading = false;
+            this.cdr.markForCheck();
+          }, 0);
+        },
+        error: (err) => {
+          console.error('Error fetching dashboard data:', err);
+          setTimeout(() => {
+            this.syncAccountSelectOptions();
+            this.isBalanceLoaded = true;
+            this.isStatsLoading = false;
+            this.cdr.markForCheck();
+          }, 0);
+        }
+      });
+  }
+
+  private mapAccountsData(data: accountsData | null | undefined): DashboardAccountOption[] {
+    if (!data) return [];
+
+    const raw = data as unknown as Record<string, unknown>;
+    const ids = this.toNumberArray(
+      raw['accountIds'] ?? raw['accounts'] ?? raw['accountNumbers'] ?? raw['accountId']
+    );
+    const balances = this.toNumberArray(raw['balances'] ?? raw['accountBalance']);
+    const types = this.toStringArray(raw['accountType'] ?? raw['accountTypes'] ?? raw['types']);
+    const statuses = this.toStringArray(raw['accountStatus'] ?? raw['accountStatuses'] ?? raw['statuses']);
+
+    const mapped = ids.map((accountId, idx) => ({
+      accountId,
+      balance: Number.isFinite(balances[idx]) ? balances[idx] : 0,
+      accountType: (types[idx] || 'SAVINGS').toUpperCase(),
+      accountStatus: (statuses[idx] || 'ACTIVE').toUpperCase()
+    }));
+
+    if (mapped.length > 0) {
+      return mapped;
+    }
+
+    // Single-account payload fallback.
+    const singleAccountId = Number(raw['accountNumber'] ?? raw['id'] ?? raw['accountId'] ?? 0);
+    if (!Number.isFinite(singleAccountId) || singleAccountId <= 0) {
+      return [];
+    }
+    const singleBalance = Number(raw['balance'] ?? raw['accountBalance'] ?? 0);
+
+    return [
+      {
+        accountId: singleAccountId,
+        balance: Number.isFinite(singleBalance) ? singleBalance : 0,
+        accountType: String(raw['type'] ?? raw['accountType'] ?? 'SAVINGS').toUpperCase(),
+        accountStatus: String(raw['status'] ?? raw['accountStatus'] ?? 'ACTIVE').toUpperCase()
+      }
+    ];
+  }
+
+  private toNumberArray(input: unknown): number[] {
+    if (!Array.isArray(input)) return [];
+    return input
+      .map((value) => Number(value))
+      .filter((value) => Number.isFinite(value));
+  }
+
+  private toStringArray(input: unknown): string[] {
+    if (!Array.isArray(input)) return [];
+    return input.map((value) => String(value));
+  }
+
+  onAccountSelectionChange(selectedId: number | string): void {
+    const parsedId = Number(selectedId);
+    if (!Number.isFinite(parsedId)) return;
+    this.setSelectedAccount(parsedId, true);
+  }
+
+  private setSelectedAccount(accountId: number, animateFromCurrent: boolean): void {
+    const selected = this.availableAccounts.find((account) => account.accountId === accountId);
+    if (!selected) return;
+
+    this.selectedAccountId = selected.accountId;
+    this.selectedAccountType = selected.accountType;
+    this.selectedAccountStatus = selected.accountStatus;
+
+    this.animateValue(
+      (value) => (this.animatedBalance = value),
+      animateFromCurrent ? this.animatedBalance : 0,
+      selected.balance
+    );
+    this.isBalanceLoaded = true;
+    this.syncAccountSelectOptions();
+  }
+
+  private syncAccountSelectOptions(): void {
+    if (this.availableAccounts.length > 0) {
+      this.accountSelectOptions = this.availableAccounts;
+      return;
+    }
+
+    const fallbackAccountId = this.selectedAccountId ?? this.currentUserId;
+    if (!fallbackAccountId) {
+      this.accountSelectOptions = [];
+      return;
+    }
+
+    this.accountSelectOptions = [
+      {
+        accountId: fallbackAccountId,
+        balance: this.animatedBalance,
+        accountType: this.selectedAccountType || 'SAVINGS',
+        accountStatus: this.selectedAccountStatus || 'ACTIVE'
+      }
+    ];
   }
 
   private computeTotals(transactions: Transaction[]): void {
@@ -168,7 +290,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     if (duration <= 0 || range === 0) {
       setter(end);
-      this.cdr.detectChanges();  // ensure UI updates
+      this.cdr.markForCheck();
       return;
     }
 
@@ -179,7 +301,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       const current = start + range * eased;
 
       setter(Number(current.toFixed(2)));
-      this.cdr.detectChanges();   // ✅ critical fix
+      this.cdr.markForCheck();
 
       if (progress < 1) {
         requestAnimationFrame(step);
@@ -241,6 +363,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             duration: 3500,
             panelClass: ['success-snackbar']
           });
+          this.loadDashboardData(String(this.currentUserId));
         },
         error: (err) => {
           this.isCreatingAccount = false;

@@ -37,6 +37,7 @@ export interface ApiUserSignUpRequest {
 export interface ApiUserSuccessLoginOrSignUpDto {
   id: number;
   token: string;
+  role?: string;
   // Legacy/new frontend naming
   accountBalance?: number[];
   accountNumbers?: number[];
@@ -74,6 +75,11 @@ export interface ApiAccountSummary {
   status: string;
 }
 
+export interface ApiDeactivateAccountRequest {
+  accountId: number;
+  accountType: string;
+}
+
 // ---------------------------
 // Transaction / Transfer DTOs
 // ---------------------------
@@ -96,6 +102,15 @@ export interface ApiTransactionsDto {
   otherAccountName: string;
   transactionStatus: string; // SUCCESS / FAILED / etc.
   type: string; // DEBIT / CREDIT
+}
+
+// New backend `RecentTransactionsDto` shape for admin dashboard.
+export interface ApiRecentTransactionsDto {
+  transactionId: number;
+  toAccount: number;
+  fromAccount: number;
+  amount: number;
+  transactionStatus: string;
 }
 
 // ---------------------------------------------------------

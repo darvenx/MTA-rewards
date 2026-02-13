@@ -1,94 +1,179 @@
-<div class="profile-page container">
-  <mat-card class="profile-card">
-    <mat-card-header>
-      <div mat-card-avatar class="avatar" *ngIf="!avatarPreview">
-        {{ getInitials(profileForm.get('fullName')?.value || username) }}
+<div class="profile-shell container">
+  <section class="hero-card" *ngIf="!loadingProfile; else profileLoader">
+    <div class="hero-avatar">
+      <div class="avatar" *ngIf="!avatarPreview">
+        {{ getInitials(profileData.fullName || username) }}
       </div>
-      <div mat-card-avatar class="avatar" *ngIf="avatarPreview">
+      <div class="avatar" *ngIf="avatarPreview">
         <img [src]="avatarPreview" alt="Profile avatar" class="avatar-img" />
       </div>
-      <mat-card-title>Profile overview</mat-card-title>
-    </mat-card-header>
+    </div>
 
-    <mat-card-content>
-      <div class="profile-grid">
-        <!-- Personal / signup information -->
-        <section class="profile-section">
-          <h3>Personal details</h3>
+    <div class="hero-text">
+      <h2>{{ profileData.fullName || username || 'User' }}</h2>
+      <p>@{{ username || 'username' }}</p>
+      <small>Last login: {{ lastLogin || 'N/A' }}</small>
+    </div>
 
-          <div class="detail-row">
-            <div class="label">Full name</div>
-            <div class="value">
-              {{ profileForm.get('fullName')?.value || (account$ | async)?.holderName || '—' }}
-            </div>
-          </div>
-
-          <div class="detail-row">
-            <div class="label">Username</div>
-            <div class="value">
-              {{ username || '—' }}
-            </div>
-          </div>
-
-          <div class="detail-row">
-            <div class="label">Email</div>
-            <div class="value">
-              {{ profileForm.get('email')?.value || 'Not provided' }}
-            </div>
-          </div>
-
-          <div class="detail-row">
-            <div class="label">Phone number</div>
-            <div class="value">
-              {{ profileForm.get('phone')?.value || 'Not provided' }}
-            </div>
-          </div>
-<!-- 
-          <div class="detail-row">
-            <div class="label">Address</div>
-            <div class="value">
-              {{ profileForm.get('address')?.value || 'Not provided' }}
-            </div>
-          </div>
-
-          <div class="detail-row">
-            <div class="label">Last login</div>
-            <div class="value">
-              {{ lastLogin || '—' }}
-            </div>
-          </div> -->
-        </section>
-
-        <!-- Account snapshot -->
-        <!-- <section class="profile-section" *ngIf="account$ | async as account">
-          <h3>Account snapshot</h3>
-
-          <div class="detail-row">
-            <div class="label">Account number</div>
-            <div class="value">
-              {{ account.accountNumber || '—' }}
-            </div>
-          </div>
-
-          <div class="detail-row">
-            <div class="label">Account type</div>
-            <div class="value">
-              {{ account.type || 'SAVINGS' }}
-            </div>
-          </div>
-
-          <div class="detail-row">
-            <div class="label">Current balance</div>
-            <div class="value">
-              {{ (balance$ | async) | currency:'INR':'symbol':'1.2-2' }}
-            </div>
-          </div>
-        </section> -->
-      </div>
-    </mat-card-content>
-
-    <mat-card-actions align="end">
+    <div class="hero-actions">
+      <label class="upload-avatar-btn" matTooltip="Upload profile image">
+        <mat-icon>photo_camera</mat-icon>
+        <span>Avatar</span>
+        <input type="file" accept="image/*" (change)="onAvatarSelected($event)" />
+      </label>
       <button mat-stroked-button color="warn" (click)="logout()">Logout</button>
-    </mat-card-actions>
-  </mat-card>
+    </div>
+  </section>
+
+  <div class="profile-layout">
+    <aside class="left-panel">
+      <mat-card class="accounts-card">
+        <mat-card-header>
+          <mat-card-title>Accounts</mat-card-title>
+          <mat-card-subtitle>Filter by type and manage status</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="account-filter">
+            <mat-label>Account Number</mat-label>
+            <mat-select
+              [value]="selectedAccountId"
+              (selectionChange)="onAccountNumberChange($event.value)"
+            >
+              <mat-option *ngFor="let account of accountNumberOptions" [value]="account.accountId">
+                {{ account.accountId }} · {{ account.accountType }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="account-filter">
+            <mat-label>Account type</mat-label>
+            <mat-select
+              [value]="selectedAccountType"
+              (selectionChange)="onAccountTypeChange($event.value)"
+            >
+              <mat-option value="SAVINGS">Savings</mat-option>
+              <mat-option value="CURRENT">Current</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="accounts-list" *ngIf="!loadingAccounts; else accountsLoader">
+            <div
+              class="account-item"
+              [class.selected]="account.accountId === selectedAccountId"
+              *ngFor="let account of filteredAccounts"
+            >
+              <div class="account-item-head">
+                <div>
+                  <div class="account-id">A/C {{ account.accountId }}</div>
+                  <div class="account-type">{{ account.accountType }}</div>
+                </div>
+                <span class="status-chip" [class.inactive]="account.accountStatus !== 'ACTIVE'">
+                  {{ account.accountStatus }}
+                </span>
+              </div>
+
+              <div class="account-balance">
+                {{ account.balance | currency:'INR':'symbol':'1.2-2' }}
+              </div>
+
+              <button
+                mat-stroked-button
+                color="warn"
+                class="deactivate-btn"
+                [disabled]="account.accountStatus !== 'ACTIVE' || isDeactivating(account.accountId)"
+                (click)="deactivateAccount(account)"
+              >
+                <mat-spinner diameter="16" *ngIf="isDeactivating(account.accountId)"></mat-spinner>
+                <span *ngIf="!isDeactivating(account.accountId)">Deactivate Account</span>
+              </button>
+            </div>
+
+            <div class="empty-state" *ngIf="filteredAccounts.length === 0">
+              No {{ selectedAccountType.toLowerCase() }} accounts found.
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </aside>
+
+    <section class="right-panel">
+      <mat-card class="details-card">
+        <mat-card-header>
+          <mat-card-title>Personal Details</mat-card-title>
+          <mat-card-subtitle>Read-only profile information</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <section class="details-view">
+            <div class="detail-row">
+              <span class="detail-label">Selected Account</span>
+              <span class="detail-value">{{ selectedAccount?.accountId || 'Not Selected' }}</span>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="detail-row">
+              <span class="detail-label">Account Type</span>
+              <span class="detail-value">{{ selectedAccount?.accountType || 'Not Available' }}</span>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="detail-row">
+              <span class="detail-label">Account Status</span>
+              <span class="detail-value">{{ selectedAccount?.accountStatus || 'Not Available' }}</span>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="detail-row">
+              <span class="detail-label">Account Balance</span>
+              <span class="detail-value">{{ (selectedAccount?.balance || 0) | currency:'INR':'symbol':'1.2-2' }}</span>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="detail-row">
+              <span class="detail-label">Full Name</span>
+              <span class="detail-value">{{ profileData.fullName }}</span>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="detail-row">
+              <span class="detail-label">Email</span>
+              <span class="detail-value">{{ profileData.email }}</span>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="detail-row">
+              <span class="detail-label">Phone</span>
+              <span class="detail-value">{{ profileData.phone }}</span>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="detail-row">
+              <span class="detail-label">Address</span>
+              <span class="detail-value">{{ profileData.address }}</span>
+            </div>
+          </section>
+        </mat-card-content>
+      </mat-card>
+    </section>
+  </div>
 </div>
+
+<ng-template #profileLoader>
+  <div class="loading-wrap">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-template #accountsLoader>
+  <div class="loading-wrap">
+    <mat-spinner diameter="32"></mat-spinner>
+  </div>
+</ng-template>

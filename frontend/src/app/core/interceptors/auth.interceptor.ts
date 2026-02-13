@@ -28,7 +28,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
         return next.handle(request).pipe(
             catchError((error: HttpErrorResponse) => {
-                if (error.status === 401) {
+                const isAccountsListRequest = request.url.includes('/api/v1/user/accounts/');
+                const isRecentTransactionsRequest = request.url.includes('/api/v1/recent-transactions');
+                const isOptionalCompatibilityRequest = isAccountsListRequest || isRecentTransactionsRequest;
+
+                // Keep session intact for optional/compat routes that have local fallback handling.
+                if (error.status === 401 && !isOptionalCompatibilityRequest) {
                     // Centralised place to clear auth state on 401s.
                     this.tokenStorage.clear();
                     this.router.navigate(['/login']);

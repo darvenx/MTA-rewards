@@ -1,177 +1,309 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Observable, take, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
+import { Observable, Subject, filter, take, takeUntil } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
 import { Account } from '../../core/models/account.model';
+import { accountsData } from '../../core/models/accounts-data.model';
 
+type AccountFilterType = 'SAVINGS' | 'CURRENT';
+
+interface ProfileAccountCard {
+  accountId: number;
+  balance: number;
+  accountType: string;
+  accountStatus: string;
+}
+
+interface ReadOnlyProfileData {
+  fullName: string;
+  email: string;
+  phone: string;
+  address: string;
+}
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule,
     MatDividerModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule
   ],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
-  account$!: Observable<Account>;
-  balance$!: Observable<number>;
-
-  profileForm!: FormGroup;
-  passwordForm!: FormGroup;
+export class ProfileComponent implements OnInit, OnDestroy {
+  account$?: Observable<Account>;
+  profileData: ReadOnlyProfileData = {
+    fullName: 'User',
+    email: 'Not Available',
+    phone: 'Not Available',
+    address: 'Not Available'
+  };
 
   avatarPreview: string | null = null;
+  private avatarObjectUrl: string | null = null;
   loadingProfile = false;
-  savingProfile = false;
-  lastLogin = localStorage.getItem('lastLogin') || '';
+  loadingAccounts = false;
+  lastLogin = '13 Feb 2026, 10:30 AM';
   username = localStorage.getItem('holderName') || '';
 
+  selectedAccountType: AccountFilterType = 'SAVINGS';
+  selectedAccountId: number | null = null;
+  selectedAccount: ProfileAccountCard | null = null;
+  accounts: ProfileAccountCard[] = [];
+  filteredAccounts: ProfileAccountCard[] = [];
+  accountNumberOptions: ProfileAccountCard[] = [];
+  private readonly deactivatingAccountIds = new Set<number>();
+  private readonly destroyed$ = new Subject<void>();
+
   constructor(
-    private fb: FormBuilder,
     private accountService: AccountService,
     private auth: AuthService,
+    private router: Router,
     private snack: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    const accountId = localStorage.getItem("id") || sessionStorage.getItem("id");
-    this.initForms();
-    console.log("accountId" + accountId);
+    this.reloadProfileData();
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe((event) => {
+        if (event.urlAfterRedirects.startsWith('/profile')) {
+          this.reloadProfileData();
+        }
+      });
+  }
 
-    if (accountId) {
-      this.loadingProfile = true;
-      this.account$ = this.accountService.getAccount(accountId);
-      // this.balance$ = this.accountService.getBalance(accountId);
+  private resolveUserId(): string | null {
+    return localStorage.getItem('id') || sessionStorage.getItem('id') || this.auth.getAccountId();
+  }
 
-      // populate when available
-      this.account$.pipe(take(1)).subscribe(acc => {
-        this.username = acc.username || this.username;
-        this.profileForm.patchValue({
-          fullName: acc.holderName || '',
-          email: acc.email || '',
-          phone: acc.phone || '',
-          address: acc.address || ''
-        });
-        this.loadingProfile = false;
-      }, () => this.loadingProfile = false);
+  private reloadProfileData(): void {
+    const userId = this.resolveUserId();
+    if (!userId) {
+      this.loadingProfile = false;
+      this.loadingAccounts = false;
+      return;
     }
-  }
 
-  private initForms() {
-    this.profileForm = this.fb.group({
-      fullName: ['', [Validators.required, Validators.maxLength(100)]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.minLength(6)]],
-      address: ['']
+    this.loadingProfile = true;
+    this.account$ = this.accountService.getAccount(userId);
+    this.loadAccounts(userId);
+
+    this.account$.pipe(take(1)).subscribe({
+      next: (account) => {
+        this.username = account.username || this.username;
+        this.profileData = {
+          fullName: account.holderName || this.username || 'User',
+          email: account.email || 'Not Available',
+          phone: account.phone || 'Not Available',
+          address: account.address || 'Not Available'
+        };
+        this.loadingProfile = false;
+      },
+      error: () => {
+        this.loadingProfile = false;
+      }
     });
-
-    this.passwordForm = this.fb.group({
-      currentPassword: ['', [Validators.required]],
-      newPassword: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required]]
-    }, { validators: this.passwordsMatch });
   }
 
-  private passwordsMatch(group: FormGroup) {
-    const a = group.get('newPassword')?.value;
-    const b = group.get('confirmPassword')?.value;
-    return a === b ? null : { mismatch: true };
+  private loadAccounts(userId: string): void {
+    this.loadingAccounts = true;
+    this.accountService.getBalance(userId).pipe(take(1)).subscribe({
+      next: (data) => {
+        this.accounts = this.mapAccountsData(data);
+        if (this.accounts.length > 0 && !this.accounts.some((a) => a.accountType === this.selectedAccountType)) {
+          this.selectedAccountType = this.accounts[0].accountType === 'CURRENT' ? 'CURRENT' : 'SAVINGS';
+        }
+        this.applyAccountTypeFilter();
+        this.loadingAccounts = false;
+      },
+      error: () => {
+        this.accounts = [];
+        this.filteredAccounts = [];
+        this.loadingAccounts = false;
+      }
+    });
   }
 
-  onAvatarSelected(evt: Event) {
+  private mapAccountsData(data: accountsData | null | undefined): ProfileAccountCard[] {
+    if (!data) {
+      return [];
+    }
+
+    if (Array.isArray(data.accountIds) && data.accountIds.length > 0) {
+      return data.accountIds.map((accountId, index) => {
+        const balance = Array.isArray(data.balances) ? Number(data.balances[index] ?? 0) : 0;
+        const type = Array.isArray(data.accountType) ? String(data.accountType[index] ?? 'SAVINGS') : 'SAVINGS';
+        const status = Array.isArray(data.accountStatus) ? String(data.accountStatus[index] ?? 'ACTIVE') : 'ACTIVE';
+
+        return {
+          accountId,
+          balance: Number.isFinite(balance) ? balance : 0,
+          accountType: type.toUpperCase(),
+          accountStatus: status.toUpperCase()
+        };
+      });
+    }
+
+    // Fallback for legacy/single-account response shapes.
+    const legacy = data as unknown as {
+      id?: number | string;
+      accountNumber?: number | string;
+      balance?: number;
+      type?: string;
+      status?: string;
+    };
+    const accountId = Number(legacy.accountNumber ?? legacy.id ?? 0);
+    if (!accountId) {
+      return [];
+    }
+
+    return [
+      {
+        accountId,
+        balance: Number.isFinite(legacy.balance ?? 0) ? Number(legacy.balance ?? 0) : 0,
+        accountType: String(legacy.type ?? 'SAVINGS').toUpperCase(),
+        accountStatus: String(legacy.status ?? 'ACTIVE').toUpperCase()
+      }
+    ];
+  }
+
+  onAccountTypeChange(value: AccountFilterType): void {
+    this.selectedAccountType = value;
+    this.applyAccountTypeFilter();
+  }
+
+  onAccountNumberChange(value: number | string): void {
+    const parsedId = Number(value);
+    if (!Number.isFinite(parsedId)) {
+      return;
+    }
+    this.selectedAccountId = parsedId;
+    this.updateSelectedAccount();
+  }
+
+  private applyAccountTypeFilter(): void {
+    this.filteredAccounts = this.accounts.filter((item) => item.accountType === this.selectedAccountType);
+    this.accountNumberOptions = [...this.filteredAccounts];
+
+    if (this.accountNumberOptions.length === 0) {
+      this.selectedAccountId = null;
+      this.selectedAccount = null;
+      return;
+    }
+
+    if (!this.selectedAccountId || !this.accountNumberOptions.some((account) => account.accountId === this.selectedAccountId)) {
+      this.selectedAccountId = this.accountNumberOptions[0].accountId;
+    }
+
+    this.updateSelectedAccount();
+  }
+
+  private updateSelectedAccount(): void {
+    this.selectedAccount =
+      this.filteredAccounts.find((account) => account.accountId === this.selectedAccountId) || null;
+  }
+
+  isDeactivating(accountId: number): boolean {
+    return this.deactivatingAccountIds.has(accountId);
+  }
+
+  deactivateAccount(account: ProfileAccountCard): void {
+    if (account.accountStatus !== 'ACTIVE' || this.isDeactivating(account.accountId)) {
+      return;
+    }
+
+    this.deactivatingAccountIds.add(account.accountId);
+    this.accountService
+      .deactivateAccount({
+        accountId: account.accountId,
+        accountType: account.accountType
+      })
+      .pipe(
+        take(1),
+        finalize(() => this.deactivatingAccountIds.delete(account.accountId))
+      )
+      .subscribe({
+        next: (isSuccess) => {
+          if (!isSuccess) {
+            this.snack.open('Could not deactivate account. Please try again.', 'Close', { duration: 3200 });
+            return;
+          }
+
+          this.accounts = this.accounts.map((item) =>
+            item.accountId === account.accountId ? { ...item, accountStatus: 'INACTIVE' } : item
+          );
+          this.applyAccountTypeFilter();
+          this.updateSelectedAccount();
+          this.snack.open(`Account ${account.accountId} deactivated.`, 'Close', { duration: 3200 });
+        },
+        error: () => {
+          this.snack.open('Account deactivation failed.', 'Close', { duration: 3200 });
+        }
+      });
+  }
+
+  onAvatarSelected(evt: Event): void {
     const input = evt.target as HTMLInputElement;
     if (!input.files || !input.files[0]) return;
     const file = input.files[0];
-    const reader = new FileReader();
-    reader.onload = () => this.avatarPreview = reader.result as string;
-    reader.readAsDataURL(file);
-    // In production you'd upload the file to the server here
+
+    // Object URLs are faster than base64 conversion for immediate preview.
+    if (this.avatarObjectUrl) {
+      URL.revokeObjectURL(this.avatarObjectUrl);
+      this.avatarObjectUrl = null;
+    }
+
+    this.avatarObjectUrl = URL.createObjectURL(file);
+    this.avatarPreview = this.avatarObjectUrl;
   }
 
   getInitials(name?: string | null): string {
     if (!name) return 'U';
     return name
       .split(' ')
-      .map(n => n[0])
+      .map((n) => n[0])
       .slice(0, 2)
       .join('')
       .toUpperCase();
   }
 
-  copyAccountNumber(accountNumber: string | null | undefined) {
-    if (!accountNumber) return;
-    try { navigator.clipboard.writeText(accountNumber); } catch (e) { /* ignore */ }
+  logout(): void {
+    this.auth.logout();
   }
 
-  saveProfile() {
-    if (!this.profileForm.valid || !this.profileForm.dirty) return;
-    this.savingProfile = true;
-    const payload = this.profileForm.value;
-    // call API (mocked) and notify
-    const accountId = this.auth.getAccountId();
-    if (!accountId) return;
-    // AccountService does not implement update in this demo; simulate a request
-    of(null).pipe(delay(700)).pipe(take(1)).subscribe(() => {
-      this.savingProfile = false;
-      this.profileForm.markAsPristine();
-      this.snack.open('Profile updated', 'Close', { duration: 3000 });
-    }, () => {
-      this.savingProfile = false;
-      this.snack.open('Unable to update profile', 'Close', { duration: 3000 });
-    });
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+    if (this.avatarObjectUrl) {
+      URL.revokeObjectURL(this.avatarObjectUrl);
+      this.avatarObjectUrl = null;
+    }
   }
-
-  cancelChanges() {
-    this.profileForm.reset();
-    // repopulate from account
-    this.account$.pipe(take(1)).subscribe(acc => {
-      this.username = acc.username || this.username;
-      this.profileForm.patchValue({
-        fullName: acc.holderName || '',
-        email: acc.email || '',
-        phone: acc.phone || '',
-        address: acc.address || ''
-      });
-    });
-  }
-
-  updatePassword() {
-    if (!this.passwordForm.valid) return;
-    // call change password API (mock)
-    const accountId = this.auth.getAccountId();
-    if (!accountId) return;
-    // Simulate password change API call
-    of(null).pipe(delay(700)).pipe(take(1)).subscribe(() => {
-      this.snack.open('Password updated', 'Close', { duration: 3000 });
-      this.passwordForm.reset();
-      this.passwordForm.markAsPristine();
-    }, () => this.snack.open('Unable to update password', 'Close', { duration: 3000 }));
-  }
-
-  logout() { this.auth.logout(); }
 }

@@ -43,7 +43,7 @@ import { Transaction, TransactionType } from '../../../core/models/transaction.m
       <ng-container matColumnDef="amount">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
         <td mat-cell *matCellDef="let transaction" [class.credit]="transaction.type === 'CREDIT'" [class.debit]="transaction.type === 'DEBIT'">
-          {{ (transaction.type === 'DEBIT' ? '-' : '+') }} {{transaction.amount | currency}}
+          {{ (transaction.type === 'DEBIT' ? '-' : '+') }} {{ transaction.amount | currency:'INR':'symbol':'1.2-2' }}
         </td>
       </ng-container>
 

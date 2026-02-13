@@ -36,6 +36,19 @@ export class MockBackendInterceptor implements HttpInterceptor {
         }
 
         // --- Accounts API (UI-only convenience reads) ---
+        // GET user accounts for dashboard dropdown
+        if (url.match(/\/user\/accounts\/\w+$/) && method === 'GET') {
+            return of(new HttpResponse({
+                status: 200,
+                body: {
+                    accountIds: [1234567890, 2234567890],
+                    balances: [15420.5, 8200],
+                    accountType: ['SAVINGS', 'CURRENT'],
+                    accountStatus: ['ACTIVE', 'ACTIVE']
+                }
+            })).pipe(delay(simulatedDelay));
+        }
+
         // GET Account
         if (url.match(/\/account\/\w+$/) && method === 'GET') {
             return of(new HttpResponse({
@@ -89,8 +102,46 @@ export class MockBackendInterceptor implements HttpInterceptor {
             })).pipe(delay(simulatedDelay));
         }
 
+        // GET Recent Transactions (admin dashboard)
+        if (url.endsWith('/recent-transactions') && method === 'GET') {
+            return of(new HttpResponse({
+                status: 200,
+                body: [
+                    {
+                        transactionId: 1091,
+                        toAccount: 2234567890,
+                        fromAccount: 1234567890,
+                        amount: 5000.00,
+                        transactionStatus: 'SUCCESS'
+                    },
+                    {
+                        transactionId: 1092,
+                        toAccount: 9234567890,
+                        fromAccount: 1234567890,
+                        amount: 1200.00,
+                        transactionStatus: 'SUCCESS'
+                    },
+                    {
+                        transactionId: 1093,
+                        toAccount: 3334567890,
+                        fromAccount: 2234567890,
+                        amount: 300.00,
+                        transactionStatus: 'FAILED'
+                    }
+                ]
+            })).pipe(delay(simulatedDelay));
+        }
+
         // --- Transfers API ---
         if (url.endsWith('/transaction') && method === 'POST') {
+            return of(new HttpResponse({
+                status: 200,
+                body: true
+            })).pipe(delay(simulatedDelay));
+        }
+
+        // --- Account deactivation API ---
+        if (url.match(/\/user\/deactivate(%20|-)?account$/) && method === 'PUT') {
             return of(new HttpResponse({
                 status: 200,
                 body: true

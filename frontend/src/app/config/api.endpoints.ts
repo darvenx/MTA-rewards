@@ -34,7 +34,11 @@ export const ApiEndpoints = {
     signup: () => `${BASE}/user/signup`, // POST UserSignUpDto -> UserSuccessLoginOrSignUpDto
     login: () => `${BASE}/user/login`,  // POST UserLoginDto -> UserSuccessLoginOrSignUpDto
     update: () => `${BASE}/user/update`, // PUT UserSignUpDto -> boolean
-    forgotPassword: () => `${BASE}/user/forgot-password`
+    forgotPassword: () => `${BASE}/user/forgot-password`,
+    // Requested frontend mapping: BASE/user/deactivate account
+    deactivateAccount: () => `${BASE}/user/deactivate%20account`,
+    // Dashboard multi-account list route
+    accounts: (userId: string | number) => `${BASE}/user/accounts/${userId}`
   },
   account: {
     /**
@@ -64,7 +68,12 @@ export const ApiEndpoints = {
      * Transaction history for a given account.
      * Backend target: GET `/api/v1/transactions/{id}` (List<TransactionsDto>).
      */
-    listByAccount: (id: string | number) => `${BASE}/transactions/${id}`
+    listByAccount: (id: string | number) => `${BASE}/transactions/${id}`,
+    /**
+     * Recent transactions for admin dashboard.
+     * Backend target: GET `/api/v1/recent-transactions` (List<RecentTransactionsDto>).
+     */
+    recent: () => `${BASE}/recent-transactions`
   }
 };
 

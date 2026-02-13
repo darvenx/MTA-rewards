@@ -8,10 +8,15 @@ import { HistoryComponent } from './features/history/history.component';
 import { ProfileComponent } from './features/profile/profile.component';
 import { ForgotPasswordComponent } from './features/forgot-password/forgot-password.component';
 import { LayoutComponent } from './shared/layout/layout.component';
+import { AdminComponent } from './features/admin/admin.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { AdminGuard } from './core/guards/admin.guard';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
+    { path: 'admin-log', component: LoginComponent },
+    { path: 'admin-login', component: LoginComponent },
+    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminGuard] },
     { path: 'signup', component: SignupComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
     {
@@ -27,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

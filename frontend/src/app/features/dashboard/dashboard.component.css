@@ -38,57 +38,9 @@
   font-weight: 700;
   color: #111;
 }
-.profile-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
 .profile-pic-placeholder mat-icon {
   font-size: 40px;
   color: #9e9e9e;
-}
-
-.notification-button {
-  position: relative;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.notification-button.has-unread mat-icon {
-  animation: bellPulse 1.4s ease-out infinite;
-}
-
-.unread-dot {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #f97316;
-  box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.6);
-  animation: dotPulse 1.8s cubic-bezier(0.21, 0.53, 0.56, 0.8) infinite;
-}
-
-@keyframes bellPulse {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-1px);
-  }
-}
-
-@keyframes dotPulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.6);
-  }
-  70% {
-    box-shadow: 0 0 0 6px rgba(249, 115, 22, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
-  }
 }
 
 /* Balance Hero */
@@ -133,6 +85,33 @@
   opacity: 0.85;
   margin-top: 6px;
 }
+
+.account-picker {
+  margin-top: 12px;
+  max-width: 340px;
+}
+
+.account-picker-field {
+  width: 100%;
+}
+
+::ng-deep .account-picker-field .mat-mdc-text-field-wrapper {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-radius: 10px !important;
+}
+
+::ng-deep .account-picker-field .mdc-floating-label,
+::ng-deep .account-picker-field .mat-mdc-select-value-text,
+::ng-deep .account-picker-field .mat-mdc-select-arrow {
+  color: #ffffff !important;
+}
+
+::ng-deep .account-picker-field .mdc-notched-outline__leading,
+::ng-deep .account-picker-field .mdc-notched-outline__notch,
+::ng-deep .account-picker-field .mdc-notched-outline__trailing {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
 .balance-meta {
   font-size: 0.78rem;
   opacity: 0.8;

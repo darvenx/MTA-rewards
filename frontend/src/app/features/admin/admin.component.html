@@ -1,0 +1,139 @@
+<section class="admin-dashboard">
+  <div class="ambient ambient-left" aria-hidden="true"></div>
+  <div class="ambient ambient-right" aria-hidden="true"></div>
+
+  <header class="hero-card">
+    <div class="hero-copy">
+      <div class="hero-chip-row">
+        <span class="hero-chip">Admin Operations</span>
+        <span class="hero-chip subtle" *ngIf="usedFallbackData">Fallback data mode</span>
+      </div>
+      <h1>Transactions Control Center</h1>
+      <p class="sub">Monitor live money movement, spot failures quickly, and review account-to-account flow in one place.</p>
+      <div class="hero-meta">
+        <span><mat-icon>schedule</mat-icon> Updated {{ lastUpdatedLabel }}</span>
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <button mat-flat-button color="primary" type="button" (click)="loadRecentTransactions()" [disabled]="isLoading">
+        <mat-icon>refresh</mat-icon>
+        Refresh Data
+      </button>
+    </div>
+  </header>
+
+  <section class="stats-grid" *ngIf="!isLoading && !errorMessage">
+    <mat-card class="stat-card tone-indigo">
+      <div class="stat-top">
+        <span>Total Transactions</span>
+        <mat-icon>receipt_long</mat-icon>
+      </div>
+      <h2>{{ transactions.length }}</h2>
+      <p>{{ filteredTransactions.length }} currently visible</p>
+    </mat-card>
+
+    <mat-card class="stat-card tone-blue">
+      <div class="stat-top">
+        <span>Total Amount</span>
+        <mat-icon>currency_rupee</mat-icon>
+      </div>
+      <h2>{{ totalAmount | currency:'INR':'symbol':'1.2-2' }}</h2>
+      <p>Filtered: {{ visibleTotalAmount | currency:'INR':'symbol':'1.2-2' }}</p>
+    </mat-card>
+
+    <mat-card class="stat-card tone-green">
+      <div class="stat-top">
+        <span>Successful</span>
+        <mat-icon>check_circle</mat-icon>
+      </div>
+      <h2>{{ successfulCount }}</h2>
+      <p>Success ratio: {{ successRate }}%</p>
+    </mat-card>
+
+    <mat-card class="stat-card tone-red">
+      <div class="stat-top">
+        <span>Failed / Pending</span>
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h2>{{ failedCount }}</h2>
+      <p>Requires attention</p>
+    </mat-card>
+  </section>
+
+  <mat-card class="table-card">
+    <div class="state state-loading" *ngIf="isLoading">
+      <mat-spinner diameter="36"></mat-spinner>
+      <p>Loading recent transactions...</p>
+    </div>
+
+    <div class="state state-error" *ngIf="!isLoading && errorMessage">
+      <mat-icon>error_outline</mat-icon>
+      <p>{{ errorMessage }}</p>
+      <button mat-flat-button color="primary" type="button" (click)="loadRecentTransactions()">Retry</button>
+    </div>
+
+    <ng-container *ngIf="!isLoading && !errorMessage">
+      <div class="table-headline">
+        <h3>Recent Transaction Feed</h3>
+        <span class="count-pill">{{ filteredTransactions.length }} records</span>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-box">
+          <mat-icon>search</mat-icon>
+          <input
+            type="text"
+            [value]="searchTerm"
+            placeholder="Search txn id, account, amount, status"
+            (input)="onSearchTermChange($any($event.target).value)"
+          />
+        </label>
+
+        <div class="status-filters">
+          <button type="button" [class.active]="isStatusFilterActive('ALL')" (click)="setStatusFilter('ALL')">All</button>
+          <button type="button" [class.active]="isStatusFilterActive('SUCCESS')" (click)="setStatusFilter('SUCCESS')">Success</button>
+          <button type="button" [class.active]="isStatusFilterActive('FAILED')" (click)="setStatusFilter('FAILED')">Failed / Pending</button>
+        </div>
+      </div>
+
+      <div class="table-wrap" *ngIf="filteredTransactions.length > 0; else emptyState">
+        <table>
+          <thead>
+            <tr>
+              <th>Txn ID</th>
+              <th>From Account</th>
+              <th>To Account</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of filteredTransactions; trackBy: trackByTransactionId">
+              <td class="mono">#{{ item.transactionId }}</td>
+              <td class="mono">{{ item.fromAccount || '--' }}</td>
+              <td class="mono">{{ item.toAccount || '--' }}</td>
+              <td class="amount">{{ item.amount | currency:'INR':'symbol':'1.2-2' }}</td>
+              <td>
+                <span
+                  class="status"
+                  [class.success]="item.transactionStatus?.toUpperCase() === 'SUCCESS'"
+                  [class.failed]="item.transactionStatus?.toUpperCase() !== 'SUCCESS'"
+                >
+                  {{ item.transactionStatus }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #emptyState>
+        <div class="state state-empty">
+          <mat-icon>search_off</mat-icon>
+          <p>No transactions match your filters.</p>
+        </div>
+      </ng-template>
+    </ng-container>
+  </mat-card>
+</section>

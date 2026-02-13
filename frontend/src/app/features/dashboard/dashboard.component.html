@@ -6,21 +6,6 @@
         {{ (account$ | async)?.holderName || 'User' }} <span class="wave-emoji">👋</span>
       </h2>
     </div>
-    <div class="profile-right">
-      <button
-        mat-icon-button
-        class="notification-button"
-        aria-label="Notifications"
-        matTooltip="{{ unreadCount }} unread notifications"
-        [class.has-unread]="unreadCount > 0"
-      >
-        <mat-icon>notifications</mat-icon>
-        <span
-          class="unread-dot"
-          *ngIf="unreadCount > 0"
-        ></span>
-      </button>
-    </div>
   </div>
 
   <!-- Balance Hero -->
@@ -54,11 +39,22 @@
             <div class="skeleton skeleton-balance"></div>
           </ng-template>
 
+          <div class="account-picker">
+            <mat-form-field appearance="outline" class="account-picker-field">
+              <mat-label>Select Account</mat-label>
+              <mat-select [value]="selectedAccountId" (selectionChange)="onAccountSelectionChange($event.value)">
+                <mat-option *ngFor="let account of accountSelectOptions" [value]="account.accountId">
+                  {{ account.accountType }} · {{ account.accountId }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
           <div class="account-number">
-            Account: {{ (account$ | async)?.accountNumber || 'XXXX-XXXX-1234' }}
+            Account: {{ selectedAccountId || (account$ | async)?.accountNumber || 'XXXX-XXXX-1234' }}
           </div>
           <div class="balance-meta">
-            Last updated · a few moments ago
+            {{ selectedAccountType }} · {{ selectedAccountStatus }} · Last updated · a few moments ago
           </div>
         </div>
       </div>

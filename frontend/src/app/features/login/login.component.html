@@ -1,21 +1,27 @@
-<div class="page-bg">
+<div class="page-bg" [class.admin-mode]="isAdminLoginMode">
   <div class="card-wrapper">
-    <mat-card class="split-card">
-      <div class="blue-side">
+    <mat-card class="split-card" [class.admin-card-mode]="isAdminLoginMode">
+      <div class="blue-side" [class.admin-blue-side]="isAdminLoginMode">
         <div class="blue-content">
           <div class="logo-row">
             <div class="logo-circle">
               <mat-icon class="rupee-icon">currency_rupee</mat-icon>
             </div>
-            <h1 class="brand">Money Transfer</h1>
+            <h1 class="brand">{{ isAdminLoginMode ? 'Money Transfer Admin' : 'Money Transfer' }}</h1>
           </div>
 
-          <h2 class="headline">Welcome to Secure Banking</h2>
+          <h2 class="headline">
+            {{ isAdminLoginMode ? 'Access The Admin Command Center' : 'Welcome to Secure Banking' }}
+          </h2>
           <p class="tagline">
-            Manage your money with confidence. Fast transfers, real-time tracking, and complete security - all in one place.
+            {{
+              isAdminLoginMode
+                ? 'Review transactions, control user operations, and monitor system activity from a protected admin entry point.'
+                : 'Manage your money with confidence. Fast transfers, real-time tracking, and complete security - all in one place.'
+            }}
           </p>
 
-          <div class="features">
+          <div class="features" *ngIf="!isAdminLoginMode">
             <div class="feat">
               <div class="feat-icon"><mat-icon>flash_on</mat-icon></div>
               <div>
@@ -38,12 +44,34 @@
               </div>
             </div>
           </div>
+
+          <div class="admin-highlights" *ngIf="isAdminLoginMode">
+            <div class="admin-highlight">
+              <mat-icon>verified_user</mat-icon>
+              <span>Role-validated sign in</span>
+            </div>
+            <div class="admin-highlight">
+              <mat-icon>monitoring</mat-icon>
+              <span>Live transaction oversight</span>
+            </div>
+            <div class="admin-highlight">
+              <mat-icon>shield</mat-icon>
+              <span>Restricted administrative access</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="form-side">
-        <h2 class="form-heading">Welcome Back</h2>
-        <p class="form-sub">Enter your credentials to access your account</p>
+      <div class="form-side" [class.admin-form-side]="isAdminLoginMode">
+        <div class="admin-pill" *ngIf="isAdminLoginMode">Admin Login Page</div>
+        <div class="admin-alert" *ngIf="isAdminLoginMode">
+          <mat-icon>lock_person</mat-icon>
+          <span>This entry is restricted to administrator accounts only.</span>
+        </div>
+        <h2 class="form-heading">{{ isAdminLoginMode ? 'Admin Login' : 'Welcome Back' }}</h2>
+        <p class="form-sub">
+          {{ isAdminLoginMode ? 'Authorized access only. Enter admin credentials to continue.' : 'Enter your credentials to access your account' }}
+        </p>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="field">
@@ -76,7 +104,11 @@
 
           <button mat-flat-button color="primary" class="submit-btn" type="submit" [disabled]="loginForm.invalid || isLoading">
             <mat-spinner diameter="20" *ngIf="isLoading; else loginText" class="white-spinner"></mat-spinner>
-            <ng-template #loginText>Login</ng-template>
+            <ng-template #loginText>{{ isAdminLoginMode ? 'Sign In as Admin' : 'Login' }}</ng-template>
+          </button>
+
+          <button mat-stroked-button type="button" class="admin-btn" (click)="goToAdminLogin()" *ngIf="!isAdminLoginMode">
+            Admin Login
           </button>
 
           <div class="forgot-link">

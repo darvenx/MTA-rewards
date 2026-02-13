@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth.service';
 import { mapLoginSuccessToSessionUser } from '../../core/api/api-mappers';
+import { Subject, filter, takeUntil } from 'rxjs';
+import { getRoleFromLoginResponse } from '../../core/utils/auth-role.util';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,12 @@ import { mapLoginSuccessToSessionUser } from '../../core/api/api-mappers';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   hidePassword = true;
   isLoading = false;
+  isAdminLoginMode = false;
+  private readonly destroyed$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -28,9 +32,27 @@ export class LoginComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.updateAdminMode(this.router.url);
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe((event) => this.updateAdminMode(event.urlAfterRedirects));
+  }
+
+  private updateAdminMode(url: string): void {
+    this.isAdminLoginMode = url.startsWith('/admin-log') || url.startsWith('/admin-login');
+  }
+
   openForgotPassword(event: Event): void {
     event.preventDefault();
     this.router.navigate(['/forgot-password']);
+  }
+
+  goToAdminLogin(): void {
+    this.router.navigate(['/admin-log']);
   }
 
   onSubmit(): void {
@@ -42,9 +64,6 @@ export class LoginComponent {
         next: (res) => {
           console.log(res);
           this.isLoading = false;
-          sessionStorage.setItem("id",String(res.id));
-          localStorage.setItem("id",String(res.id));
-          console.log(sessionStorage);
           // Defensive check for response structure
           if (!res || !res.token) {
             console.error('Invalid login response:', res);
@@ -55,11 +74,23 @@ export class LoginComponent {
             return;
           }
 
+          const loggedInRole = getRoleFromLoginResponse(res);
+          if (this.isAdminLoginMode && loggedInRole !== 'ADMIN') {
+            this.snackBar.open('Only admin users can log in from this page.', 'Close', {
+              duration: 4200,
+              panelClass: ['error-snackbar']
+            });
+            return;
+          }
+
           // Map transport DTO -> UI session model and persist via AuthService
           const session = mapLoginSuccessToSessionUser(res, username);
           this.authService.setSession(session);
+          sessionStorage.setItem("id", String(res.id));
+          localStorage.setItem("id", String(res.id));
+          console.log(sessionStorage);
 
-          this.router.navigate(['/dashboard']);
+          this.router.navigate([this.isAdminLoginMode ? '/admin' : '/dashboard']);
         },
         error: (err) => {
           this.isLoading = false;
@@ -115,5 +146,10 @@ export class LoginComponent {
         }
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 }
