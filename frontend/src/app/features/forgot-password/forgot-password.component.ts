@@ -32,7 +32,7 @@ export class ForgotPasswordComponent {
     this.form = this.fb.group({
       username: ['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-      oldPassword: ['', [Validators.required, Validators.minLength(6)]],
+      // oldPassword: ['', [Validators.required, Validators.minLength(6)]],
       newPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -49,7 +49,7 @@ export class ForgotPasswordComponent {
     const payload: ApiUserUpdatePasswordRequest = {
       username: this.form.value.username,
       phoneNumber: this.form.value.phoneNumber,
-      oldPassword: this.form.value.oldPassword,
+      // oldPassword: this.form.value.oldPassword,
       newPassword: this.form.value.newPassword
     };
 

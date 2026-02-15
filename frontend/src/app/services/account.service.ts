@@ -66,7 +66,7 @@ export class AccountService {
             ? { responseType: 'text' as const, headers: new HttpHeaders({ Authorization: `Bearer ${token}` }) }
             : { responseType: 'text' as const };
 
-        return this.http.get(ApiEndpoints.account.toggleStatus(accountId), options).pipe(
+        return this.http.post(ApiEndpoints.account.toggleStatus(accountId), options).pipe(
             map((response) => {
                 const body = String(response ?? '').trim().toLowerCase();
                 if (body === 'false') return false;

@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService {
             throws UserNotFoundException
     {
         Optional<User> userObj = userRepo.findByUsernameAndPassword(
-                userRequest.getUsername(),userRequest.getConfirmPassword());
+                userRequest.getUsername(),userRequest.getNewPassword());
         if(userObj.isEmpty()){
             throw new UserNotFoundException();
         }

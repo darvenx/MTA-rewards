@@ -129,7 +129,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       error: (err) => {
         this.loadingProfile = false;
         this.snack.open(this.extractApiErrorMessage(err, 'Could not load profile details.'), 'Close', {
-          duration: 3200
+          duration: 100
         });
       }
     });

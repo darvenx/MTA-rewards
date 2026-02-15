@@ -66,7 +66,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUserDetails(),HttpStatus.OK);
     }
 
-    @PostMapping("/update-creds/{id}")
+    @PostMapping("/forgot-password")
     public ResponseEntity<Boolean> updatecredentials(UserUpdatePasswordDto req){
         return new ResponseEntity<>(userService.updateCredentials(req),HttpStatus.OK);
     }
