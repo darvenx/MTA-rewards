@@ -35,8 +35,6 @@ export const ApiEndpoints = {
     login: () => `${BASE}/user/login`,  // POST UserLoginDto -> UserSuccessLoginOrSignUpDto
     update: () => `${BASE}/user/update`, // PUT UserSignUpDto -> boolean
     forgotPassword: () => `${BASE}/user/forgot-password`,
-    // Requested frontend mapping: BASE/user/deactivate account
-    deactivateAccount: () => `${BASE}/user/deactivate%20account`,
     // Dashboard multi-account list route
     accounts: (userId: string | number) => `${BASE}/user/accounts/${userId}`
   },
@@ -54,7 +52,8 @@ export const ApiEndpoints = {
      * implement matching endpoints or refactor the UI in one place.
      */
     get: (id: string | number) => `${BASE}/user/${id}`,
-    balance: (id: string | number) => `${BASE}/account/${id}`
+    balance: (id: string | number) => `${BASE}/account/${id}`,
+    toggleStatus: (id: string | number) => `${BASE}/account/${id}`
   },
   transfer: {
     /**

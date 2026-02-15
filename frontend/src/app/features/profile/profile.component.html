@@ -78,14 +78,17 @@
               </div>
 
               <button
+                type="button"
                 mat-stroked-button
-                color="warn"
+                [color]="isAccountActive(account.accountStatus) ? 'warn' : 'primary'"
                 class="deactivate-btn"
-                [disabled]="account.accountStatus !== 'ACTIVE' || isDeactivating(account.accountId)"
-                (click)="deactivateAccount(account)"
+                [disabled]="isTogglingAccountStatus(account.accountId)"
+                (click)="$event.stopPropagation(); toggleAccountStatus(account)"
               >
-                <mat-spinner diameter="16" *ngIf="isDeactivating(account.accountId)"></mat-spinner>
-                <span *ngIf="!isDeactivating(account.accountId)">Deactivate Account</span>
+                <mat-spinner diameter="16" *ngIf="isTogglingAccountStatus(account.accountId)"></mat-spinner>
+                <span *ngIf="!isTogglingAccountStatus(account.accountId)">
+                  {{ getAccountToggleLabel(account.accountStatus) }}
+                </span>
               </button>
             </div>
 

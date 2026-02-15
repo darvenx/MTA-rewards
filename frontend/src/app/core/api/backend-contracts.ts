@@ -24,6 +24,7 @@ export interface ApiUserLoginRequest {
 
 export interface ApiUserUpdatePasswordRequest {
   username: string;
+  phoneNumber: string;
   oldPassword: string;
   newPassword: string;
 }

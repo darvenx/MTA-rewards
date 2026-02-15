@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable, Subject, filter, take, takeUntil } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, timeout } from 'rxjs/operators';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   accounts: ProfileAccountCard[] = [];
   filteredAccounts: ProfileAccountCard[] = [];
   accountNumberOptions: ProfileAccountCard[] = [];
-  private readonly deactivatingAccountIds = new Set<number>();
+  private readonly togglingAccountIds = new Set<number>();
   private readonly destroyed$ = new Subject<void>();
 
   constructor(
@@ -135,12 +135,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  private loadAccounts(userId: string): void {
+  private loadAccounts(userId: string, preferredAccountId?: number): void {
     this.loadingAccounts = true;
     this.accountService.getBalance(userId).pipe(take(1)).subscribe({
       next: (data) => {
         this.accounts = this.mapAccountsData(data);
-        if (this.accounts.length > 0 && !this.accounts.some((a) => a.accountType === this.selectedAccountType)) {
+        const preferredAccount = this.accounts.find((account) => account.accountId === preferredAccountId);
+
+        if (preferredAccount) {
+          this.selectedAccountType = preferredAccount.accountType === 'CURRENT' ? 'CURRENT' : 'SAVINGS';
+          this.selectedAccountId = preferredAccount.accountId;
+        } else if (this.accounts.length > 0 && !this.accounts.some((a) => a.accountType === this.selectedAccountType)) {
           this.selectedAccountType = this.accounts[0].accountType === 'CURRENT' ? 'CURRENT' : 'SAVINGS';
         }
         this.applyAccountTypeFilter();
@@ -236,41 +241,52 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.filteredAccounts.find((account) => account.accountId === this.selectedAccountId) || null;
   }
 
-  isDeactivating(accountId: number): boolean {
-    return this.deactivatingAccountIds.has(accountId);
+  isTogglingAccountStatus(accountId: number): boolean {
+    return this.togglingAccountIds.has(accountId);
   }
 
-  deactivateAccount(account: ProfileAccountCard): void {
-    if (account.accountStatus !== 'ACTIVE' || this.isDeactivating(account.accountId)) {
+  isAccountActive(accountStatus: string): boolean {
+    return String(accountStatus).toUpperCase() === 'ACTIVE';
+  }
+
+  getAccountToggleLabel(accountStatus: string): string {
+    return this.isAccountActive(accountStatus) ? 'Deactivate Account' : 'Reactivate Account';
+  }
+
+  toggleAccountStatus(account: ProfileAccountCard): void {
+    if (this.isTogglingAccountStatus(account.accountId)) {
       return;
     }
 
-    this.deactivatingAccountIds.add(account.accountId);
+    this.togglingAccountIds.add(account.accountId);
+    const isActive = this.isAccountActive(account.accountStatus);
+    const actionLabel = isActive ? 'deactivated' : 'reactivated';
+    const updatedStatus = isActive ? 'LOCKED' : 'ACTIVE';
+
     this.accountService
-      .deactivateAccount({
-        accountId: account.accountId,
-        accountType: account.accountType
-      })
+      .toggleAccountStatus(account.accountId)
       .pipe(
         take(1),
-        finalize(() => this.deactivatingAccountIds.delete(account.accountId))
+        timeout(10000),
+        finalize(() => this.togglingAccountIds.delete(account.accountId))
       )
       .subscribe({
         next: (isSuccess) => {
           if (!isSuccess) {
-            this.snack.open('Could not deactivate account. Please try again.', 'Close', { duration: 3200 });
+            this.snack.open('Could not update account status. Please try again.', 'Close', { duration: 3200 });
             return;
           }
 
           this.accounts = this.accounts.map((item) =>
-            item.accountId === account.accountId ? { ...item, accountStatus: 'INACTIVE' } : item
+            item.accountId === account.accountId ? { ...item, accountStatus: updatedStatus } : item
           );
           this.applyAccountTypeFilter();
           this.updateSelectedAccount();
-          this.snack.open(`Account ${account.accountId} deactivated.`, 'Close', { duration: 3200 });
+
+          this.snack.open(`Account ${account.accountId} ${actionLabel}.`, 'Close', { duration: 3200 });
         },
         error: (err) => {
-          this.snack.open(this.extractApiErrorMessage(err, 'Account deactivation failed.'), 'Close', {
+          this.snack.open(this.extractApiErrorMessage(err, 'Account status update failed.'), 'Close', {
             duration: 3200
           });
         }

@@ -36,8 +36,8 @@ export class MockBackendInterceptor implements HttpInterceptor {
         }
 
         if (url.endsWith('/user/forgot-password') && method === 'POST') {
-            const { username, oldPassword, newPassword } = body as any;
-            if (username && oldPassword && newPassword) {
+            const { username, phoneNumber, oldPassword, newPassword } = body as any;
+            if (username && phoneNumber && oldPassword && newPassword) {
                 return of(new HttpResponse({
                     status: 200,
                     body: true
@@ -79,6 +79,14 @@ export class MockBackendInterceptor implements HttpInterceptor {
             return of(new HttpResponse({
                 status: 200,
                 body: 15420.50
+            })).pipe(delay(simulatedDelay));
+        }
+
+        // POST Account status toggle (ACTIVE <-> LOCKED)
+        if (url.match(/\/account\/\w+$/) && method === 'POST') {
+            return of(new HttpResponse({
+                status: 200,
+                body: 'true'
             })).pipe(delay(simulatedDelay));
         }
 
@@ -144,14 +152,6 @@ export class MockBackendInterceptor implements HttpInterceptor {
 
         // --- Transfers API ---
         if (url.endsWith('/transaction') && method === 'POST') {
-            return of(new HttpResponse({
-                status: 200,
-                body: true
-            })).pipe(delay(simulatedDelay));
-        }
-
-        // --- Account deactivation API ---
-        if (url.match(/\/user\/deactivate(%20|-)?account$/) && method === 'PUT') {
             return of(new HttpResponse({
                 status: 200,
                 body: true

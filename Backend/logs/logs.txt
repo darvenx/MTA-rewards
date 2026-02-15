@@ -3624,3 +3624,304 @@ Caused by: java.sql.SQLException: Access denied for user 'root'@'localhost' (usi
 2026-02-15 23:28:21 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@30348e7b
 2026-02-15 23:28:21 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@65d1b888,[]>
 2026-02-15 23:28:21 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@30348e7b,[]>
+2026-02-15 23:33:01 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:33:01 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:33:01 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:33:01 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:33:01 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@3b3ebf31
+2026-02-15 23:33:01 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@3b3ebf31,[]>
+2026-02-15 23:33:01 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@3abbd771
+2026-02-15 23:33:01 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@3abbd771,[]>
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@6f8aa94d
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@6f8aa94d,[]>
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@15555287
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@15555287,[]>
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@49c4ac1d
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@49c4ac1d,[]>
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [5]
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [5]
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@537d7acc]
+2026-02-15 23:35:27 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@537d7acc],[]>
+2026-02-15 23:35:31 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [6]
+2026-02-15 23:35:31 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [6]
+2026-02-15 23:35:31 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@64395807, com.training.dto.transaction.TransactionsDto@e6d1c6f, com.training.dto.transaction.TransactionsDto@4493c0e1]
+2026-02-15 23:35:31 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@64395807, com.training.dto.transaction.TransactionsDto@e6d1c6f, com.training.dto.transaction.TransactionsDto@4493c0e1],[]>
+2026-02-15 23:35:37 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:35:37 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:35:37 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:35:37 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:35:37 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@7498bb7e
+2026-02-15 23:35:37 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@7498bb7e,[]>
+2026-02-15 23:35:37 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@763e1427
+2026-02-15 23:35:37 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@763e1427,[]>
+2026-02-15 23:35:56 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:35:56 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:35:56 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:35:56 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:35:56 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@7ed5814e
+2026-02-15 23:35:56 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@7ed5814e,[]>
+2026-02-15 23:35:56 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@8efeda1
+2026-02-15 23:35:56 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@8efeda1,[]>
+2026-02-15 23:36:30 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:36:30 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:36:30 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:36:30 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:36:30 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@26381614
+2026-02-15 23:36:30 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@26381614,[]>
+2026-02-15 23:36:30 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@717bc312
+2026-02-15 23:36:30 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@717bc312,[]>
+2026-02-15 23:37:09 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:37:09 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:37:09 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:37:09 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:37:09 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@5e3107f3
+2026-02-15 23:37:09 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@721f7d36
+2026-02-15 23:37:09 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@5e3107f3,[]>
+2026-02-15 23:37:09 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@721f7d36,[]>
+2026-02-15 23:37:52 WARN  [http-nio-8080-exec-1] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@74cde36b
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@74cde36b,[]>
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@182a9a30
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@182a9a30,[]>
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@7d7d5888
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@7d7d5888,[]>
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [5]
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [5]
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@5bd902e5]
+2026-02-15 23:38:41 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@5bd902e5],[]>
+2026-02-15 23:38:43 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:38:43 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:38:43 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:38:43 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:38:43 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@667764d2
+2026-02-15 23:38:43 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@ba7a394
+2026-02-15 23:38:43 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@ba7a394,[]>
+2026-02-15 23:38:43 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@667764d2,[]>
+2026-02-15 23:40:54 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:40:54 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:40:54 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:40:54 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:40:54 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@ce3d932
+2026-02-15 23:40:54 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@ce3d932,[]>
+2026-02-15 23:40:54 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@3e34dbdb
+2026-02-15 23:40:54 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@3e34dbdb,[]>
+2026-02-15 23:42:38 WARN  [http-nio-8080-exec-1] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@7baf5f4d
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@7baf5f4d,[]>
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@1c03d24a
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@1c03d24a,[]>
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@4c612514
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@4c612514,[]>
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [5]
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [5]
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@5bd71a37]
+2026-02-15 23:43:30 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@5bd71a37],[]>
+2026-02-15 23:45:11 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:45:11 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:45:11 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:45:11 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:45:12 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@59d2fb8a
+2026-02-15 23:45:12 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@5c8353d4
+2026-02-15 23:45:12 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@5c8353d4,[]>
+2026-02-15 23:45:12 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@59d2fb8a,[]>
+2026-02-15 23:45:12 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [5]
+2026-02-15 23:45:12 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [5]
+2026-02-15 23:45:12 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@3018755b]
+2026-02-15 23:45:12 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@3018755b],[]>
+2026-02-15 23:45:18 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:45:18 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:45:18 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:45:18 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:45:18 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@74dd2b6d
+2026-02-15 23:45:18 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@709499d
+2026-02-15 23:45:18 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@709499d,[]>
+2026-02-15 23:45:18 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@74dd2b6d,[]>
+2026-02-15 23:45:20 WARN  [http-nio-8080-exec-2] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@77f72200
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@77f72200,[]>
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@6ab18315
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@6ab18315,[]>
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@5f9c7818
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@5f9c7818,[]>
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [5]
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [5]
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@43cc686a]
+2026-02-15 23:45:41 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@43cc686a],[]>
+2026-02-15 23:45:46 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:45:46 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:45:46 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:45:46 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:45:46 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@37e5cc1e
+2026-02-15 23:45:46 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@6e93c46d
+2026-02-15 23:45:46 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@6e93c46d,[]>
+2026-02-15 23:45:46 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@37e5cc1e,[]>
+2026-02-15 23:45:47 WARN  [http-nio-8080-exec-1] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@35210cb2
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@35210cb2,[]>
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@26bf1085
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@26bf1085,[]>
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@11b8476
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@11b8476,[]>
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [5]
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [5]
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@45d42bac]
+2026-02-15 23:49:10 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@45d42bac],[]>
+2026-02-15 23:49:14 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:49:14 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:49:14 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:49:14 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:49:14 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@64e318cf
+2026-02-15 23:49:14 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@69d51e44
+2026-02-15 23:49:14 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@69d51e44,[]>
+2026-02-15 23:49:14 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@64e318cf,[]>
+2026-02-15 23:49:16 WARN  [http-nio-8080-exec-9] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [UserLoginDto(username=user2, password=12345678)]
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@4ba311dc
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@4ba311dc,[]>
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@1329d596
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@1329d596,[]>
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@1482e7c4
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@1482e7c4,[]>
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [5]
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [5]
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@62fd0632]
+2026-02-15 23:50:59 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@62fd0632],[]>
+2026-02-15 23:51:02 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:51:02 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:51:02 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:51:02 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:51:02 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@1300617b
+2026-02-15 23:51:02 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@1300617b,[]>
+2026-02-15 23:51:02 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@4f76d154
+2026-02-15 23:51:02 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@4f76d154,[]>
+2026-02-15 23:51:18 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [5]
+2026-02-15 23:51:18 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [5]
+2026-02-15 23:51:18 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@62999166
+2026-02-15 23:51:18 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@62999166,[]>
+2026-02-15 23:51:18 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:51:18 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:51:18 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@771a1011
+2026-02-15 23:51:18 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@771a1011,[]>
+2026-02-15 23:52:31 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [10]
+2026-02-15 23:52:31 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [10]
+2026-02-15 23:52:31 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [10]
+2026-02-15 23:52:31 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [10]
+2026-02-15 23:52:31 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@40e8cdb
+2026-02-15 23:52:31 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@40e8cdb,[]>
+2026-02-15 23:52:31 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@7907037f
+2026-02-15 23:52:31 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@7907037f,[]>
+2026-02-15 23:52:54 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [5]
+2026-02-15 23:52:54 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [5]
+2026-02-15 23:52:54 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@64707325
+2026-02-15 23:52:54 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@64707325,[]>
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Entering: UserController.loginUser(..) with args: [UserLoginDto(username=user3, password=12345678)]
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.login(..) with args: [UserLoginDto(username=user3, password=12345678)]
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.login(..) with result: com.training.dto.user.UserSuccessLoginOrSignUpDto@3b8b0d0a
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.loginUser(..) with result: <200 OK OK,com.training.dto.user.UserSuccessLoginOrSignUpDto@3b8b0d0a,[]>
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [11]
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [11]
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@46d0cdc
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@46d0cdc,[]>
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [11]
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [11]
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@4001eb2a
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@4001eb2a,[]>
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [7]
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [7]
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@7a8a0c48]
+2026-02-15 23:53:22 INFO  [http-nio-8080-exec-7] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@7a8a0c48],[]>
+2026-02-15 23:53:26 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [11]
+2026-02-15 23:53:26 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [11]
+2026-02-15 23:53:26 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [11]
+2026-02-15 23:53:26 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [11]
+2026-02-15 23:53:26 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@1855eaba
+2026-02-15 23:53:26 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@1855eaba,[]>
+2026-02-15 23:53:26 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@58a007ea
+2026-02-15 23:53:26 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@58a007ea,[]>
+2026-02-15 23:53:28 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [7]
+2026-02-15 23:53:28 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [7]
+2026-02-15 23:53:28 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@469b68ea
+2026-02-15 23:53:28 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@469b68ea,[]>
+2026-02-15 23:54:40 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [11]
+2026-02-15 23:54:40 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [11]
+2026-02-15 23:54:40 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [11]
+2026-02-15 23:54:40 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [11]
+2026-02-15 23:54:40 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@72533e31
+2026-02-15 23:54:40 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@72533e31,[]>
+2026-02-15 23:54:40 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@5c2d4a9d
+2026-02-15 23:54:40 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@5c2d4a9d,[]>
+2026-02-15 23:54:46 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [11]
+2026-02-15 23:54:46 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [11]
+2026-02-15 23:54:46 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [11]
+2026-02-15 23:54:46 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [11]
+2026-02-15 23:54:46 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@44db8965
+2026-02-15 23:54:46 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@60a77235
+2026-02-15 23:54:46 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@44db8965,[]>
+2026-02-15 23:54:46 INFO  [http-nio-8080-exec-2] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@60a77235,[]>
+2026-02-15 23:55:19 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [11]
+2026-02-15 23:55:19 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [11]
+2026-02-15 23:55:19 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [11]
+2026-02-15 23:55:19 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [11]
+2026-02-15 23:55:19 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@53a1101d
+2026-02-15 23:55:19 INFO  [http-nio-8080-exec-3] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@53a1101d,[]>
+2026-02-15 23:55:19 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@2fb92862
+2026-02-15 23:55:19 INFO  [http-nio-8080-exec-5] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@2fb92862,[]>
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [11]
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [11]
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@e9f87a6
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-10] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@e9f87a6,[]>
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [11]
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [11]
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@14b956b3
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-8] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@14b956b3,[]>
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Entering: TransactionController.getAllTransactions(..) with args: [7]
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Entering: TransactionServiceImpl.getTransactions(..) with args: [7]
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Service] Exiting: TransactionServiceImpl.getTransactions(..) with result: [com.training.dto.transaction.TransactionsDto@4cc4e6ea]
+2026-02-15 23:55:23 INFO  [http-nio-8080-exec-4] com.training.aop.LoggingAspect - [Controller] Exiting: TransactionController.getAllTransactions(..) with result: <200 OK OK,[com.training.dto.transaction.TransactionsDto@4cc4e6ea],[]>
+2026-02-15 23:55:26 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [11]
+2026-02-15 23:55:26 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Entering: UserController.getUserDetails(..) with args: [11]
+2026-02-15 23:55:26 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [11]
+2026-02-15 23:55:26 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Entering: UserServiceImpl.getUserDetails(..) with args: [11]
+2026-02-15 23:55:26 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Service] Exiting: UserServiceImpl.getUserDetails(..) with result: com.training.dto.UserDetailsResponseDto@1d6dd123
+2026-02-15 23:55:26 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@19b282c9
+2026-02-15 23:55:26 INFO  [http-nio-8080-exec-1] com.training.aop.LoggingAspect - [Controller] Exiting: UserController.getUserDetails(..) with result: <200 OK OK,com.training.dto.UserDetailsResponseDto@1d6dd123,[]>
+2026-02-15 23:55:26 INFO  [http-nio-8080-exec-9] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@19b282c9,[]>
+2026-02-15 23:55:29 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Entering: AccountController.fetchAllAccountsData(..) with args: [7]
+2026-02-15 23:55:29 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Entering: AccountServiceImpl.getAllAccountsData(..) with args: [7]
+2026-02-15 23:55:29 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Service] Exiting: AccountServiceImpl.getAllAccountsData(..) with result: com.training.dto.AccountDataDto@724885d
+2026-02-15 23:55:29 INFO  [http-nio-8080-exec-6] com.training.aop.LoggingAspect - [Controller] Exiting: AccountController.fetchAllAccountsData(..) with result: <200 OK OK,com.training.dto.AccountDataDto@724885d,[]>

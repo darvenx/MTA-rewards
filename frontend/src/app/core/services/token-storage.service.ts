@@ -14,14 +14,18 @@ export class TokenStorageService {
   private readonly HOLDER_NAME_KEY = 'holderName';
 
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    const token = localStorage.getItem(this.TOKEN_KEY) ?? sessionStorage.getItem(this.TOKEN_KEY);
+    return this.normalizeToken(token);
   }
 
   setToken(token: string | null): void {
-    if (token == null) {
+    const normalizedToken = this.normalizeToken(token);
+    if (normalizedToken == null) {
       localStorage.removeItem(this.TOKEN_KEY);
+      sessionStorage.removeItem(this.TOKEN_KEY);
     } else {
-      localStorage.setItem(this.TOKEN_KEY, token);
+      localStorage.setItem(this.TOKEN_KEY, normalizedToken);
+      sessionStorage.removeItem(this.TOKEN_KEY);
     }
   }
 
@@ -51,8 +55,15 @@ export class TokenStorageService {
 
   clear(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    sessionStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.ACCOUNT_ID_KEY);
     localStorage.removeItem(this.HOLDER_NAME_KEY);
   }
-}
 
+  private normalizeToken(token: string | null): string | null {
+    if (!token) return null;
+    const trimmed = token.trim();
+    if (!trimmed) return null;
+    return trimmed.startsWith('Bearer ') ? trimmed.slice('Bearer '.length).trim() : trimmed;
+  }
+}

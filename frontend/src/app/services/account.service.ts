@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Account } from '../core/models/account.model';
@@ -10,7 +10,6 @@ import {
     ApiTransactionsDto,
     ApiAccountCreateRequest,
     ApiAccountSuccessCreation,
-    ApiDeactivateAccountRequest,
     ApiRecentTransactionsDto
 } from '../core/api/backend-contracts';
 import {
@@ -18,12 +17,13 @@ import {
     mapApiTransactionsDtoToTransaction
 } from '../core/api/api-mappers';
 import { accountsData } from '../core/models/accounts-data.model';
+import { TokenStorageService } from '../core/services/token-storage.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AccountService {
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
 
     getAccount(id: string): Observable<Account> {
         return this.http.get<LegacyAccountDto>(ApiEndpoints.account.get(id)).pipe(
@@ -60,7 +60,18 @@ export class AccountService {
         return this.http.post<ApiAccountSuccessCreation>(ApiEndpoints.account.create(), accountData);
     }
 
-    deactivateAccount(payload: ApiDeactivateAccountRequest): Observable<boolean> {
-        return this.http.put<boolean>(ApiEndpoints.user.deactivateAccount(), payload);
+    toggleAccountStatus(accountId: number): Observable<boolean> {
+        const token = this.tokenStorage.getToken();
+        const options = token
+            ? { responseType: 'text' as const, headers: new HttpHeaders({ Authorization: `Bearer ${token}` }) }
+            : { responseType: 'text' as const };
+
+        return this.http.get(ApiEndpoints.account.toggleStatus(accountId), options).pipe(
+            map((response) => {
+                const body = String(response ?? '').trim().toLowerCase();
+                if (body === 'false') return false;
+                return true;
+            })
+        );
     }
 }
