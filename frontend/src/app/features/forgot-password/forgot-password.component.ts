@@ -8,13 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ApiUserUpdatePasswordRequest } from '../../core/api/backend-contracts';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatToolbarModule, MatCardModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatToolbarModule, MatCardModule],
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
@@ -29,9 +30,8 @@ export class ForgotPasswordComponent {
     private router: Router
   ) {
     this.form = this.fb.group({
-      phoneNumber: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      accountNumber: ['', Validators.required],
+      username: ['', Validators.required],
+      oldPassword: ['', [Validators.required, Validators.minLength(6)]],
       newPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -45,10 +45,9 @@ export class ForgotPasswordComponent {
     if (this.form.invalid) return;
 
     this.isLoading = true;
-    const payload = {
-      phoneNumber: this.form.value.phoneNumber,
-      email: this.form.value.email,
-      accountNumber: Number(this.form.value.accountNumber),
+    const payload: ApiUserUpdatePasswordRequest = {
+      username: this.form.value.username,
+      oldPassword: this.form.value.oldPassword,
       newPassword: this.form.value.newPassword
     };
 
@@ -100,4 +99,3 @@ export class ForgotPasswordComponent {
     });
   }
 }
-

@@ -15,6 +15,7 @@ export class HistoryComponent implements OnInit {
     allTransactions: Transaction[] = [];
     filteredTransactions: Transaction[] = [];
     isLoading = true;
+    activeAccountId: string | null = null;
 
     constructor(
         private accountService: AccountService,
@@ -24,31 +25,39 @@ export class HistoryComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        const accountId = localStorage.getItem("id");
-        console.log("on init");
-        console.log(accountId);
-        if (accountId) {
-            this.accountService.getTransactions(accountId).subscribe({
-                next: (data) => {
-                    console.log(data);
-                    // Sort by date newest first
-                    this.allTransactions = data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-                    this.filteredTransactions = this.allTransactions;
-                    this.isLoading = false;
-                    this.cdr.markForCheck();
-                },
-                error: () => {
-                    this.isLoading = false;
-                    this.cdr.markForCheck();
-                }
-            });
+        this.activeAccountId = this.authService.getAccountId();
+
+        if (!this.activeAccountId) {
+            this.allTransactions = [];
+            this.filteredTransactions = [];
+            this.isLoading = false;
+            this.cdr.markForCheck();
+            return;
         }
-        this.isLoading = false;
-        this.cdr.markForCheck();
+
+        this.loadTransactionsForAccount(this.activeAccountId);
+    }
+
+    private loadTransactionsForAccount(accountId: string): void {
+        this.isLoading = true;
+        this.accountService.getTransactions(accountId).subscribe({
+            next: (data) => {
+                // Sort by date newest first
+                this.allTransactions = data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                this.filteredTransactions = this.allTransactions;
+                this.isLoading = false;
+                this.cdr.markForCheck();
+            },
+            error: () => {
+                this.allTransactions = [];
+                this.filteredTransactions = [];
+                this.isLoading = false;
+                this.cdr.markForCheck();
+            }
+        });
     }
 
     onTabChange(event: MatTabChangeEvent): void {
-        console.log(event.index);
         switch (event.index) {
             case 0: // All
                 this.filteredTransactions = this.allTransactions;
