@@ -1,10 +1,10 @@
 package com.training.controller;
 
 import com.training.dto.account.AccountCreateDto;
+import com.training.dto.account.AccountDataDto;
 import com.training.dto.account.AccountSuccessCreation;
 import com.training.enums.AccountStatus;
 import com.training.enums.AccountType;
-import com.training.service.AccountService;
 import com.training.service.impl.AccountServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -129,14 +129,14 @@ class AccountControllerTest {
     @DisplayName("Should successfully fetch all accounts data")
     void testFetchAllAccountsData_Success() {
         // Arrange
-        com.training.dto.AccountDataDto accountDataDto = new com.training.dto.AccountDataDto();
+        AccountDataDto accountDataDto = new AccountDataDto();
         accountDataDto.addAccount(1L);
         accountDataDto.addBalance(1000.0);
 
         when(accountService.getAllAccountsData(1L)).thenReturn(accountDataDto);
 
         // Act
-        ResponseEntity<com.training.dto.AccountDataDto> response = accountController.fetchAllAccountsData(1L);
+        ResponseEntity<AccountDataDto> response = accountController.fetchAllAccountsData(1L);
 
         // Assert
         assertNotNull(response);

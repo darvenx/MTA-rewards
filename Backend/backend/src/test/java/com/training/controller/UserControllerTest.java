@@ -1,14 +1,14 @@
 package com.training.controller;
 
+import com.training.dto.user.UserDetailsResponseDto;
 import com.training.dto.user.UserLoginDto;
 import com.training.dto.user.UserSignUpDto;
 import com.training.dto.user.UserSuccessLoginOrSignUpDto;
 import com.training.exceptions.UserAlreadyExistsException;
 import com.training.exceptions.UserNotFoundException;
-import com.training.service.UserService;
 import com.training.service.impl.UserServiceImpl;
 import com.training.service.impl.AccountServiceImpl;
-import com.training.dto.AccountDataDto;
+import com.training.dto.account.AccountDataDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -191,13 +191,13 @@ class UserControllerTest {
     @DisplayName("Should successfully get user details")
     void testGetUserDetails_Success() throws UserNotFoundException {
         // Arrange
-        com.training.dto.UserDetailsResponseDto userDetails = new com.training.dto.UserDetailsResponseDto(
+        UserDetailsResponseDto userDetails = new UserDetailsResponseDto(
                 "Test User", "test@example.com", "1234567890", "testuser");
 
         when(userService.getUserDetails(1L)).thenReturn(userDetails);
 
         // Act
-        ResponseEntity<com.training.dto.UserDetailsResponseDto> response = userController.getUserDetails(1L);
+        ResponseEntity<UserDetailsResponseDto> response = userController.getUserDetails(1L);
 
         // Assert
         assertNotNull(response);

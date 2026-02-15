@@ -1,4 +1,4 @@
-package com.training.dto;
+package com.training.dto.user;
 
 
 public class UserDetailsResponseDto {

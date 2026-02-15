@@ -1,6 +1,6 @@
 package com.training.service.impl;
 
-import com.training.dto.AccountDataDto;
+import com.training.dto.account.AccountDataDto;
 import com.training.dto.account.AccountCreateDto;
 import com.training.dto.account.AccountSuccessCreation;
 import com.training.entities.Account;

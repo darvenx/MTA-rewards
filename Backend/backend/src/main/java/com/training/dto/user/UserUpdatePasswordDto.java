@@ -3,8 +3,18 @@ package com.training.dto.user;
 
 public class UserUpdatePasswordDto {
     private String username;
-    private String oldPassword;
+
+    private String phoneNumber;
+    private String confirmPassword;
     private String newPassword;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getUsername() {
         return username;
@@ -14,12 +24,12 @@ public class UserUpdatePasswordDto {
         this.username = username;
     }
 
-    public String getOldPassword() {
-        return oldPassword;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getNewPassword() {

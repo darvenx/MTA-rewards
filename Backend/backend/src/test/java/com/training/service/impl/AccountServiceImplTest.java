@@ -8,7 +8,7 @@ import com.training.enums.AccountStatus;
 import com.training.enums.AccountType;
 import com.training.repo.AccountRepo;
 import com.training.repo.UserRepo;
-import com.training.dto.AccountDataDto;
+import com.training.dto.account.AccountDataDto;
 import com.training.exceptions.UserNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,12 +20,10 @@ import org.mockito.MockitoAnnotations;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 @DisplayName("AccountServiceImpl Tests")

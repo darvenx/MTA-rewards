@@ -1,4 +1,4 @@
-package com.training.dto;
+package com.training.dto.account;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,6 @@
 package com.training.service.impl;
 
-import com.training.dto.user.UserLoginDto;
-import com.training.dto.user.UserSignUpDto;
-import com.training.dto.user.UserSuccessLoginOrSignUpDto;
-import com.training.dto.user.UserUpdatePasswordDto;
+import com.training.dto.user.*;
 import com.training.entities.Account;
 import com.training.entities.User;
 import com.training.enums.AccountStatus;
@@ -13,7 +10,6 @@ import com.training.exceptions.UserNotFoundException;
 import com.training.repo.UserRepo;
 import com.training.jwt.JwtService;
 import com.training.jwt.Jwt;
-import com.training.enums.UserRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -89,7 +85,7 @@ class UserServiceImplTest {
 
                 updatePasswordDto = new UserUpdatePasswordDto();
                 updatePasswordDto.setUsername("testuser");
-                updatePasswordDto.setOldPassword("oldPassword123");
+                updatePasswordDto.setConfirmPassword("oldPassword123");
                 updatePasswordDto.setNewPassword("newPassword456");
         }
 
@@ -284,7 +280,7 @@ class UserServiceImplTest {
         when(userRepo.findByUsernameAndPassword("testuser", "wrongOldPassword"))
                 .thenReturn(Optional.empty());
 
-        updatePasswordDto.setOldPassword("wrongOldPassword");
+        updatePasswordDto.setConfirmPassword("wrongOldPassword");
 
         assertThrows(UserNotFoundException.class, () -> userService.resetPassword(updatePasswordDto));
         verify(userRepo, times(1)).findByUsernameAndPassword("testuser", "wrongOldPassword");
@@ -296,7 +292,7 @@ class UserServiceImplTest {
     void testGetUserDetails_Success() throws UserNotFoundException {
         when(userRepo.findById(1L)).thenReturn(Optional.of(testUser));
 
-        com.training.dto.UserDetailsResponseDto result = userService.getUserDetails(1L);
+        UserDetailsResponseDto result = userService.getUserDetails(1L);
 
         assertNotNull(result);
         assertEquals("TestUser", result.getFullName());

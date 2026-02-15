@@ -1,7 +1,7 @@
 package com.training.service.impl;
 
-import com.training.dto.AllUserData;
-import com.training.dto.UserDetailsResponseDto;
+import com.training.dto.user.AllUserData;
+import com.training.dto.user.UserDetailsResponseDto;
 import com.training.dto.user.UserLoginDto;
 import com.training.dto.user.UserSignUpDto;
 import com.training.dto.user.UserSuccessLoginOrSignUpDto;
@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService {
             throws UserNotFoundException
     {
         Optional<User> userObj = userRepo.findByUsernameAndPassword(
-                userRequest.getUsername(),userRequest.getOldPassword());
+                userRequest.getUsername(),userRequest.getConfirmPassword());
         if(userObj.isEmpty()){
             throw new UserNotFoundException();
         }
@@ -172,5 +172,16 @@ public class UserServiceImpl implements UserService {
             res.add(new AllUserData(user.getUserId(), accountNumbers,accountTransfers,user.getRole().name()));
         }
         return res;
+    }
+
+    public Boolean updateCredentials(UserUpdatePasswordDto req) throws UserNotFoundException{
+        Optional<User> userObj = userRepo.findByUsernameOrEmailOrPhoneNumber(req.getUsername(),"", req.getPhoneNumber());
+        if(userObj.isEmpty()){
+            throw new UserNotFoundException();
+        }
+        User user = userObj.get();
+        user.setPassword(req.getNewPassword());
+        userRepo.saveAndFlush(user);
+        return true;
     }
 }

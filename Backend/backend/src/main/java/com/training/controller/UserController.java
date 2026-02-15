@@ -1,11 +1,7 @@
 package com.training.controller;
 
-import com.training.dto.AccountDataDto;
-import com.training.dto.AllUserData;
-import com.training.dto.UserDetailsResponseDto;
-import com.training.dto.user.UserLoginDto;
-import com.training.dto.user.UserSignUpDto;
-import com.training.dto.user.UserSuccessLoginOrSignUpDto;
+import com.training.dto.account.AccountDataDto;
+import com.training.dto.user.*;
 import com.training.exceptions.*;
 import com.training.service.impl.AccountServiceImpl;
 import com.training.service.impl.UserServiceImpl;
@@ -69,4 +65,10 @@ public class UserController {
     public ResponseEntity<List<AllUserData>> getAllUserData(){
         return new ResponseEntity<>(userService.getAllUserDetails(),HttpStatus.OK);
     }
+
+    @PostMapping("/update-creds/{id}")
+    public ResponseEntity<Boolean> updatecredentials(UserUpdatePasswordDto req){
+        return new ResponseEntity<>(userService.updateCredentials(req),HttpStatus.OK);
+    }
+
 }
