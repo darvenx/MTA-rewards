@@ -4,6 +4,8 @@ import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
 import { Transaction, TransactionType } from '../../core/models/transaction.model';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { extractApiErrorMessage } from '../../core/utils/http-error.util';
 
 @Component({
     selector: 'app-history',
@@ -21,7 +23,8 @@ export class HistoryComponent implements OnInit {
         private accountService: AccountService,
         private authService: AuthService,
         private router: Router,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        private snackBar: MatSnackBar
     ) { }
 
     ngOnInit(): void {
@@ -48,10 +51,15 @@ export class HistoryComponent implements OnInit {
                 this.isLoading = false;
                 this.cdr.markForCheck();
             },
-            error: () => {
+            error: (err: unknown) => {
                 this.allTransactions = [];
                 this.filteredTransactions = [];
                 this.isLoading = false;
+                this.snackBar.open(
+                    extractApiErrorMessage(err, 'Could not load transaction history.'),
+                    'Close',
+                    { duration: 3500, panelClass: ['error-snackbar'] }
+                );
                 this.cdr.markForCheck();
             }
         });

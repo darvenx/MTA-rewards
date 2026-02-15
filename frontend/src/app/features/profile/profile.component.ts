@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
 import { Account } from '../../core/models/account.model';
+import { extractApiErrorMessage } from '../../core/utils/http-error.util';
 import { accountsData } from '../../core/models/accounts-data.model';
 
 type AccountFilterType = 'SAVINGS' | 'CURRENT';
@@ -128,8 +129,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         this.loadingProfile = false;
-        this.snack.open(this.extractApiErrorMessage(err, 'Could not load profile details.'), 'Close', {
-          duration: 100
+        this.snack.open(extractApiErrorMessage(err, 'Could not load profile details.'), 'Close', {
+          duration: 3200
         });
       }
     });
@@ -155,7 +156,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.accounts = [];
         this.filteredAccounts = [];
         this.loadingAccounts = false;
-        this.snack.open(this.extractApiErrorMessage(err, 'Could not load account list.'), 'Close', {
+        this.snack.open(extractApiErrorMessage(err, 'Could not load account list.'), 'Close', {
           duration: 3200
         });
       }
@@ -286,55 +287,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.snack.open(`Account ${account.accountId} ${actionLabel}.`, 'Close', { duration: 3200 });
         },
         error: (err) => {
-          this.snack.open(this.extractApiErrorMessage(err, 'Account status update failed.'), 'Close', {
+          this.snack.open(extractApiErrorMessage(err, 'Account status update failed.'), 'Close', {
             duration: 3200
           });
         }
       });
-  }
-
-  private extractApiErrorMessage(err: unknown, fallback: string): string {
-    if (!err) {
-      return fallback;
-    }
-
-    const httpErr = err as {
-      error?: unknown;
-      message?: unknown;
-    };
-
-    if (typeof httpErr.error === 'string' && httpErr.error.trim()) {
-      return httpErr.error;
-    }
-
-    if (httpErr.error && typeof httpErr.error === 'object') {
-      const payload = httpErr.error as {
-        message?: unknown;
-        error?: unknown;
-        fieldErrors?: Array<{ field?: string; message?: string }>;
-      };
-
-      if (typeof payload.message === 'string' && payload.message.trim()) {
-        return payload.message;
-      }
-
-      if (typeof payload.error === 'string' && payload.error.trim()) {
-        return payload.error;
-      }
-
-      if (Array.isArray(payload.fieldErrors) && payload.fieldErrors.length > 0) {
-        const firstFieldError = payload.fieldErrors.find((item) => item?.message)?.message;
-        if (firstFieldError) {
-          return firstFieldError;
-        }
-      }
-    }
-
-    if (typeof httpErr.message === 'string' && httpErr.message.trim()) {
-      return httpErr.message;
-    }
-
-    return fallback;
   }
 
   onAvatarSelected(evt: Event): void {

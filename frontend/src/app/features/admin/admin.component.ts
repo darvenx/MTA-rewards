@@ -4,11 +4,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AccountService } from '../../services/account.service';
 import { ApiRecentTransactionsDto } from '../../core/api/backend-contracts';
 import { Transaction, TransactionType } from '../../core/models/transaction.model';
 import { catchError, finalize, map, of, timeout } from 'rxjs';
+import { extractApiErrorMessage } from '../../core/utils/http-error.util';
 
 type StatusFilter = 'ALL' | 'SUCCESS' | 'FAILED';
 
@@ -31,7 +33,8 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +65,11 @@ export class AdminComponent implements OnInit {
         timeout(7000),
         catchError((error: unknown) => {
           console.error('Primary recent-transactions API failed:', error);
+          this.snackBar.open(
+            extractApiErrorMessage(error, 'Could not load live recent transactions.'),
+            'Close',
+            { duration: 3500, panelClass: ['error-snackbar'] }
+          );
 
           if (!userId) {
             this.errorMessage = 'Could not load recent transactions right now.';
@@ -75,6 +83,11 @@ export class AdminComponent implements OnInit {
             catchError((fallbackError: unknown) => {
               console.error('Fallback transaction API failed:', fallbackError);
               this.errorMessage = null;
+              this.snackBar.open(
+                extractApiErrorMessage(fallbackError, 'Could not load fallback transaction data.'),
+                'Close',
+                { duration: 3500, panelClass: ['error-snackbar'] }
+              );
               return of(this.getStaticFallbackTransactions());
             })
           );

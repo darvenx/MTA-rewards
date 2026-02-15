@@ -7,6 +7,7 @@ import { TransferService } from '../../services/transfer.service';
 import { AuthService } from '../../services/auth.service';
 import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { TransferRequest } from '../../core/models/transfer-request.model';
+import { extractApiErrorMessage } from '../../core/utils/http-error.util';
 
 @Component({
     selector: 'app-transfer',
@@ -106,7 +107,8 @@ export class TransferComponent implements OnInit {
             },
             error: (err) => {
                 this.isLoading = false;
-                this.snackBar.open('Transfer Failed: ' + (err.error?.message || 'Unknown error'), 'Close', { duration: 5000 });
+                const message = extractApiErrorMessage(err, 'Unknown error');
+                this.snackBar.open('Transfer Failed: ' + message, 'Close', { duration: 5000 });
             }
         });
     }

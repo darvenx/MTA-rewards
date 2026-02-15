@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ApiUserUpdatePasswordRequest } from '../../core/api/backend-contracts';
+import { extractApiErrorMessage } from '../../core/utils/http-error.util';
 
 @Component({
   selector: 'app-forgot-password',
@@ -62,41 +63,14 @@ export class ForgotPasswordComponent {
         });
         this.close();
       },
-      error: (err) => {
+      error: (err: unknown) => {
         this.isLoading = false;
         console.error('Password reset error:', err);
-
-        try {
-          if (err?.status === 400) {
-            const message = err.error?.message || 'Invalid data. Please check your information.';
-            this.snackBar.open('Reset Failed: ' + message, 'Close', {
-              duration: 4000,
-              panelClass: ['error-snackbar']
-            });
-          } else if (err?.status === 404) {
-            this.snackBar.open('User or account not found. Please verify your details.', 'Close', {
-              duration: 4000,
-              panelClass: ['error-snackbar']
-            });
-          } else if (err?.status === 0) {
-            this.snackBar.open('Cannot connect to server. Please check your connection.', 'Close', {
-              duration: 5000,
-              panelClass: ['error-snackbar']
-            });
-          } else {
-            const message = err?.error?.message || 'Something went wrong. Please try again.';
-            this.snackBar.open('Reset Failed: ' + message, 'Close', {
-              duration: 4000,
-              panelClass: ['error-snackbar']
-            });
-          }
-        } catch (e) {
-          console.error('Error handling failed:', e);
-          this.snackBar.open('An unexpected error occurred. Please try again.', 'Close', {
-            duration: 4000,
-            panelClass: ['error-snackbar']
-          });
-        }
+        const message = extractApiErrorMessage(err, 'Unable to reset password. Please try again.');
+        this.snackBar.open(`Reset Failed: ${message}`, 'Close', {
+          duration: 4000,
+          panelClass: ['error-snackbar']
+        });
       }
     });
   }

@@ -7,6 +7,7 @@ import { finalize, takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { ApiUserSuccessLoginOrSignUpDto } from '../../core/api/backend-contracts';
 import { SessionUser } from '../../core/models/session-user.model';
+import { extractApiErrorMessage, extractApiFieldErrors } from '../../core/utils/http-error.util';
 
 @Component({
   selector: 'app-signup',
@@ -42,6 +43,7 @@ export class SignupComponent implements OnDestroy {
       return;
     }
 
+    this.clearServerErrors();
     this.isLoading$.next(true);
 
     const signupData = {
@@ -69,65 +71,66 @@ export class SignupComponent implements OnDestroy {
 
           this.finishSignup(res, signupData.username, this.getPrimaryAccountNumber(res));
         },
-        error: (err) => {
+        error: (err: unknown) => {
           console.error('Signup API error:', err);
-          try {
-            if (err && err.status === 400 && err.error && typeof err.error === 'string') {
-              const msg = err.error as string;
-              if (msg.toLowerCase().includes('already')) {
-                const control = this.signupForm.get('username');
-                if (control) control.setErrors({ serverError: msg });
-              } else {
-                this.snackBar.open('Signup Failed: ' + msg, 'Close', { duration: 3000, panelClass: ['error-snackbar'] });
+          const fieldErrors = extractApiFieldErrors(err);
+          if (fieldErrors.length > 0) {
+            fieldErrors.forEach((item) => {
+              if (!item.field) {
+                return;
               }
-              return;
+              const control = this.signupForm.get(item.field);
+              if (!control) {
+                return;
+              }
+              control.setErrors({
+                ...(control.errors ?? {}),
+                serverError: item.message
+              });
+              control.markAsTouched();
+            });
+
+            const firstFieldMessage = fieldErrors[0]?.message;
+            if (firstFieldMessage) {
+              this.snackBar.open(`Signup Failed: ${firstFieldMessage}`, 'Close', {
+                duration: 3000,
+                panelClass: ['error-snackbar']
+              });
             }
-
-            if (err && err.status === 400 && err.error && typeof err.error === 'object') {
-              const payload = err.error;
-
-              if (payload.fieldErrors && Array.isArray(payload.fieldErrors)) {
-                payload.fieldErrors.forEach((fe: any) => {
-                  const control = this.signupForm.get(fe.field);
-                  if (control) {
-                    control.setErrors({ serverError: fe.message });
-                  }
-                });
-                return;
-              }
-
-              if (payload.errors && typeof payload.errors === 'object') {
-                Object.keys(payload.errors).forEach((field) => {
-                  const control = this.signupForm.get(field);
-                  if (control) control.setErrors({ serverError: payload.errors[field] });
-                });
-                return;
-              }
-
-              if (payload.message) {
-                this.snackBar.open('Signup Failed: ' + payload.message, 'Close', {
-                  duration: 3000,
-                  panelClass: ['error-snackbar']
-                });
-                return;
-              }
-            }
-          } catch {
-            // fall through to generic message
+            return;
           }
 
-          const generic =
-            err && err.error && err.error.message
-              ? err.error.message
-              : err && err.message
-                ? err.message
-                : 'Please try again';
+          const generic = extractApiErrorMessage(err, 'Please try again');
+          if (generic.toLowerCase().includes('already')) {
+            const usernameControl = this.signupForm.get('username');
+            if (usernameControl) {
+              usernameControl.setErrors({
+                ...(usernameControl.errors ?? {}),
+                serverError: generic
+              });
+              usernameControl.markAsTouched();
+            }
+          }
+
           this.snackBar.open('Signup Failed: ' + generic, 'Close', {
             duration: 3000,
             panelClass: ['error-snackbar']
           });
         }
       });
+  }
+
+  private clearServerErrors(): void {
+    Object.keys(this.signupForm.controls).forEach((field) => {
+      const control = this.signupForm.get(field);
+      if (!control?.errors || !control.errors['serverError']) {
+        return;
+      }
+
+      const nextErrors = { ...control.errors };
+      delete nextErrors['serverError'];
+      control.setErrors(Object.keys(nextErrors).length > 0 ? nextErrors : null);
+    });
   }
 
   private finishSignup(res: ApiUserSuccessLoginOrSignUpDto, holderName: string, accountNumber?: number): void {

@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { mapLoginSuccessToSessionUser } from '../../core/api/api-mappers';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { getRoleFromLoginResponse } from '../../core/utils/auth-role.util';
+import { extractApiErrorMessage } from '../../core/utils/http-error.util';
 
 @Component({
   selector: 'app-login',
@@ -92,54 +93,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
           this.router.navigate([this.isAdminLoginMode ? '/admin' : '/dashboard']);
         },
-        error: (err) => {
+        error: (err: unknown) => {
           this.isLoading = false;
           console.error('Login error:', err);
-
-          // Defensive error handling to prevent silent crashes
-          try {
-            // Handle different error status codes
-            if (err?.status === 400) {
-              // Bad request - validation error
-              const message = err.error?.message || 'Invalid login data. Please check your credentials.';
-              this.snackBar.open('Login Failed: ' + message, 'Close', {
-                duration: 4000,
-                panelClass: ['error-snackbar']
-              });
-            } else if (err?.status === 401) {
-              // Unauthorized - wrong credentials
-              this.snackBar.open('Invalid username or password', 'Close', {
-                duration: 4000,
-                panelClass: ['error-snackbar']
-              });
-            } else if (err?.status === 0) {
-              // Network error - server unreachable
-              this.snackBar.open('Cannot connect to server. Please check your connection.', 'Close', {
-                duration: 5000,
-                panelClass: ['error-snackbar']
-              });
-            } else if (err?.status >= 500) {
-              // Server error
-              this.snackBar.open('Server error. Please try again later.', 'Close', {
-                duration: 4000,
-                panelClass: ['error-snackbar']
-              });
-            } else {
-              // Generic fallback
-              const message = err?.error?.message || err?.message || 'Something went wrong. Please try again.';
-              this.snackBar.open('Login Failed: ' + message, 'Close', {
-                duration: 4000,
-                panelClass: ['error-snackbar']
-              });
-            }
-          } catch (e) {
-            // Final safety net - if error parsing fails
-            console.error('Error handling failed:', e);
-            this.snackBar.open('An unexpected error occurred. Please try again.', 'Close', {
-              duration: 4000,
-              panelClass: ['error-snackbar']
-            });
-          }
+          const message = extractApiErrorMessage(err, 'Unable to log in. Please try again.');
+          this.snackBar.open(`Login Failed: ${message}`, 'Close', {
+            duration: 4000,
+            panelClass: ['error-snackbar']
+          });
         },
         complete: () => {
           this.isLoading = false;

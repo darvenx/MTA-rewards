@@ -10,6 +10,7 @@ import { takeUntil, tap } from 'rxjs/operators';
 import { ApiAccountSuccessCreation } from '../../core/api/backend-contracts';
 import { Transaction, TransactionType, TransactionStatus } from '../../core/models/transaction.model';
 import { accountsData } from '../../core/models/accounts-data.model';
+import { extractApiErrorMessage } from '../../core/utils/http-error.util';
 
 interface DashboardAccountOption {
   accountId: number;
@@ -126,6 +127,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         },
         error: (err) => {
           console.error('Error fetching dashboard data:', err);
+          this.snackBar.open(
+            extractApiErrorMessage(err, 'Could not load account details right now.'),
+            'Close',
+            { duration: 3500, panelClass: ['error-snackbar'] }
+          );
           setTimeout(() => {
             this.syncAccountSelectOptions();
             this.isBalanceLoaded = true;
@@ -276,6 +282,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
           if (requestId !== this.statsRequestId) return;
 
           console.error(`Error fetching transactions for account ${accountId}:`, err);
+          this.snackBar.open(
+            extractApiErrorMessage(err, 'Could not load transactions for the selected account.'),
+            'Close',
+            { duration: 3500, panelClass: ['error-snackbar'] }
+          );
           this.hasTransactions = false;
           this.computeTotals([], true);
           this.isStatsLoading = false;
@@ -462,7 +473,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         },
         error: (err) => {
           this.isCreatingAccount = false;
-          const message = err?.error?.message || err?.message || 'Unable to create account';
+          const message = extractApiErrorMessage(err, 'Unable to create account');
           this.snackBar.open('Account creation failed: ' + message, 'Close', {
             duration: 3500,
             panelClass: ['error-snackbar']
