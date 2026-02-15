@@ -1,16 +1,14 @@
 package com.training.service.impl;
 
 import com.training.dto.transaction.RecentTransactionsDto;
+import com.training.enums.AccountStatus;
 import com.training.enums.TransactionStatus;
 import com.training.enums.TransactionType;
-import com.training.exceptions.AccountNotFoundException;
-import com.training.exceptions.IncorrectPinException;
-import com.training.exceptions.InsufficientBalanceException;
+import com.training.exceptions.*;
 import com.training.dto.transaction.TransactionsDto;
 import com.training.dto.transaction.TransferRequestDto;
 import com.training.entities.Account;
 import com.training.entities.Transaction;
-import com.training.exceptions.SelfTransferException;
 import com.training.repo.AccountRepo;
 import com.training.repo.TransactionRepo;
 import com.training.service.TransactionService;
@@ -35,7 +33,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Boolean transferMoney(TransferRequestDto transferRequestDto)
             throws AccountNotFoundException,IncorrectPinException,
-            InsufficientBalanceException, SelfTransferException
+            InsufficientBalanceException, SelfTransferException, AccountLockedException
     {
         if(Objects.equals(transferRequestDto.getSenderAccountNumber(), transferRequestDto.getReceiverAccountNumber())){
             transactionRepo.saveAndFlush(
@@ -48,6 +46,7 @@ public class TransactionServiceImpl implements TransactionService {
                             null,LocalDateTime.now()));
             throw new SelfTransferException("Cant send to same account");
         }
+
         Optional<Account> sender = accountRepo.findById(transferRequestDto.getSenderAccountNumber());
         Optional<Account> reciever = accountRepo.findById(transferRequestDto.getReceiverAccountNumber());
         // check Exceptions
@@ -64,6 +63,9 @@ public class TransactionServiceImpl implements TransactionService {
         }
         Account senderAccount = sender.get();
         Account receiverAccount = reciever.get();
+        if(senderAccount.getAccountStatus() == AccountStatus.LOCKED || receiverAccount.getAccountStatus() == AccountStatus.LOCKED){
+            throw  new AccountLockedException();
+        }
         if(senderAccount.getAccountBalance() < transferRequestDto.getAmount()){
             transactionRepo.saveAndFlush(
                     new Transaction(null,

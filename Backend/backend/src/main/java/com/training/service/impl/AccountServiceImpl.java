@@ -6,6 +6,7 @@ import com.training.dto.account.AccountSuccessCreation;
 import com.training.entities.Account;
 import com.training.enums.AccountStatus;
 import com.training.enums.AccountType;
+import com.training.exceptions.AccountNotFoundException;
 import com.training.exceptions.UserNotFoundException;
 import com.training.repo.AccountRepo;
 import com.training.repo.UserRepo;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -86,5 +88,17 @@ public class AccountServiceImpl implements AccountService {
             res.addBalance(account.getAccountBalance());
         }
         return res;
+    }
+
+    public Boolean toggleAccountStatus(Long id) {
+        Optional<Account> accObj = accountRepo.findById(id);
+        if(accObj.isEmpty()){
+            throw new AccountNotFoundException();
+        }
+        Account acc = accObj.get();
+        AccountStatus  status =  acc.getAccountStatus() == AccountStatus.LOCKED ?AccountStatus.ACTIVE : AccountStatus.LOCKED;
+        acc.setAccountStatus(status);
+        accountRepo.save(acc);
+        return true;
     }
 }

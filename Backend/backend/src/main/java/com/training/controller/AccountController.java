@@ -29,4 +29,9 @@ public class AccountController {
         return new ResponseEntity<>(accountService.getAllAccountsData(id),HttpStatus.OK);
     }
 
+    @PostMapping("/{id}")
+    public ResponseEntity<String> deactivateAccount(@PathVariable Long id){
+        return new ResponseEntity<>(accountService.toggleAccountStatus(id).toString(),HttpStatus.OK);
+    }
+
 }

@@ -84,4 +84,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleInsufficientBalance(){
         return new ResponseEntity<>("Not enough balance",HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(AccountLockedException.class)
+    public ResponseEntity<Object> handleAccountLockedException(){
+        return new ResponseEntity<>("Account is locked",HttpStatus.BAD_REQUEST);
+    }
 }
