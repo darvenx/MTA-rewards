@@ -6,7 +6,8 @@ import { SessionUser } from '../core/models/session-user.model';
 import {
     ApiUserLoginRequest,
     ApiUserSignUpRequest,
-    ApiUserSuccessLoginOrSignUpDto
+    ApiUserSuccessLoginOrSignUpDto,
+    ApiUserUpdatePasswordRequest
 } from '../core/api/backend-contracts';
 import ApiEndpoints, { ApiHttpConfig } from '../config/api.endpoints';
 import { TokenStorageService } from '../core/services/token-storage.service';
@@ -105,11 +106,15 @@ export class AuthService {
         return this.tokenStorage.getAccountId();
     }
 
+    setActiveAccountId(accountId: string | null): void {
+        this.tokenStorage.setAccountId(accountId);
+    }
+
     isAuthenticated(): boolean {
         return !!this.getToken();
     }
 
-    forgotPassword(payload: { phoneNumber: string; email: string; accountNumber: number; newPassword: string; }) {
+    forgotPassword(payload: ApiUserUpdatePasswordRequest) {
         return this.http.post<boolean>(ApiEndpoints.user.forgotPassword(), payload);
     }
 }

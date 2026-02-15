@@ -35,6 +35,16 @@ export class MockBackendInterceptor implements HttpInterceptor {
             }
         }
 
+        if (url.endsWith('/user/forgot-password') && method === 'POST') {
+            const { username, oldPassword, newPassword } = body as any;
+            if (username && oldPassword && newPassword) {
+                return of(new HttpResponse({
+                    status: 200,
+                    body: true
+                })).pipe(delay(simulatedDelay));
+            }
+        }
+
         // --- Accounts API (UI-only convenience reads) ---
         // GET user accounts for dashboard dropdown
         if (url.match(/\/user\/accounts\/\w+$/) && method === 'GET') {

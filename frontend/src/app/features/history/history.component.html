@@ -8,6 +8,10 @@
 <div class="container history-content">
   <mat-card>
     <mat-card-content>
+      <p class="history-context" *ngIf="activeAccountId">
+        Showing transactions for account: <strong>{{ activeAccountId }}</strong>
+      </p>
+
       <mat-tab-group (selectedTabChange)="onTabChange($event)">
         <mat-tab label="All Transactions"></mat-tab>
         <mat-tab label="Sent (Debit)"></mat-tab>
@@ -22,10 +26,9 @@
         </div>
 
         <div *ngIf="!isLoading && filteredTransactions.length === 0" class="no-data">
-          <p>No transactions found.</p>
+          <p>No transactions found for account {{ activeAccountId || 'N/A' }}.</p>
         </div>
       </div>
     </mat-card-content>
   </mat-card>
 </div>
-

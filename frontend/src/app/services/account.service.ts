@@ -36,10 +36,11 @@ export class AccountService {
     }
 
     getUserAccounts(userId: string): Observable<accountsData> {
-        // Use legacy/stable account list endpoint first to avoid auth failures on optional routes.
-        return this.getBalance(userId).pipe(
-            // Fallback to requested route if legacy endpoint is unavailable in an environment.
-            catchError(() => this.http.get<accountsData>(ApiEndpoints.user.accounts(userId)))
+        // Prefer the user-scoped accounts endpoint which is expected to
+        // return all accounts for the logged-in user.
+        return this.http.get<accountsData>(ApiEndpoints.user.accounts(userId)).pipe(
+            // Fallback to account endpoint for backend variants.
+            catchError(() => this.getBalance(userId))
         );
     }
 

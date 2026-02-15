@@ -84,10 +84,13 @@
               <mat-icon matPrefix>lock</mat-icon>
               <input
                 matInput
-                formControlName="remarks"
+                formControlName="senderAccountPin"
                 type="password"
                 placeholder="Enter password to perform transaction"
               >
+              <mat-error *ngIf="transferForm.get('senderAccountPin')?.hasError('required')">
+                Password is required
+              </mat-error>
             </mat-form-field>
           </div>
 

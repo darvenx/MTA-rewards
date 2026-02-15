@@ -23,10 +23,6 @@ import { MatIconModule } from '@angular/material/icon';
 					<mat-icon>history</mat-icon>
 					<span>History</span>
 				</a>
-				<a routerLink="/admin" routerLinkActive="active">
-					<mat-icon>admin_panel_settings</mat-icon>
-					<span>Admin</span>
-				</a>
 
 				<h4 class="section">ACCOUNT</h4>
 				<a routerLink="/profile" routerLinkActive="active">

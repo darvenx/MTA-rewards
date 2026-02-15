@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AccountService } from '../../services/account.service';
+import { AuthService } from '../../services/auth.service';
 import { Account } from '../../core/models/account.model';
-import { Observable, Subject, forkJoin } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { ApiAccountSuccessCreation } from '../../core/api/backend-contracts';
 import { Transaction, TransactionType, TransactionStatus } from '../../core/models/transaction.model';
@@ -55,10 +56,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   currentUserId: number | null = null;
   currentHolderName = 'User';
+  private statsRequestId = 0;
   private destroyed$ = new Subject<void>();
 
   constructor(
     private accountService: AccountService,
+    private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
@@ -73,7 +76,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const userId = localStorage.getItem("id");
     if (userId) {
       this.currentUserId = Number(userId);
-      this.selectedAccountId = Number(userId);
+      const persistedAccountId = Number(this.authService.getAccountId());
+      this.selectedAccountId = Number.isFinite(persistedAccountId) && persistedAccountId > 0
+        ? persistedAccountId
+        : Number(userId);
       this.syncAccountSelectOptions();
       this.account$ = this.accountService.getAccount(userId).pipe(
         tap((account) => {
@@ -94,20 +100,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private loadDashboardData(userId: string): void {
     this.isStatsLoading = true;
     this.isBalanceLoaded = false;
-
-    const accounts$ = this.accountService.getUserAccounts(userId);
-    const transactions$ = this.accountService.getTransactions(userId);
-
-    forkJoin({
-      accounts: accounts$,
-      transactions: transactions$
-    })
+    this.accountService.getUserAccounts(userId)
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
-        next: ({ accounts, transactions }) => {
-          this.availableAccounts = this.mapAccountsData(accounts);
+        next: (accounts) => {
+          const mappedAccounts = this.mapAccountsData(accounts);
+          this.availableAccounts = this.mergeAccounts(this.availableAccounts, mappedAccounts);
           this.syncAccountSelectOptions();
           const initialAccount =
+            this.availableAccounts.find((account) => account.accountId === this.selectedAccountId) ||
             this.availableAccounts.find((account) => account.accountStatus === 'ACTIVE') ||
             this.accountSelectOptions[0];
 
@@ -117,20 +118,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.selectedAccountId = null;
             this.animatedBalance = 0;
             this.isBalanceLoaded = true;
-          }
-
-          this.hasTransactions = !!transactions && transactions.length > 0;
-          this.computeTotals(transactions);
-          setTimeout(() => {
+            this.hasTransactions = false;
+            this.computeTotals([], false);
             this.isStatsLoading = false;
-            this.cdr.markForCheck();
-          }, 0);
+          }
+          this.cdr.markForCheck();
         },
         error: (err) => {
           console.error('Error fetching dashboard data:', err);
           setTimeout(() => {
             this.syncAccountSelectOptions();
             this.isBalanceLoaded = true;
+            this.hasTransactions = false;
+            this.computeTotals([], false);
             this.isStatsLoading = false;
             this.cdr.markForCheck();
           }, 0);
@@ -177,6 +177,49 @@ export class DashboardComponent implements OnInit, OnDestroy {
     ];
   }
 
+  private mapAccountCreationData(data: ApiAccountSuccessCreation | null | undefined): DashboardAccountOption[] {
+    if (!data || !Array.isArray(data.accountNumbers) || data.accountNumbers.length === 0) {
+      return [];
+    }
+
+    return data.accountNumbers
+      .map((rawId, idx) => {
+        const accountId = Number(rawId);
+        if (!Number.isFinite(accountId) || accountId <= 0) {
+          return null;
+        }
+
+        const balance = Number(Array.isArray(data.accountBalance) ? data.accountBalance[idx] : 0);
+        const accountType = String(Array.isArray(data.accountType) ? data.accountType[idx] ?? 'SAVINGS' : 'SAVINGS').toUpperCase();
+        const accountStatus = String(Array.isArray(data.accountStatus) ? data.accountStatus[idx] ?? 'ACTIVE' : 'ACTIVE').toUpperCase();
+
+        return {
+          accountId,
+          balance: Number.isFinite(balance) ? balance : 0,
+          accountType,
+          accountStatus
+        } as DashboardAccountOption;
+      })
+      .filter((account): account is DashboardAccountOption => account !== null);
+  }
+
+  private mergeAccounts(
+    existing: DashboardAccountOption[],
+    incoming: DashboardAccountOption[]
+  ): DashboardAccountOption[] {
+    const merged = new Map<number, DashboardAccountOption>();
+
+    existing.forEach((account) => {
+      merged.set(account.accountId, account);
+    });
+
+    incoming.forEach((account) => {
+      merged.set(account.accountId, account);
+    });
+
+    return Array.from(merged.values()).sort((a, b) => a.accountId - b.accountId);
+  }
+
   private toNumberArray(input: unknown): number[] {
     if (!Array.isArray(input)) return [];
     return input
@@ -202,6 +245,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.selectedAccountId = selected.accountId;
     this.selectedAccountType = selected.accountType;
     this.selectedAccountStatus = selected.accountStatus;
+    this.authService.setActiveAccountId(String(selected.accountId));
 
     this.animateValue(
       (value) => (this.animatedBalance = value),
@@ -210,6 +254,34 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
     this.isBalanceLoaded = true;
     this.syncAccountSelectOptions();
+    this.loadStatsForAccount(selected.accountId);
+  }
+
+  private loadStatsForAccount(accountId: number): void {
+    this.isStatsLoading = true;
+    const requestId = ++this.statsRequestId;
+
+    this.accountService.getTransactions(String(accountId))
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe({
+        next: (transactions) => {
+          if (requestId !== this.statsRequestId) return;
+
+          this.hasTransactions = Array.isArray(transactions) && transactions.length > 0;
+          this.computeTotals(transactions);
+          this.isStatsLoading = false;
+          this.cdr.markForCheck();
+        },
+        error: (err) => {
+          if (requestId !== this.statsRequestId) return;
+
+          console.error(`Error fetching transactions for account ${accountId}:`, err);
+          this.hasTransactions = false;
+          this.computeTotals([], true);
+          this.isStatsLoading = false;
+          this.cdr.markForCheck();
+        }
+      });
   }
 
   private syncAccountSelectOptions(): void {
@@ -234,7 +306,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     ];
   }
 
-  private computeTotals(transactions: Transaction[]): void {
+  private computeTotals(transactions: Transaction[], animateFromCurrent = true): void {
     const now = new Date();
     const currentMonth = now.getMonth();
     const currentYear = now.getFullYear();
@@ -262,9 +334,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.totalReceived = received;
     this.thisMonth = monthNet;
 
-    this.animateValue((v) => (this.displayTotalSent = v), 0, this.totalSent);
-    this.animateValue((v) => (this.displayTotalReceived = v), 0, this.totalReceived);
-    this.animateValue((v) => (this.displayThisMonth = v), 0, this.thisMonth);
+    this.animateValue(
+      (v) => (this.displayTotalSent = v),
+      animateFromCurrent ? this.displayTotalSent : 0,
+      this.totalSent
+    );
+    this.animateValue(
+      (v) => (this.displayTotalReceived = v),
+      animateFromCurrent ? this.displayTotalReceived : 0,
+      this.totalReceived
+    );
+    this.animateValue(
+      (v) => (this.displayThisMonth = v),
+      animateFromCurrent ? this.displayThisMonth : 0,
+      this.thisMonth
+    );
   }
 
   getGreeting(): string {
@@ -354,6 +438,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.showAddAccountForm = false;
           this.addAccountForm.reset({ accountType: 'SAVINGS' });
 
+          const createdAccounts = this.mapAccountCreationData(res);
+          if (createdAccounts.length > 0) {
+            this.availableAccounts = this.mergeAccounts(this.availableAccounts, createdAccounts);
+            this.syncAccountSelectOptions();
+          }
+
           const createdAccountNumber = this.getCreatedAccountNumber(res);
           const successMessage = createdAccountNumber
             ? `Account created successfully: ${createdAccountNumber}`
@@ -363,6 +453,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
             duration: 3500,
             panelClass: ['success-snackbar']
           });
+
+          if (createdAccountNumber) {
+            this.setSelectedAccount(createdAccountNumber, true);
+          }
+
           this.loadDashboardData(String(this.currentUserId));
         },
         error: (err) => {
@@ -378,7 +473,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private getCreatedAccountNumber(res: ApiAccountSuccessCreation): number | null {
     if (res && Array.isArray(res.accountNumbers) && res.accountNumbers.length > 0) {
-      return res.accountNumbers[0];
+      const parsedNumbers = res.accountNumbers
+        .map((value) => Number(value))
+        .filter((value) => Number.isFinite(value) && value > 0);
+
+      if (parsedNumbers.length > 0) {
+        return Math.max(...parsedNumbers);
+      }
     }
     return null;
   }

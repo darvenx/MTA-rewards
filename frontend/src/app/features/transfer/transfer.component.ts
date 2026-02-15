@@ -31,15 +31,19 @@ export class TransferComponent implements OnInit {
             senderAccountNumber: [{ value: '', disabled: true }, Validators.required],
             receiverAccountNumber: ['', Validators.required],
             amount: [null, [Validators.required, Validators.min(0.01)]],
-            remarks: ['']
+            senderAccountPin: ['', Validators.required]
         });
     }
 
     ngOnInit(): void {
-        this.currentAccountId = localStorage.getItem("id");
+        this.currentAccountId = this.authService.getAccountId();
         if (this.currentAccountId) {
             this.transferForm.patchValue({ senderAccountNumber: this.currentAccountId });
+            return;
         }
+
+        this.snackBar.open('Session expired. Please log in again.', 'Close', { duration: 4000 });
+        this.router.navigate(['/login']);
     }
 
     initiateTransfer(): void {
@@ -59,19 +63,34 @@ export class TransferComponent implements OnInit {
     }
 
     executeTransfer(): void {
+        if (!this.currentAccountId) {
+            this.snackBar.open('Session expired. Please log in again.', 'Close', { duration: 4000 });
+            this.router.navigate(['/login']);
+            return;
+        }
+
         this.isLoading = true;
         const formValue = this.transferForm.getRawValue();
+        const senderAccountNumber = Number(this.currentAccountId);
+
+        if (!Number.isFinite(senderAccountNumber) || senderAccountNumber <= 0) {
+            this.isLoading = false;
+            this.snackBar.open('Invalid sender account. Please log in again.', 'Close', { duration: 5000 });
+            this.router.navigate(['/login']);
+            return;
+        }
 
         // Generate Idempotency Key
         const idempotencyKey = self.crypto.randomUUID();
 
         const request: TransferRequest = {
-            senderAccountNumber: Number(sessionStorage.getItem("id")),
+            senderAccountNumber,
             receiverAccountNumber: Number(formValue.receiverAccountNumber),
             amount: formValue.amount,
             idempotencyKey: idempotencyKey,
-            senderAccountPin:String(formValue.remarks)
+            senderAccountPin: String(formValue.senderAccountPin)
         };
+        this.authService.setActiveAccountId(String(senderAccountNumber));
         // console.log(request);
 
         this.transferService.transfer(request).subscribe({
