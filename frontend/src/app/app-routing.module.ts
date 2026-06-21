@@ -11,6 +11,7 @@ import { LayoutComponent } from './shared/layout/layout.component';
 import { AdminComponent } from './features/admin/admin.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AdminGuard } from './core/guards/admin.guard';
+import { RewardsComponent } from './features/rewards/rewards.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
             { path: 'transfer', component: TransferComponent },
             { path: 'history', component: HistoryComponent },
             { path: 'profile', component: ProfileComponent },
+            { path: 'rewards', component: RewardsComponent, canActivate: [AuthGuard] },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     },

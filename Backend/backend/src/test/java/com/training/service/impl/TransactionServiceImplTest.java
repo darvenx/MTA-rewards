@@ -39,6 +39,9 @@ class TransactionServiceImplTest {
     @Mock
     private AccountRepo accountRepo;
 
+    @Mock
+    private com.training.service.RewardService rewardService;
+
     @InjectMocks
     private TransactionServiceImpl transactionService;
 
@@ -86,7 +89,8 @@ class TransactionServiceImplTest {
 
     @Test
     @DisplayName("Should successfully transfer money between accounts")
-    void testTransferMoney_Success() throws AccountNotFoundException, IncorrectPinException, InsufficientBalanceException {
+    void testTransferMoney_Success()
+            throws AccountNotFoundException, IncorrectPinException, InsufficientBalanceException {
         when(accountRepo.findById(1L)).thenReturn(Optional.of(senderAccount));
         when(accountRepo.findById(2L)).thenReturn(Optional.of(receiverAccount));
 
@@ -360,7 +364,8 @@ class TransactionServiceImplTest {
 
     @Test
     @DisplayName("Should save both accounts after successful transfer")
-    void testTransferMoney_BothAccountsSaved() throws AccountNotFoundException, IncorrectPinException, InsufficientBalanceException {
+    void testTransferMoney_BothAccountsSaved()
+            throws AccountNotFoundException, IncorrectPinException, InsufficientBalanceException {
         when(accountRepo.findById(1L)).thenReturn(Optional.of(senderAccount));
         when(accountRepo.findById(2L)).thenReturn(Optional.of(receiverAccount));
 

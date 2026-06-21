@@ -5,7 +5,7 @@ public class UserUpdatePasswordDto {
     private String username;
 
     private String phoneNumber;
-//    private String confirmPassword;
+    private String confirmPassword;
     private String newPassword;
 
     public String getPhoneNumber() {
@@ -24,13 +24,13 @@ public class UserUpdatePasswordDto {
         this.username = username;
     }
 
-//    public String getConfirmPassword() {
-//        return confirmPassword;
-//    }
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
 
-//    public void setConfirmPassword(String confirmPassword) {
-//        this.confirmPassword = confirmPassword;
-//    }
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
     public String getNewPassword() {
         return newPassword;

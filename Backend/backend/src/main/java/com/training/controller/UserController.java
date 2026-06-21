@@ -18,7 +18,7 @@ public class UserController {
     private final UserServiceImpl userService;
     private final AccountServiceImpl accountService;
 
-    public UserController(UserServiceImpl userService,AccountServiceImpl accountService) {
+    public UserController(UserServiceImpl userService, AccountServiceImpl accountService) {
         this.userService = userService;
         this.accountService = accountService;
     }
@@ -33,42 +33,42 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<UserSuccessLoginOrSignUpDto> loginUser(
             @RequestBody UserLoginDto userLoginDto)
-            throws UserNotFoundException
-    {
-        return new ResponseEntity<>(userService.login(userLoginDto),HttpStatus.OK);
+            throws UserNotFoundException {
+        return new ResponseEntity<>(userService.login(userLoginDto), HttpStatus.OK);
     }
-
-
 
     @PutMapping("/update")
     public ResponseEntity<Boolean> updateDetails(
             @RequestBody UserSignUpDto userSignUpDto)
-            throws DuplicateKeyException,UserNotFoundException {
-        return new ResponseEntity<>(userService.updateData(userSignUpDto),HttpStatus.OK);
+            throws DuplicateKeyException, UserNotFoundException {
+        return new ResponseEntity<>(userService.updateData(userSignUpDto), HttpStatus.OK);
     }
 
     @GetMapping("/account/{id}")
     public ResponseEntity<AccountDataDto> getAccounts(@PathVariable Long id)
-            throws UserNotFoundException
-    {
-        return new ResponseEntity<>(accountService.getAccountDetails(id),HttpStatus.OK);
+            throws UserNotFoundException {
+        return new ResponseEntity<>(accountService.getAccountDetails(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/accounts/{id}")
+    public ResponseEntity<AccountDataDto> getAllAccountsForUser(@PathVariable Long id) {
+        return new ResponseEntity<>(accountService.getAllAccountsData(id), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDetailsResponseDto> getUserDetails(@PathVariable Long id)
-            throws UserNotFoundException
-    {
-        return new ResponseEntity<>(userService.getUserDetails(id),HttpStatus.OK);
+            throws UserNotFoundException {
+        return new ResponseEntity<>(userService.getUserDetails(id), HttpStatus.OK);
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<AllUserData>> getAllUserData(){
-        return new ResponseEntity<>(userService.getAllUserDetails(),HttpStatus.OK);
+    public ResponseEntity<List<AllUserData>> getAllUserData() {
+        return new ResponseEntity<>(userService.getAllUserDetails(), HttpStatus.OK);
     }
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<Boolean> updatecredentials(UserUpdatePasswordDto req){
-        return new ResponseEntity<>(userService.updateCredentials(req),HttpStatus.OK);
+    public ResponseEntity<Boolean> updatecredentials(UserUpdatePasswordDto req) {
+        return new ResponseEntity<>(userService.updateCredentials(req), HttpStatus.OK);
     }
 
 }

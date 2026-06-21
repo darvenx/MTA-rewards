@@ -73,6 +73,23 @@ export const ApiEndpoints = {
      * Backend target: GET `/api/v1/recent-transactions` (List<RecentTransactionsDto>).
      */
     recent: () => `${BASE}/recent-transactions`
+  },
+  reward: {
+    /**
+     * Reward history for an account (newest first).
+     * Backend target: GET `/api/v1/rewards/{accountId}` (List<RewardLogDto>).
+     */
+    history: (accountId: string | number) => `${BASE}/rewards/${accountId}`,
+    /**
+     * Total reward points for an account.
+     * Backend target: GET `/api/v1/rewards/{accountId}/total` (RewardSummaryDto).
+     */
+    total: (accountId: string | number) => `${BASE}/rewards/${accountId}/total`,
+    /**
+     * Redeem reward points for an account.
+     * Backend target: POST `/api/v1/rewards/{accountId}/redeem` (RewardSummaryDto).
+     */
+    redeem: (accountId: string | number) => `${BASE}/rewards/${accountId}/redeem`
   }
 };
 

@@ -11,6 +11,7 @@ import com.training.entities.Account;
 import com.training.entities.Transaction;
 import com.training.repo.AccountRepo;
 import com.training.repo.TransactionRepo;
+import com.training.service.RewardService;
 import com.training.service.TransactionService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -24,18 +25,21 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepo transactionRepo;
     private final AccountRepo accountRepo;
+    private final RewardService rewardService;
 
-    public TransactionServiceImpl(TransactionRepo transactionRepo, AccountRepo accountRepo) {
+    public TransactionServiceImpl(TransactionRepo transactionRepo, AccountRepo accountRepo,
+            RewardService rewardService) {
         this.transactionRepo = transactionRepo;
         this.accountRepo = accountRepo;
+        this.rewardService = rewardService;
     }
 
     @Override
     public Boolean transferMoney(TransferRequestDto transferRequestDto)
-            throws AccountNotFoundException,IncorrectPinException,
-            InsufficientBalanceException, SelfTransferException, AccountLockedException
-    {
-        if(Objects.equals(transferRequestDto.getSenderAccountNumber(), transferRequestDto.getReceiverAccountNumber())){
+            throws AccountNotFoundException, IncorrectPinException,
+            InsufficientBalanceException, SelfTransferException, AccountLockedException {
+        if (Objects.equals(transferRequestDto.getSenderAccountNumber(),
+                transferRequestDto.getReceiverAccountNumber())) {
             transactionRepo.saveAndFlush(
                     new Transaction(null,
                             transferRequestDto.getSenderAccountNumber(),
@@ -43,14 +47,14 @@ public class TransactionServiceImpl implements TransactionService {
                             transferRequestDto.getAmount(),
                             TransactionStatus.FAILED,
                             "can not transfer to same account",
-                            null,LocalDateTime.now()));
+                            null, LocalDateTime.now()));
             throw new SelfTransferException("Cant send to same account");
         }
 
         Optional<Account> sender = accountRepo.findById(transferRequestDto.getSenderAccountNumber());
         Optional<Account> reciever = accountRepo.findById(transferRequestDto.getReceiverAccountNumber());
         // check Exceptions
-        if(sender.isEmpty() || reciever.isEmpty()){
+        if (sender.isEmpty() || reciever.isEmpty()) {
             transactionRepo.saveAndFlush(
                     new Transaction(null,
                             transferRequestDto.getSenderAccountNumber(),
@@ -58,15 +62,16 @@ public class TransactionServiceImpl implements TransactionService {
                             transferRequestDto.getAmount(),
                             TransactionStatus.FAILED,
                             "Unidentified sender and reciever",
-                            null,LocalDateTime.now()));
+                            null, LocalDateTime.now()));
             throw new AccountNotFoundException();
         }
         Account senderAccount = sender.get();
         Account receiverAccount = reciever.get();
-        if(senderAccount.getAccountStatus() == AccountStatus.LOCKED || receiverAccount.getAccountStatus() == AccountStatus.LOCKED){
-            throw  new AccountLockedException();
+        if (senderAccount.getAccountStatus() == AccountStatus.LOCKED
+                || receiverAccount.getAccountStatus() == AccountStatus.LOCKED) {
+            throw new AccountLockedException();
         }
-        if(senderAccount.getAccountBalance() < transferRequestDto.getAmount()){
+        if (senderAccount.getAccountBalance() < transferRequestDto.getAmount()) {
             transactionRepo.saveAndFlush(
                     new Transaction(null,
                             transferRequestDto.getSenderAccountNumber(),
@@ -74,10 +79,10 @@ public class TransactionServiceImpl implements TransactionService {
                             transferRequestDto.getAmount(),
                             TransactionStatus.FAILED,
                             "insufficient balance",
-                            null,LocalDateTime.now()));
+                            null, LocalDateTime.now()));
             throw new InsufficientBalanceException();
         }
-        if(!Objects.equals(senderAccount.getUser().getPassword(), transferRequestDto.getSenderAccountPin())){
+        if (!Objects.equals(senderAccount.getUser().getPassword(), transferRequestDto.getSenderAccountPin())) {
             transactionRepo.saveAndFlush(
                     new Transaction(null,
                             transferRequestDto.getSenderAccountNumber(),
@@ -85,10 +90,9 @@ public class TransactionServiceImpl implements TransactionService {
                             transferRequestDto.getAmount(),
                             TransactionStatus.FAILED,
                             "incorrect pin",
-                            null,LocalDateTime.now()));
+                            null, LocalDateTime.now()));
             throw new IncorrectPinException();
         }
-
 
         // debit amount
         Double amount = transferRequestDto.getAmount();
@@ -99,36 +103,44 @@ public class TransactionServiceImpl implements TransactionService {
         accountRepo.save(senderAccount);
         accountRepo.save(receiverAccount);
         // add to transaction table
-        Transaction transaction = new Transaction
-                (null,senderAccount.getAccountId(), receiverAccount.getAccountId()
-                        ,amount, TransactionStatus.SUCCESS,""
-                        ,transferRequestDto.getIdempotencyKey(), LocalDateTime.now());
+        Transaction transaction = new Transaction(null, senderAccount.getAccountId(), receiverAccount.getAccountId(),
+                amount, TransactionStatus.SUCCESS, "", transferRequestDto.getIdempotencyKey(), LocalDateTime.now());
         transactionRepo.save(transaction);
+
+        // award reward points to sender for eligible transactions
+        rewardService.calculateAndSaveReward(
+                senderAccount.getAccountId(),
+                receiverAccount.getAccountId(),
+                amount,
+                transaction.getTransactionId());
+
         return true;
     }
 
     @Override
     public List<TransactionsDto> getTransactions(Long accountNumber)
-    throws AccountNotFoundException{
-        List<Transaction> txns = transactionRepo.findAllByFromAccountOrToAccount(accountNumber,accountNumber);
+            throws AccountNotFoundException {
+        List<Transaction> txns = transactionRepo.findAllByFromAccountOrToAccount(accountNumber, accountNumber);
         List<TransactionsDto> transactions = new ArrayList<>();
-        for (Transaction txn: txns
-             ) {
+        for (Transaction txn : txns) {
             // add name of person and type of transaction
 
             TransactionsDto tdto = new TransactionsDto();
 
             Long otherNumber;
             String type;
-            if(Objects.equals(txn.getFromAccount(), accountNumber)){
+            if (Objects.equals(txn.getFromAccount(), accountNumber)) {
                 otherNumber = txn.getToAccount();
                 type = TransactionType.DEBIT.toString();
-            }
-            else{
+            } else {
                 otherNumber = txn.getFromAccount();
                 type = TransactionType.CREDIT.toString();
             }
-            tdto.setOtherAccountName(accountRepo.findById(otherNumber).get().getAccountHolderName());
+            Optional<Account> otherAccount = accountRepo.findById(otherNumber);
+            String otherName = otherAccount.isPresent() ? otherAccount.get().getAccountHolderName()
+                    : "Unknown Account (" + otherNumber + ")";
+
+            tdto.setOtherAccountName(otherName);
             tdto.setTransactionId(txn.getTransactionId());
             tdto.setTransactionStatus(txn.getTransactionStatus());
             tdto.setAmount(txn.getAmount());
@@ -137,6 +149,7 @@ public class TransactionServiceImpl implements TransactionService {
         }
         return transactions;
     }
+
     public List<RecentTransactionsDto> getRecent10Transactions() {
         List<Transaction> txns = transactionRepo.findAll();
 
@@ -144,11 +157,10 @@ public class TransactionServiceImpl implements TransactionService {
         txns.sort((t1, t2) -> t2.getCreatedOn().compareTo(t1.getCreatedOn()));
         System.out.println(txns);
         // Limit to 10 and map to DTOs
-        List <RecentTransactionsDto> res = txns.stream()
+        List<RecentTransactionsDto> res = txns.stream()
                 .limit(10)
-                .map(txn ->
-                     new RecentTransactionsDto(txn.getTransactionId(),txn.getFromAccount(),txn.getToAccount(),txn.getAmount(),txn.getTransactionStatus().name())
-                ) // adjust mapping as needed
+                .map(txn -> new RecentTransactionsDto(txn.getTransactionId(), txn.getFromAccount(), txn.getToAccount(),
+                        txn.getAmount(), txn.getTransactionStatus().name())) // adjust mapping as needed
                 .collect(Collectors.toList());
         System.out.println("GIVING DATA BELOW");
         System.out.println(res);

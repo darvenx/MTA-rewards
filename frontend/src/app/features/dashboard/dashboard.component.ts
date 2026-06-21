@@ -110,8 +110,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.syncAccountSelectOptions();
           const initialAccount =
             this.availableAccounts.find((account) => account.accountId === this.selectedAccountId) ||
-            this.availableAccounts.find((account) => account.accountStatus === 'ACTIVE') ||
-            this.accountSelectOptions[0];
+            this.availableAccounts.find((account) => account.accountStatus === 'ACTIVE');
 
           if (initialAccount) {
             this.setSelectedAccount(initialAccount.accountId, false);
@@ -246,7 +245,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private setSelectedAccount(accountId: number, animateFromCurrent: boolean): void {
     const selected = this.availableAccounts.find((account) => account.accountId === accountId);
-    if (!selected) return;
+
+    if (!selected) {
+      this.isBalanceLoaded = true;
+      this.isStatsLoading = false;
+      this.cdr.markForCheck();
+      return;
+    }
 
     this.selectedAccountId = selected.accountId;
     this.selectedAccountType = selected.accountType;
@@ -408,7 +413,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   copyAccountNumber(acc?: string) {
     if (!acc) return;
-    try { navigator.clipboard.writeText(acc); } catch (e) {}
+    try { navigator.clipboard.writeText(acc); } catch (e) { }
   }
 
   toggleAddAccountForm(): void {

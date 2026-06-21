@@ -152,3 +152,19 @@ export interface LegacyTransactionDto {
   otherPersonAccountNumber: number;
   transactionStatus: string;
 }
+
+// ---------------------------
+// Reward DTOs (new API)
+// ---------------------------
+
+export interface ApiRewardLogDto {
+  rewardId: number;
+  transactionId: number;
+  pointsEarned: number;
+  createdOn: string; // ISO-8601 datetime string from backend
+}
+
+export interface ApiRewardSummaryDto {
+  accountId: number;
+  totalPoints: number;
+}

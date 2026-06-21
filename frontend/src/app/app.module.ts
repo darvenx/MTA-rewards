@@ -13,6 +13,7 @@ import { SignupComponent } from './features/signup/signup.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { TransferComponent } from './features/transfer/transfer.component';
 import { HistoryComponent } from './features/history/history.component';
+import { RewardsComponent } from './features/rewards/rewards.component';
 
 // Interceptors
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
@@ -22,8 +23,8 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
         // AppComponent is now standalone and bootstrapped via bootstrapApplication
         LoginComponent,
         SignupComponent,
-    DashboardComponent,
-    TransferComponent,
+        DashboardComponent,
+        TransferComponent,
         HistoryComponent
     ],
     imports: [
@@ -31,7 +32,8 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
-        SharedModule
+        SharedModule,
+        RewardsComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
