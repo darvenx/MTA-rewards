@@ -6,6 +6,7 @@ public class RecentTransactionsDto {
     private Long fromAccount;
     private Double amount;
     private String transactionStatus;
+    private String category;
 
     @Override
     public String toString() {
@@ -15,15 +16,18 @@ public class RecentTransactionsDto {
                 ", fromAccount=" + fromAccount +
                 ", amount=" + amount +
                 ", transactionStatus='" + transactionStatus + '\'' +
+                ", category='" + category + '\'' +
                 '}';
     }
 
-    public RecentTransactionsDto(Long transactionId, Long toAccount, Long fromAccount, Double amount, String transactionStatus) {
+    public RecentTransactionsDto(Long transactionId, Long toAccount, Long fromAccount, Double amount,
+            String transactionStatus, String category) {
         this.transactionId = transactionId;
         this.toAccount = toAccount;
         this.fromAccount = fromAccount;
         this.amount = amount;
         this.transactionStatus = transactionStatus;
+        this.category = category;
     }
 
     public Long getTransactionId() {
@@ -64,5 +68,13 @@ public class RecentTransactionsDto {
 
     public void setTransactionStatus(String transactionStatus) {
         this.transactionStatus = transactionStatus;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

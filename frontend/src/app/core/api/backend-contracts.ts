@@ -97,6 +97,7 @@ export interface ApiTransferRequestDto {
   senderAccountPin: string;
   idempotencyKey: string;
   amount: number;
+  category?: string;
 }
 
 // `POST /transaction` returns `Boolean` (true/false)
@@ -109,6 +110,8 @@ export interface ApiTransactionsDto {
   otherAccountName: string;
   transactionStatus: string; // SUCCESS / FAILED / etc.
   type: string; // DEBIT / CREDIT
+  category?: string;
+  createdOn?: string; // ISO-8601 datetime string from backend
 }
 
 // New backend `RecentTransactionsDto` shape for admin dashboard.
@@ -118,6 +121,7 @@ export interface ApiRecentTransactionsDto {
   fromAccount: number;
   amount: number;
   transactionStatus: string;
+  category?: string;
 }
 
 // ---------------------------------------------------------
@@ -167,4 +171,13 @@ export interface ApiRewardLogDto {
 export interface ApiRewardSummaryDto {
   accountId: number;
   totalPoints: number;
+  currentTier: string;
+  multiplier: number;
+  nextTierProgress: number;
+}
+
+export interface ApiSpendingAnalyticsDto {
+  accountId: number;
+  spendingByCategory: { [key: string]: number };
+  transactionCount: number;
 }

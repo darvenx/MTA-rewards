@@ -32,7 +32,24 @@ import { catchError, finalize } from 'rxjs/operators';
                     <ng-template #heroSkeleton>
                         <div class="skeleton hero-skeleton"></div>
                     </ng-template>
-                    <div class="hero-hint">₹{{ (summary?.totalPoints ?? 0) * 100 | number }} equivalent transferred</div>
+                    <div class="hero-hint">₹{{ (summary?.totalPoints ?? 0) * 100 | number : '1.0-0' }} equivalent transferred</div>
+
+                    <!-- Tier Progress -->
+                    <div class="tier-progress-container" *ngIf="!loading && summary">
+                        <div class="tier-label-row">
+                            <span class="current-tier-text">{{ summary.currentTier }} TIER</span>
+                            <span class="multiplier-tag">{{ summary.multiplier }}x Points</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" [style.width.%]="summary.nextTierProgress" [class]="summary.currentTier.toLowerCase()"></div>
+                        </div>
+                        <div class="tier-footer-text" *ngIf="summary.nextTierProgress < 100">
+                            {{ summary.nextTierProgress }}% to next level
+                        </div>
+                        <div class="tier-footer-text" *ngIf="summary.nextTierProgress === 100">
+                            MAX LEVEL REACHED
+                        </div>
+                    </div>
 
                     <!-- Redeem Action -->
                     <div class="hero-action" *ngIf="!loading && (summary?.totalPoints ?? 0) >= 100">
@@ -40,14 +57,10 @@ import { catchError, finalize } from 'rxjs/operators';
                             {{ redeeming ? 'Redeeming...' : 'Redeem to Account' }}
                         </button>
                     </div>
-                    <div class="hero-low-points" *ngIf="!loading && (summary?.totalPoints ?? 0) > 0 && (summary?.totalPoints ?? 0) < 100">
-                        <span class="lock-icon">🔒</span>
-                        Redeem at 100 pts
-                    </div>
                 </div>
                 <div class="hero-glow"></div>
-                <div class="hero-badge">
-                    <span>🏆</span>
+                <div class="hero-badge" [class]="summary?.currentTier?.toLowerCase()">
+                    <span>{{ getTierEmoji(summary?.currentTier ?? 'BRONZE') }}</span>
                 </div>
             </div>
 
@@ -186,14 +199,68 @@ import { catchError, finalize } from 'rxjs/operators';
             right: 36px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 72px;
-            opacity: 0.18;
+            font-size: 84px;
+            opacity: 0.12;
             z-index: 1;
             user-select: none;
+            transition: all 400ms ease;
+        }
+        .hero-badge.silver { color: #94a3b8; opacity: 0.25; filter: drop-shadow(0 0 10px rgba(148,163,184,0.3)); }
+        .hero-badge.gold { color: #fbbf24; opacity: 0.35; filter: drop-shadow(0 0 15px rgba(251,191,36,0.5)); }
+
+        /* Tier Progress */
+        .tier-progress-container {
+            margin-top: 24px;
+            background: rgba(255,255,255,0.08);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .tier-label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .current-tier-text {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+        .multiplier-tag {
+            font-size: 10px;
+            font-weight: 700;
+            background: #fff;
+            color: #2563eb;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+        .progress-bar-bg {
+            height: 6px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: #fff;
+            border-radius: 3px;
+            transition: width 800ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .progress-bar-fill.silver { background: linear-gradient(90deg, #94a3b8, #f8fafc); }
+        .progress-bar-fill.gold { background: linear-gradient(90deg, #f59e0b, #fef3c7); }
+        
+        .tier-footer-text {
+            font-size: 10px;
+            opacity: 0.6;
+            font-weight: 500;
         }
 
         /* Redeem action */
-        .hero-action { margin-top: 24px; }
+        .hero-action { margin-top: 20px; }
         .redeem-btn {
             background: #fff;
             color: #2563eb;
@@ -212,18 +279,6 @@ import { catchError, finalize } from 'rxjs/operators';
         }
         .redeem-btn:disabled { opacity: 0.7; cursor: not-allowed; }
 
-        .hero-low-points {
-            margin-top: 18px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            opacity: 0.6;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .lock-icon { font-size: 12px; }
         .hero-skeleton {
             width: 180px;
             height: 72px;
@@ -245,11 +300,14 @@ import { catchError, finalize } from 'rxjs/operators';
             font-size: 12.5px;
             color: #475569;
             font-weight: 500;
+            border: 1px solid transparent;
+            transition: background 0.2s;
         }
         .chip-icon { font-size: 14px; }
 
         /* ---- History ---- */
         .section-title { font-size: 17px; font-weight: 700; color: #0f172a; margin: 0 0 16px; }
+        .history-section { margin-top: 4px; }
         .table-wrapper {
             border: 1px solid #e2e8f0;
             border-radius: 14px;
@@ -362,6 +420,95 @@ import { catchError, finalize } from 'rxjs/operators';
             font-size: 13px;
             font-weight: 600;
         }
+
+        /* ================================================================
+           DARK MODE OVERRIDES
+           ================================================================ */
+        :host-context(body.dark-mode) .page-title {
+            color: #e4e6eb;
+        }
+        :host-context(body.dark-mode) .page-subtitle {
+            color: #9ca3af;
+        }
+
+        /* Chips */
+        :host-context(body.dark-mode) .chip {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+        }
+
+        /* Section title */
+        :host-context(body.dark-mode) .section-title {
+            color: #e4e6eb;
+        }
+
+        /* Table wrapper */
+        :host-context(body.dark-mode) .table-wrapper {
+            border-color: #2a2d3a;
+        }
+        :host-context(body.dark-mode) .history-table thead tr {
+            background: #1e2130;
+        }
+        :host-context(body.dark-mode) .history-table th {
+            color: #9ca3af;
+            border-bottom-color: #2a2d3a;
+        }
+        :host-context(body.dark-mode) .history-table td {
+            color: #e4e6eb;
+        }
+        :host-context(body.dark-mode) .history-row {
+            border-bottom-color: #1e2130;
+        }
+        :host-context(body.dark-mode) .history-row:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+        :host-context(body.dark-mode) .row-num {
+            color: #4b5563;
+        }
+        :host-context(body.dark-mode) .row-date {
+            color: #cbd5e1;
+        }
+        :host-context(body.dark-mode) .row-txn {
+            color: #93c5fd;
+        }
+
+        /* Points badge — keep green but darker bg */
+        :host-context(body.dark-mode) .pts-badge {
+            background: linear-gradient(135deg, #064e3b, #065f46);
+            color: #6ee7b7;
+        }
+
+        /* Skeleton in dark */
+        :host-context(body.dark-mode) .skeleton {
+            background: linear-gradient(90deg, #1e2130 25%, #252836 50%, #1e2130 75%);
+            background-size: 200% 100%;
+        }
+
+        /* Empty state */
+        :host-context(body.dark-mode) .empty-title {
+            color: #e4e6eb;
+        }
+        :host-context(body.dark-mode) .empty-sub {
+            color: #9ca3af;
+        }
+
+        /* Success banner */
+        :host-context(body.dark-mode) .success-banner {
+            background: rgba(6, 78, 59, 0.3);
+            border-color: #065f46;
+            color: #6ee7b7;
+        }
+        :host-context(body.dark-mode) .close-btn {
+            color: #6ee7b7;
+        }
+
+        /* Error banner */
+        :host-context(body.dark-mode) .error-banner {
+            background: rgba(154, 52, 18, 0.2);
+            border-color: #7c2d12;
+            color: #fca5a5;
+        }
     `]
 })
 export class RewardsComponent implements OnInit {
@@ -457,6 +604,14 @@ export class RewardsComponent implements OnInit {
                     console.error('RewardsComponent: Redemption error', err);
                 }
             });
+    }
+
+    getTierEmoji(tier: string): string {
+        switch (tier.toUpperCase()) {
+            case 'GOLD': return '👑';
+            case 'SILVER': return '💎';
+            default: return '🏆';
+        }
     }
 
     formatDate(isoString: string): string {

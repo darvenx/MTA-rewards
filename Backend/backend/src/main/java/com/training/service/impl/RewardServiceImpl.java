@@ -28,17 +28,28 @@ public class RewardServiceImpl implements RewardService {
 
     @Override
     public void calculateAndSaveReward(Long fromAccountId, Long toAccountId, Double amount, Long transactionId) {
-        // Eligibility check: amount must be > 100
         if (amount == null || amount <= 100.0) {
             return;
         }
 
-        int points = (int) Math.floor(amount / 100.0);
-        if (points <= 0) {
+        // 1. Get lifetime points to determine multiplier
+        int lifetimePoints = rewardRepo.findAllByAccountId(fromAccountId)
+                .stream()
+                .mapToInt(RewardLog::getPointsEarned)
+                .sum();
+
+        double multiplier = getMultiplierForPoints(lifetimePoints);
+
+        // 2. Base points calculation
+        int basePoints = (int) Math.floor(amount / 100.0);
+        if (basePoints <= 0) {
             return;
         }
 
-        RewardLog log = new RewardLog(fromAccountId, transactionId, points, LocalDateTime.now());
+        // 3. Apply multiplier
+        int finalPoints = (int) Math.round(basePoints * multiplier);
+
+        RewardLog log = new RewardLog(fromAccountId, transactionId, finalPoints, LocalDateTime.now());
         rewardRepo.save(log);
     }
 
@@ -47,49 +58,82 @@ public class RewardServiceImpl implements RewardService {
         return rewardRepo.findAllByAccountId(accountId)
                 .stream()
                 .sorted((a, b) -> b.getCreatedOn().compareTo(a.getCreatedOn()))
-                .map(log -> {
-                    RewardLogDto dto = new RewardLogDto(log.getId(), log.getTransactionId(), log.getPointsEarned(),
-                            log.getCreatedOn());
-                    return dto;
-                })
+                .map(log -> new RewardLogDto(log.getId(), log.getTransactionId(), log.getPointsEarned(),
+                        log.getCreatedOn()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public RewardSummaryDto getTotalPoints(Long accountId) {
-        int total = rewardRepo.findAllByAccountIdAndIsRedeemedFalse(accountId)
-                .stream()
+        List<RewardLog> allLogs = rewardRepo.findAllByAccountId(accountId);
+
+        int unredeemedTotal = allLogs.stream()
+                .filter(log -> !log.isRedeemed())
                 .mapToInt(RewardLog::getPointsEarned)
                 .sum();
-        return new RewardSummaryDto(accountId, total);
+
+        int lifetimeTotal = allLogs.stream()
+                .mapToInt(RewardLog::getPointsEarned)
+                .sum();
+
+        String tier = getTierForPoints(lifetimeTotal);
+        double multiplier = getMultiplierForPoints(lifetimeTotal);
+        int progress = getProgressForPoints(lifetimeTotal);
+
+        return new RewardSummaryDto(accountId, unredeemedTotal, tier, multiplier, progress);
     }
 
     @Override
     @Transactional
     public RewardSummaryDto redeemPoints(Long accountId) {
         List<RewardLog> unredeemedLogs = rewardRepo.findAllByAccountIdAndIsRedeemedFalse(accountId);
-        int totalPoints = unredeemedLogs.stream().mapToInt(RewardLog::getPointsEarned).sum();
+        int totalPointsToRedeem = unredeemedLogs.stream().mapToInt(RewardLog::getPointsEarned).sum();
 
-        if (totalPoints < 100) {
-            return new RewardSummaryDto(accountId, totalPoints); // Not enough points
+        if (totalPointsToRedeem < 100) {
+            return getTotalPoints(accountId);
         }
 
         Optional<Account> accountOpt = accountRepo.findById(accountId);
         if (accountOpt.isPresent()) {
             Account account = accountOpt.get();
-            // 1 point = 1 rupee
-            account.setAccountBalance(account.getAccountBalance() + totalPoints);
+            account.setAccountBalance(account.getAccountBalance() + totalPointsToRedeem);
             accountRepo.save(account);
 
-            // Mark logs as redeemed
             for (RewardLog log : unredeemedLogs) {
                 log.setRedeemed(true);
             }
             rewardRepo.saveAll(unredeemedLogs);
 
-            return new RewardSummaryDto(accountId, 0); // Points redeemed (now 0 unredeemed)
+            return getTotalPoints(accountId);
         }
 
-        return new RewardSummaryDto(accountId, totalPoints);
+        return getTotalPoints(accountId);
+    }
+
+    private String getTierForPoints(int points) {
+        if (points >= 1500)
+            return "GOLD";
+        if (points >= 500)
+            return "SILVER";
+        return "BRONZE";
+    }
+
+    private double getMultiplierForPoints(int points) {
+        if (points >= 1500)
+            return 1.5;
+        if (points >= 500)
+            return 1.2;
+        return 1.0;
+    }
+
+    private int getProgressForPoints(int points) {
+        if (points >= 1500)
+            return 100;
+        if (points >= 500) {
+            // Progress towards Gold (1500) from Silver (500)
+            return (int) (((points - 500) / 1000.0) * 100);
+        }
+        // Progress towards Silver (500) from Bronze (0)
+        return (int) ((points / 500.0) * 100);
     }
 }

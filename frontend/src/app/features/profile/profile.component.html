@@ -36,10 +36,7 @@
         <mat-card-content>
           <mat-form-field appearance="outline" class="account-filter">
             <mat-label>Account Number</mat-label>
-            <mat-select
-              [value]="selectedAccountId"
-              (selectionChange)="onAccountNumberChange($event.value)"
-            >
+            <mat-select [value]="selectedAccountId" (selectionChange)="onAccountNumberChange($event.value)">
               <mat-option *ngFor="let account of accountNumberOptions" [value]="account.accountId">
                 {{ account.accountId }} · {{ account.accountType }}
               </mat-option>
@@ -48,21 +45,15 @@
 
           <mat-form-field appearance="outline" class="account-filter">
             <mat-label>Account type</mat-label>
-            <mat-select
-              [value]="selectedAccountType"
-              (selectionChange)="onAccountTypeChange($event.value)"
-            >
+            <mat-select [value]="selectedAccountType" (selectionChange)="onAccountTypeChange($event.value)">
               <mat-option value="SAVINGS">Savings</mat-option>
               <mat-option value="CURRENT">Current</mat-option>
             </mat-select>
           </mat-form-field>
 
           <div class="accounts-list" *ngIf="!loadingAccounts; else accountsLoader">
-            <div
-              class="account-item"
-              [class.selected]="account.accountId === selectedAccountId"
-              *ngFor="let account of filteredAccounts"
-            >
+            <div class="account-item" [class.selected]="account.accountId === selectedAccountId"
+              *ngFor="let account of filteredAccounts">
               <div class="account-item-head">
                 <div>
                   <div class="account-id">A/C {{ account.accountId }}</div>
@@ -77,14 +68,10 @@
                 {{ account.balance | currency:'INR':'symbol':'1.2-2' }}
               </div>
 
-              <button
-                type="button"
-                mat-stroked-button
-                [color]="isAccountActive(account.accountStatus) ? 'warn' : 'primary'"
-                class="deactivate-btn"
+              <button type="button" mat-stroked-button
+                [color]="isAccountActive(account.accountStatus) ? 'warn' : 'primary'" class="deactivate-btn"
                 [disabled]="isTogglingAccountStatus(account.accountId)"
-                (click)="$event.stopPropagation(); toggleAccountStatus(account)"
-              >
+                (click)="$event.stopPropagation(); toggleAccountStatus(account)">
                 <mat-spinner diameter="16" *ngIf="isTogglingAccountStatus(account.accountId)"></mat-spinner>
                 <span *ngIf="!isTogglingAccountStatus(account.accountId)">
                   {{ getAccountToggleLabel(account.accountStatus) }}
@@ -163,6 +150,28 @@
               <span class="detail-value">{{ profileData.address }}</span>
             </div> -->
           </section>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="preferences-card">
+        <mat-card-header>
+          <mat-card-title>Preferences</mat-card-title>
+          <mat-card-subtitle>Customize your experience</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="preference-row">
+            <div class="preference-info">
+              <div class="preference-icon-wrap">
+                <mat-icon>dark_mode</mat-icon>
+              </div>
+              <div>
+                <div class="preference-label">Dark Mode</div>
+                <div class="preference-desc">Switch to a darker color scheme</div>
+              </div>
+            </div>
+            <mat-slide-toggle [checked]="themeService.isDarkMode" (change)="themeService.toggle()"
+              color="primary"></mat-slide-toggle>
+          </div>
         </mat-card-content>
       </mat-card>
     </section>

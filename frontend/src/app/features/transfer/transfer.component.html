@@ -29,7 +29,7 @@
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>From Account</mat-label>
               <mat-icon matPrefix color="primary">account_balance</mat-icon>
-              <input matInput formControlName="senderAccountNumber" readonly/>
+              <input matInput formControlName="senderAccountNumber" readonly />
               <mat-hint>Your primary account</mat-hint>
             </mat-form-field>
           </div>
@@ -41,11 +41,7 @@
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>To Account Number</mat-label>
               <mat-icon matPrefix>account_balance</mat-icon>
-              <input
-                matInput
-                formControlName="receiverAccountNumber"
-                placeholder="Enter recipient account number"
-              />
+              <input matInput formControlName="receiverAccountNumber" placeholder="Enter recipient account number" />
               <mat-error *ngIf="transferForm.get('receiverAccountNumber')?.hasError('required')">
                 Recipient account is required
               </mat-error>
@@ -59,12 +55,7 @@
             <mat-form-field appearance="outline" class="full-width amount-field">
               <mat-label>Amount</mat-label>
               <mat-icon matPrefix color="primary">currency_rupee</mat-icon>
-              <input
-                matInput
-                type="number"
-                formControlName="amount"
-                placeholder="0.00"
-              />
+              <input matInput type="number" formControlName="amount" placeholder="0.00" />
               <span matSuffix class="amount-suffix">INR</span>
               <mat-error *ngIf="transferForm.get('amount')?.hasError('required')">
                 Amount is required
@@ -75,19 +66,30 @@
             </mat-form-field>
           </div>
 
-          <!-- Remarks -->
+          <!-- Category -->
+          <div class="form-section">
+            <div class="section-label">Category</div>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Transaction Category</mat-label>
+              <mat-select formControlName="category">
+                <mat-option *ngFor="let cat of categories" [value]="cat">
+                  {{ cat | titlecase }}
+                </mat-option>
+              </mat-select>
+              <mat-hint>Helps track your spending</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <!-- Password verification -->
           <div class="form-section">
             <div class="section-label">Password</div>
 
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Password</mat-label>
               <mat-icon matPrefix>lock</mat-icon>
-              <input
-                matInput
-                formControlName="senderAccountPin"
-                type="password"
-                placeholder="Enter password to perform transaction"
-              >
+              <input matInput formControlName="senderAccountPin" type="password"
+                placeholder="Enter password to perform transaction">
               <mat-error *ngIf="transferForm.get('senderAccountPin')?.hasError('required')">
                 Password is required
               </mat-error>
@@ -98,19 +100,14 @@
           <div class="actions">
             <button mat-button class="secondary-action" type="button" (click)="goBack()">Cancel</button>
 
-            <button
-              mat-raised-button
-              color="primary"
-              class="primary-cta"
-              type="submit"
-              [disabled]="transferForm.invalid || isLoading"
-            >
+            <button mat-raised-button color="primary" class="primary-cta" type="submit"
+              [disabled]="transferForm.invalid || isLoading">
               <mat-icon>send</mat-icon>
               <span>
                 {{
-                  transferForm.valid && transferForm.value.amount
-                    ? ('Transfer \u20B9' + (transferForm.value.amount | number:'1.2-2'))
-                    : 'Transfer Now'
+                transferForm.valid && transferForm.value.amount
+                ? ('Transfer \u20B9' + (transferForm.value.amount | number:'1.2-2'))
+                : 'Transfer Now'
                 }}
               </span>
             </button>

@@ -19,6 +19,7 @@ export class TransferComponent implements OnInit {
     transferForm: FormGroup;
     isLoading = false;
     currentAccountId: string | null = null;
+    categories = ['FOOD', 'SHOPPING', 'TRANSPORT', 'UTILITIES', 'RENT', 'ENTERTAINMENT', 'OTHER'];
 
     constructor(
         private fb: FormBuilder,
@@ -32,7 +33,8 @@ export class TransferComponent implements OnInit {
             senderAccountNumber: [{ value: '', disabled: true }, Validators.required],
             receiverAccountNumber: ['', Validators.required],
             amount: [null, [Validators.required, Validators.min(0.01)]],
-            senderAccountPin: ['', Validators.required]
+            senderAccountPin: ['', Validators.required],
+            category: ['OTHER', Validators.required]
         });
     }
 
@@ -89,7 +91,8 @@ export class TransferComponent implements OnInit {
             receiverAccountNumber: Number(formValue.receiverAccountNumber),
             amount: formValue.amount,
             idempotencyKey: idempotencyKey,
-            senderAccountPin: String(formValue.senderAccountPin)
+            senderAccountPin: String(formValue.senderAccountPin),
+            category: formValue.category
         };
         this.authService.setActiveAccountId(String(senderAccountNumber));
         // console.log(request);

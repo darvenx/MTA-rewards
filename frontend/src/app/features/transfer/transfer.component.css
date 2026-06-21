@@ -6,16 +6,17 @@
 .transfer-header {
   padding: 10px 2px 0;
   background: transparent;
-  color: #0f172a;
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
 .transfer-header button[mat-icon-button] {
-  background: #eef4ff;
-  border: 1px solid #dbe8ff;
+  background: var(--sidebar-hover);
+  border: 1px solid var(--card-border);
   border-radius: 10px;
+  color: var(--text);
   transition: transform 140ms ease-out, box-shadow 140ms ease-out;
 }
 
@@ -34,12 +35,13 @@
   margin: 0;
   font-size: 1.62rem;
   font-weight: 700;
+  color: var(--text);
   letter-spacing: -0.01em;
 }
 
 .page-subtitle {
   font-size: 0.84rem;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 /* Layout */
@@ -62,9 +64,9 @@
   width: 100%;
   max-width: 600px;
   border-radius: 18px;
-  border: 1px solid #dbe6f5;
-  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.11);
-  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 18px 38px var(--shadow);
+  background: var(--card);
 }
 
 .transfer-card::before {
@@ -83,11 +85,11 @@
 .transfer-card .mat-mdc-card-title {
   font-size: 1.24rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .transfer-card .mat-mdc-card-subtitle {
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .transfer-form {
@@ -107,8 +109,8 @@
   gap: 7px;
   padding: 12px 14px 2px;
   border-radius: 13px;
-  border: 1px solid #e3ecf8;
-  background: #ffffff;
+  border: 1px solid var(--card-border);
+  background: var(--card);
   box-shadow: 0 4px 10px rgba(15, 23, 42, 0.03);
 }
 
@@ -117,12 +119,12 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #5b6b82;
+  color: var(--text-secondary);
 }
 
 .from-account-group {
-  background: linear-gradient(180deg, #f7fbff 0%, #eff7ff 100%);
-  border: 1px solid rgba(125, 161, 220, 0.36);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--card) 100%);
+  border: 1px solid var(--card-border);
 }
 
 /* Emphasised amount field */
@@ -133,14 +135,14 @@
 
 .amount-suffix {
   font-size: 0.79rem;
-  color: #64748b;
+  color: var(--text-secondary);
   font-weight: 700;
   letter-spacing: 0.06em;
 }
 
 /* Icons */
 mat-form-field.mat-mdc-form-field .mat-mdc-form-field-icon-prefix {
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 ::ng-deep .transfer-card .mat-mdc-form-field-subscript-wrapper {
@@ -148,7 +150,7 @@ mat-form-field.mat-mdc-form-field .mat-mdc-form-field-icon-prefix {
 }
 
 ::ng-deep .transfer-card .mdc-text-field--outlined {
-  background: #ffffff;
+  background: var(--card);
 }
 
 /* Actions / CTA */
@@ -157,37 +159,65 @@ mat-form-field.mat-mdc-form-field .mat-mdc-form-field-icon-prefix {
   justify-content: flex-end;
   margin-top: 4px;
   padding-top: 14px;
-  border-top: 1px solid #e5edf7;
+  border-top: 1px solid var(--card-border);
   gap: 12px;
   align-items: center;
 }
 
 .secondary-action {
-  color: #475569;
+  color: var(--text) !important;
+  border: 1px solid var(--card-border) !important;
+  background: transparent !important;
   border-radius: 10px;
-  padding-inline: 6px;
+  padding-inline: 14px;
+  min-height: 40px;
+  line-height: 40px;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.secondary-action:hover {
+  background: var(--sidebar-hover) !important;
+  border-color: var(--text-secondary) !important;
 }
 
 .primary-cta {
+  background: var(--primary) !important;
+  color: #ffffff !important;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-height: 40px;
-  padding-inline: 18px;
+  padding-inline: 20px;
   border-radius: 999px;
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-  transition:
-    box-shadow 180ms ease-out,
-    transform 160ms ease-out;
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+  transition: box-shadow 180ms ease-out, transform 160ms ease-out, background-color 180ms ease-out;
+}
+
+.primary-cta mat-icon,
+.primary-cta span {
+  color: #ffffff !important;
 }
 
 .primary-cta:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.42);
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.38);
+  filter: brightness(1.08);
 }
 
 .primary-cta:disabled {
-  box-shadow: 0 3px 8px rgba(100, 116, 139, 0.16);
+  background-color: var(--card-border) !important;
+  color: var(--text-secondary) !important;
+  opacity: 0.6;
+  box-shadow: none !important;
+  transform: none !important;
+  cursor: not-allowed;
+}
+
+.primary-cta:disabled mat-icon,
+.primary-cta:disabled span {
+  color: var(--text-secondary) !important;
 }
 
 /* Responsive */
@@ -221,3 +251,48 @@ mat-form-field.mat-mdc-form-field .mat-mdc-form-field-icon-prefix {
     width: 100%;
   }
 }
+
+/* Dark-mode specific fixes to improve contrast for the transfer card, inputs and CTAs */
+body.dark-mode .transfer-card {
+  background: var(--card) !important;
+  border-color: var(--card-border) !important;
+}
+
+body.dark-mode .transfer-card .mdc-text-field__input,
+body.dark-mode .transfer-card input.mat-input-element,
+body.dark-mode .transfer-card .mat-mdc-select-value-text {
+  color: var(--text) !important;
+}
+
+body.dark-mode .transfer-card .mdc-floating-label,
+body.dark-mode .transfer-card .mat-mdc-form-field .mat-mdc-floating-label {
+  color: var(--text-secondary) !important;
+}
+
+/* Make secondary action visible in dark mode */
+body.dark-mode .secondary-action {
+  color: var(--text) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  background: transparent !important;
+}
+
+/* Primary CTA should be bright and readable in dark mode */
+body.dark-mode .primary-cta {
+  background: linear-gradient(90deg, #2b6ef6, #5b9cf6) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 20px rgba(91,156,246,0.18) !important;
+}
+
+body.dark-mode .primary-cta mat-icon,
+body.dark-mode .primary-cta span {
+  color: #ffffff !important;
+}
+
+/* Disabled primary CTA should still read clearly */
+body.dark-mode .primary-cta:disabled {
+  background-color: rgba(255,255,255,0.06) !important;
+  color: rgba(255,255,255,0.72) !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+}
+

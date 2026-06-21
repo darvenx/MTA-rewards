@@ -1,12 +1,11 @@
 package com.training.entities;
 
-
 import com.training.enums.TransactionStatus;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="transactions")
+@Table(name = "transactions")
 public class Transaction {
     @Override
     public String toString() {
@@ -39,6 +38,10 @@ public class Transaction {
     private String idempotencyKey;
     @Column
     private LocalDateTime createdOn;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private com.training.enums.TransactionCategory category;
 
     public Long getTransactionId() {
         return transactionId;
@@ -104,7 +107,16 @@ public class Transaction {
         this.createdOn = createdOn;
     }
 
-    public Transaction(Long transactionId, Long fromAccount, Long toAccount, Double amount, TransactionStatus transactionStatus, String failureReason, String idempotencyKey, LocalDateTime createdOn) {
+    public com.training.enums.TransactionCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(com.training.enums.TransactionCategory category) {
+        this.category = category;
+    }
+
+    public Transaction(Long transactionId, Long fromAccount, Long toAccount, Double amount,
+            TransactionStatus transactionStatus, String failureReason, String idempotencyKey, LocalDateTime createdOn) {
         this.transactionId = transactionId;
         this.fromAccount = fromAccount;
         this.toAccount = toAccount;
@@ -114,7 +126,8 @@ public class Transaction {
         this.idempotencyKey = idempotencyKey;
         this.createdOn = createdOn;
     }
-    public Transaction(){
+
+    public Transaction() {
 
     }
 }

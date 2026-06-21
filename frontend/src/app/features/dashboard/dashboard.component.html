@@ -15,14 +15,8 @@
         <div>
           <div class="balance-label-row">
             <div class="balance-label">Available Balance</div>
-            <button
-              mat-icon-button
-              class="toggle-balance-btn"
-              type="button"
-              (click)="toggleBalanceVisibility()"
-              [attr.aria-pressed]="!showBalance"
-              matTooltip="{{ showBalance ? 'Hide balance' : 'Show balance' }}"
-            >
+            <button mat-icon-button class="toggle-balance-btn" type="button" (click)="toggleBalanceVisibility()"
+              [attr.aria-pressed]="!showBalance" matTooltip="{{ showBalance ? 'Hide balance' : 'Show balance' }}">
               <mat-icon>{{ showBalance ? 'visibility' : 'visibility_off' }}</mat-icon>
             </button>
           </div>
@@ -51,7 +45,7 @@
           </div>
 
           <div class="account-number">
-            Account: {{ selectedAccountId || (account$ | async)?.accountNumber || 'XXXX-XXXX-1234' }}
+            Account: {{ maskedAccountId }}
           </div>
           <div class="balance-meta">
             {{ selectedAccountType }} · {{ selectedAccountStatus }} · Last updated · a few moments ago
@@ -65,53 +59,33 @@
   <section class="quick-actions">
     <h3>Quick Actions</h3>
     <div class="actions-grid" *ngIf="!isActionsLoading; else actionsSkeleton">
-      <div
-        class="action-item"
-        (click)="navigateTo('/transfer')"
-        tabindex="0"
-        (keyup.enter)="navigateTo('/transfer')"
-      >
-        <div class="icon-circle bg-green-light">
-          <mat-icon class="icon-green">currency_exchange</mat-icon>
+      <div class="action-item" (click)="navigateTo('/transfer')" tabindex="0" (keyup.enter)="navigateTo('/transfer')">
+        <div class="action-icon-wrapper wrapper-transfer">
+          <mat-icon>currency_exchange</mat-icon>
         </div>
         <span class="action-label">Transfer Money</span>
         <div class="action-sub">Send money to another account</div>
       </div>
 
-      <div
-        class="action-item"
-        (click)="navigateTo('/history')"
-        tabindex="0"
-        (keyup.enter)="navigateTo('/history')"
-      >
-        <div class="icon-circle bg-orange-light">
-          <mat-icon class="icon-orange">receipt_long</mat-icon>
+      <div class="action-item" (click)="navigateTo('/history')" tabindex="0" (keyup.enter)="navigateTo('/history')">
+        <div class="action-icon-wrapper wrapper-history">
+          <mat-icon>receipt_long</mat-icon>
         </div>
         <span class="action-label">Transaction History</span>
         <div class="action-sub">View all transactions</div>
       </div>
 
-      <div
-        class="action-item"
-        (click)="navigateTo('/profile')"
-        tabindex="0"
-        (keyup.enter)="navigateTo('/profile')"
-      >
-        <div class="icon-circle bg-blue-light">
-          <mat-icon class="icon-blue">person</mat-icon>
+      <div class="action-item" (click)="navigateTo('/profile')" tabindex="0" (keyup.enter)="navigateTo('/profile')">
+        <div class="action-icon-wrapper wrapper-profile">
+          <mat-icon>person</mat-icon>
         </div>
         <span class="action-label">My Profile</span>
         <div class="action-sub">Manage your account</div>
       </div>
 
-      <div
-        class="action-item"
-        (click)="toggleAddAccountForm()"
-        tabindex="0"
-        (keyup.enter)="toggleAddAccountForm()"
-      >
-        <div class="icon-circle bg-purple-light">
-          <mat-icon class="icon-purple">add_card</mat-icon>
+      <div class="action-item" (click)="toggleAddAccountForm()" tabindex="0" (keyup.enter)="toggleAddAccountForm()">
+        <div class="action-icon-wrapper wrapper-add">
+          <mat-icon>add_card</mat-icon>
         </div>
         <span class="action-label">Add Account</span>
         <div class="action-sub">Create a new savings or current account</div>
@@ -154,7 +128,8 @@
 
           <div class="add-account-actions">
             <button mat-button type="button" (click)="toggleAddAccountForm()">Cancel</button>
-            <button mat-flat-button color="primary" type="submit" [disabled]="addAccountForm.invalid || isCreatingAccount">
+            <button mat-flat-button color="primary" type="submit"
+              [disabled]="addAccountForm.invalid || isCreatingAccount">
               <mat-spinner diameter="18" *ngIf="isCreatingAccount; else addAccountText"></mat-spinner>
               <ng-template #addAccountText>Create Account</ng-template>
             </button>
@@ -199,4 +174,5 @@
       No recent transactions yet. Your activity will show up here once you start using your account.
     </div>
   </section>
+
 </div>

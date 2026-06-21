@@ -8,7 +8,7 @@ import { SidebarComponent } from './sidebar.component';
 	selector: 'app-layout',
 	standalone: true,
 	imports: [CommonModule, RouterModule, HeaderComponent, SidebarComponent],
-		template: `
+	template: `
 			<div class="layout-root">
 				<app-header></app-header>
 				<div class="layout-main">
@@ -19,13 +19,13 @@ import { SidebarComponent } from './sidebar.component';
 				</div>
 			</div>
 		`,
-		styles: [
-			`:host { display: block; min-height: 100vh; background: #f5f7fa; }
+	styles: [
+		`:host { display: block; min-height: 100vh; background: var(--layout-bg); transition: background 0.3s ease; }
 			 .layout-main { display: flex; min-height: calc(100vh - 64px); }
 			 app-sidebar { flex: 0 0 240px; }
 			 .layout-content { flex: 1; overflow: auto; padding: 32px; box-sizing: border-box; }
 			 @media (max-width: 1000px) { app-sidebar { display: none; } .layout-content { padding: 16px; } }
 			`
-		]
+	]
 })
 export class LayoutComponent { }

@@ -81,8 +81,9 @@ export function mapApiTransactionsDtoToTransaction(
     // accountId: currentAccountId,
     type,
     amount: dto.amount,
-    date: new Date().toISOString(),
-    transactionStatus:status,
+    // Use the real timestamp from the backend; fall back to now if absent
+    date: dto.createdOn ? new Date(dto.createdOn).toISOString() : new Date().toISOString(),
+    transactionStatus: status,
     description: dto.otherAccountName,
     otherAccountName: dto.otherAccountName
   };

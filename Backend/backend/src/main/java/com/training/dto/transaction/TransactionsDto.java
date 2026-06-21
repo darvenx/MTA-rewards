@@ -1,18 +1,20 @@
 package com.training.dto.transaction;
 
 import com.training.enums.TransactionStatus;
+import java.time.LocalDateTime;
 
 public class TransactionsDto {
-    private  Long transactionId;
+    private Long transactionId;
 
     private Double amount;
 
-    private String  otherAccountName;
+    private String otherAccountName;
 
     private TransactionStatus transactionStatus;
 
     private String type;
-
+    private String category;
+    private LocalDateTime createdOn;
 
     public String getType() {
         return type;
@@ -46,7 +48,6 @@ public class TransactionsDto {
         this.amount = amount;
     }
 
-
     public TransactionStatus getTransactionStatus() {
         return transactionStatus;
     }
@@ -54,5 +55,20 @@ public class TransactionsDto {
     public void setTransactionStatus(TransactionStatus transactionStatus) {
         this.transactionStatus = transactionStatus;
     }
-}
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
+    }
+}

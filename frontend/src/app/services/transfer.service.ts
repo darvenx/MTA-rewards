@@ -19,7 +19,8 @@ export class TransferService {
             receiverAccountNumber: request.receiverAccountNumber,
             senderAccountPin: request.senderAccountPin ?? '',
             amount: request.amount,
-            idempotencyKey: request.idempotencyKey
+            idempotencyKey: request.idempotencyKey,
+            category: request.category
         };
 
         return this.http.post<ApiTransferResponseDto>(ApiEndpoints.transfer.create(), payload);

@@ -90,6 +90,13 @@ export const ApiEndpoints = {
      * Backend target: POST `/api/v1/rewards/{accountId}/redeem` (RewardSummaryDto).
      */
     redeem: (accountId: string | number) => `${BASE}/rewards/${accountId}/redeem`
+  },
+  analytics: {
+    /**
+     * Get spending summary by category.
+     * Backend target: GET `/api/v1/analytics/spending/{accountId}` (SpendingAnalyticsDto).
+     */
+    spending: (accountId: string | number) => `${BASE}/analytics/spending/${accountId}`
   }
 };
 

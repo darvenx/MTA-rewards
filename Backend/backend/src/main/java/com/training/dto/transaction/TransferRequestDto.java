@@ -39,11 +39,21 @@ public class TransferRequestDto {
         this.idempotencyKey = idempotencyKey;
     }
 
+    private String category; // RENT, FOOD, etc.
+
     public Double getAmount() {
         return amount;
     }
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

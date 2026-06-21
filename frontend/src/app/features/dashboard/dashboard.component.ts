@@ -12,6 +12,8 @@ import { Transaction, TransactionType, TransactionStatus } from '../../core/mode
 import { accountsData } from '../../core/models/accounts-data.model';
 import { extractApiErrorMessage } from '../../core/utils/http-error.util';
 
+
+
 interface DashboardAccountOption {
   accountId: number;
   balance: number;
@@ -57,6 +59,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   currentUserId: number | null = null;
   currentHolderName = 'User';
+
   private statsRequestId = 0;
   private destroyed$ = new Subject<void>();
 
@@ -66,7 +69,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private router: Router,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private cdr: ChangeDetectorRef   // ✅ Added
+    private cdr: ChangeDetectorRef
   ) {
     this.addAccountForm = this.fb.group({
       accountType: ['SAVINGS', Validators.required]
@@ -376,6 +379,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   toggleBalanceVisibility(): void {
     this.showBalance = !this.showBalance;
+  }
+
+  get maskedAccountId(): string {
+    if (!this.selectedAccountId) return '•••• XXXX';
+    const idStr = String(this.selectedAccountId);
+    const last4 = idStr.length >= 4 ? idStr.slice(-4) : idStr.padStart(4, '0');
+    return `•••• ${last4}`;
   }
 
   // ✅ FIXED animation method

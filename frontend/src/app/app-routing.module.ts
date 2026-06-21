@@ -27,6 +27,7 @@ const routes: Routes = [
             { path: 'history', component: HistoryComponent },
             { path: 'profile', component: ProfileComponent },
             { path: 'rewards', component: RewardsComponent, canActivate: [AuthGuard] },
+            { path: 'analytics', loadComponent: () => import('./features/analytics/analytics.component').then(m => m.AnalyticsComponent), canActivate: [AuthGuard] },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     },

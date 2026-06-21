@@ -35,6 +35,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    @Transactional
     public Boolean transferMoney(TransferRequestDto transferRequestDto)
             throws AccountNotFoundException, IncorrectPinException,
             InsufficientBalanceException, SelfTransferException, AccountLockedException {
@@ -105,6 +106,19 @@ public class TransactionServiceImpl implements TransactionService {
         // add to transaction table
         Transaction transaction = new Transaction(null, senderAccount.getAccountId(), receiverAccount.getAccountId(),
                 amount, TransactionStatus.SUCCESS, "", transferRequestDto.getIdempotencyKey(), LocalDateTime.now());
+
+        // Set category if provided
+        if (transferRequestDto.getCategory() != null) {
+            try {
+                transaction.setCategory(
+                        com.training.enums.TransactionCategory.valueOf(transferRequestDto.getCategory().toUpperCase()));
+            } catch (IllegalArgumentException e) {
+                transaction.setCategory(com.training.enums.TransactionCategory.OTHER);
+            }
+        } else {
+            transaction.setCategory(com.training.enums.TransactionCategory.OTHER);
+        }
+
         transactionRepo.save(transaction);
 
         // award reward points to sender for eligible transactions
@@ -145,6 +159,8 @@ public class TransactionServiceImpl implements TransactionService {
             tdto.setTransactionStatus(txn.getTransactionStatus());
             tdto.setAmount(txn.getAmount());
             tdto.setType(type);
+            tdto.setCategory(txn.getCategory() != null ? txn.getCategory().name() : "OTHER");
+            tdto.setCreatedOn(txn.getCreatedOn());
             transactions.add(tdto);
         }
         return transactions;
@@ -160,7 +176,8 @@ public class TransactionServiceImpl implements TransactionService {
         List<RecentTransactionsDto> res = txns.stream()
                 .limit(10)
                 .map(txn -> new RecentTransactionsDto(txn.getTransactionId(), txn.getFromAccount(), txn.getToAccount(),
-                        txn.getAmount(), txn.getTransactionStatus().name())) // adjust mapping as needed
+                        txn.getAmount(), txn.getTransactionStatus().name(),
+                        txn.getCategory() != null ? txn.getCategory().name() : "OTHER")) // adjust mapping as needed
                 .collect(Collectors.toList());
         System.out.println("GIVING DATA BELOW");
         System.out.println(res);

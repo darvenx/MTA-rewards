@@ -42,8 +42,8 @@ import { Transaction, TransactionType } from '../../../core/models/transaction.m
       <!-- Amount Column -->
       <ng-container matColumnDef="amount">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
-        <td mat-cell *matCellDef="let transaction" [class.credit]="transaction.type === 'CREDIT'" [class.debit]="transaction.type === 'DEBIT'">
-          {{ (transaction.type === 'DEBIT' ? '-' : '+') }} {{ transaction.amount | currency:'INR':'symbol':'1.2-2' }}
+        <td mat-cell *matCellDef="let transaction" [ngClass]="transaction.type === 'CREDIT' ? 'amount-credit' : 'amount-debit'">
+          {{ (transaction.type === 'CREDIT' ? '+' : '-') }} {{ transaction.amount | currency:'INR':'symbol':'1.2-2' }}
         </td>
       </ng-container>
 
@@ -51,7 +51,11 @@ import { Transaction, TransactionType } from '../../../core/models/transaction.m
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
         <td mat-cell *matCellDef="let transaction">
-          <span class="status-badge" [class.success]="transaction.transactionStatus === 'SUCCESS'" [class.failed]="transaction.transactionStatus === 'FAILED'">
+          <span class="badge-pill" [ngClass]="{
+            'badge-success': transaction.transactionStatus === 'SUCCESS',
+            'badge-failed': transaction.transactionStatus === 'FAILED',
+            'badge-pending': transaction.transactionStatus !== 'SUCCESS' && transaction.transactionStatus !== 'FAILED'
+          }">
             {{transaction.transactionStatus}}
           </span>
         </td>
@@ -63,15 +67,8 @@ import { Transaction, TransactionType } from '../../../core/models/transaction.m
   `,
   styles: [`
     .full-width { width: 100%; }
-    .credit { color: #2e7d32; font-weight: 500; }
-    .debit { color: #c62828; font-weight: 500; }
-    .status-badge {
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-    }
-    .status-badge.success { background-color: #e8f5e9; color: #2e7d32; }
-    .status-badge.failed { background-color: #ffebee; color: #c62828; }
+    .party-name { font-weight: 500; }
+    .small { font-size: 0.8rem; color: #666; }
   `]
 })
 export class TransactionTableComponent implements OnChanges {

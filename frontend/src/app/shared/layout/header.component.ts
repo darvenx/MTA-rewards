@@ -11,7 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 @Component({
 	selector: 'app-header',
 	standalone: true,
-		imports: [CommonModule, MatToolbarModule, MatMenuModule, MatIconModule, MatButtonModule, MatDividerModule],
+	imports: [CommonModule, MatToolbarModule, MatMenuModule, MatIconModule, MatButtonModule, MatDividerModule],
 	template: `
 		<mat-toolbar color="primary" class="app-header">
 			<div class="left">
@@ -37,8 +37,7 @@ import { MatDividerModule } from '@angular/material/divider';
 			 position: sticky;
 			 top: 0;
 			 z-index: 20;
-			 /* Reuse balance-card gradient for visual consistency */
-			 background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 40%, #22c1c3 100%);
+			 background: var(--mat-toolbar-bg);
 			 box-shadow: 0 14px 32px rgba(15,23,42,0.35);
 			 color: #ffffff;
 			 transition: background 220ms ease-out, box-shadow 220ms ease-out;

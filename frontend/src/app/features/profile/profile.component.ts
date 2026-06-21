@@ -13,12 +13,14 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
 import { Account } from '../../core/models/account.model';
 import { extractApiErrorMessage } from '../../core/utils/http-error.util';
 import { accountsData } from '../../core/models/accounts-data.model';
+import { ThemeService } from '../../services/theme.service';
 
 type AccountFilterType = 'SAVINGS' | 'CURRENT';
 
@@ -49,7 +51,8 @@ interface ReadOnlyProfileData {
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
@@ -83,8 +86,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private auth: AuthService,
     private router: Router,
-    private snack: MatSnackBar
-  ) {}
+    private snack: MatSnackBar,
+    public themeService: ThemeService
+  ) { }
 
   ngOnInit(): void {
     this.reloadProfileData();

@@ -4,4 +4,5 @@ export interface TransferRequest {
     senderAccountPin: string;
     amount: number;
     idempotencyKey: string;
+    category?: string;
 }
